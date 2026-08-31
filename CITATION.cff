@@ -1,0 +1,29 @@
+﻿cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: lit-screening-pipeline: hybrid semi-automated screening pipeline for systematic literature reviews
+authors:
+  - family-names: Wong
+    given-names: Clarence
+    orcid: https://orcid.org/0009-0000-9676-5881
+version: 1.0.0
+date-released: 2026-08-31
+license: MIT
+type: software
+keywords:
+  - systematic literature review
+  - PRISMA 2020
+  - LLM adjudication
+  - GitHub Copilot
+  - Claude Opus
+  - Consensus MCP
+  - hybrid pipeline
+repository-code: https://github.com/cw18-coder/lit-screening-pipeline
+abstract: |
+  Hybrid semi-automated screening pipeline for systematic literature reviews.
+  Combines deterministic Python scripts for deduplication and hard filters
+  with LLM adjudication (Claude Opus via GitHub Copilot Chat in agent mode).
+  Designed for the ESGCI DBA thesis literature review on AI-assisted software
+  development but generalises to any focused systematic review with a
+  well-defined scope. Ships a SKILL.md, prompt pack with eight gold
+  calibration examples, deterministic script rule set, and a validation
+  harness with a retrospective ground-truth test.
