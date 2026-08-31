@@ -1,6 +1,6 @@
 ﻿cff-version: 1.2.0
-message: If you use this software, please cite it using these metadata.
-title: lit-screening-pipeline: hybrid semi-automated screening pipeline for systematic literature reviews
+message: "If you use this software, please cite it using these metadata."
+title: "lit-screening-pipeline: hybrid semi-automated screening pipeline for systematic literature reviews"
 authors:
   - family-names: Wong
     given-names: Clarence
