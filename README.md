@@ -1,5 +1,7 @@
 # lit-screening
 
+[![DOI](https://zenodo.org/badge/1352520473.svg)](https://doi.org/10.5281/zenodo.22210843)
+
 Hybrid semi-automated screening pipeline for the ESGCI DBA thesis
 literature review.
 
