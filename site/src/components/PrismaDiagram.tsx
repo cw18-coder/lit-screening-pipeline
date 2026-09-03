@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Background,
   BackgroundVariant,
@@ -8,6 +9,7 @@ import {
   ReactFlowProvider,
   type Edge,
   type Node,
+  type NodeMouseHandler,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -31,6 +33,18 @@ export interface PrismaDiagramProps {
 }
 
 export function PrismaDiagram({ nodes }: PrismaDiagramProps) {
+  return (
+    <ReactFlowProvider>
+      <PrismaDiagramInner nodes={nodes} />
+    </ReactFlowProvider>
+  );
+}
+
+// Inner component so that useNavigate can share the router context and
+// onNodeClick can dispatch navigation without re-instantiating callbacks.
+function PrismaDiagramInner({ nodes }: PrismaDiagramProps) {
+  const navigate = useNavigate();
+
   const byId = useMemo(
     () => Object.fromEntries(nodes.map(n => [n.node_id, n])),
     [nodes]
@@ -49,44 +63,51 @@ export function PrismaDiagram({ nodes }: PrismaDiagramProps) {
       draggable: false,
       selectable: false,
       connectable: false,
+      style: { width: NODE_WIDTH, cursor: spec.clickable ? 'pointer' : 'default' },
     }));
   }, [byId]);
 
   const rfEdges: Edge[] = useMemo(() => toRfEdges(DIAGRAM_EDGES), []);
 
-  // Compute canvas bounds so ReactFlow can fit-view.
+  // Reliable click-through: React Flow's own node-click event fires regardless
+  // of pointer-events on inner elements. Custom-node onClick is unreliable
+  // when nodesDraggable=false + elementsSelectable=false.
+  const onNodeClick = useCallback<NodeMouseHandler>((_evt, node) => {
+    const data = node.data as PrismaFlowNodeData;
+    if (data?.clickable) {
+      navigate(`/prisma/${node.id}`);
+    }
+  }, [navigate]);
+
   const maxRow = Math.max(...DIAGRAM_NODES.map(n => n.row), 5);
-  const canvasHeight = (maxRow + 1) * (NODE_HEIGHT + ROW_GAP) + 60;
+  const canvasHeight = (maxRow + 1) * (NODE_HEIGHT + ROW_GAP) + 80;
 
   return (
     <div className={styles.wrap} style={{ height: canvasHeight }}>
-      <ReactFlowProvider>
-        <ReactFlow
-          nodes={rfNodes}
-          edges={rfEdges}
-          nodeTypes={nodeTypes}
-          fitView
-          fitViewOptions={{ padding: 0.08, minZoom: 0.4, maxZoom: 1.2 }}
-          minZoom={0.4}
-          maxZoom={1.5}
-          nodesDraggable={false}
-          nodesConnectable={false}
-          elementsSelectable={false}
-          panOnScroll
-          zoomOnScroll={false}
-          panOnDrag
-          proOptions={{ hideAttribution: true }}
-        >
-          <Background variant={BackgroundVariant.Dots} gap={20} size={1} className={styles.bg} />
-          <Controls showInteractive={false} position="bottom-right" />
-        </ReactFlow>
-      </ReactFlowProvider>
+      <ReactFlow
+        nodes={rfNodes}
+        edges={rfEdges}
+        nodeTypes={nodeTypes}
+        onNodeClick={onNodeClick}
+        fitView
+        fitViewOptions={{ padding: 0.1, minZoom: 0.4, maxZoom: 1.2 }}
+        minZoom={0.4}
+        maxZoom={1.5}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
+        panOnScroll={false}
+        zoomOnScroll={false}
+        panOnDrag
+        proOptions={{ hideAttribution: true }}
+      >
+        <Background variant={BackgroundVariant.Dots} gap={20} size={1} className={styles.bg} />
+        <Controls showInteractive={false} position="bottom-right" />
+      </ReactFlow>
     </div>
   );
 }
 
-// Route edges through Handles that match the geometry: sideways for branches,
-// straight vertical for the main spine.
 function toRfEdges(specs: DiagramEdgeSpec[]): Edge[] {
   return specs.map(spec => {
     const isBranch = spec.variant === 'branch';
@@ -100,22 +121,24 @@ function toRfEdges(specs: DiagramEdgeSpec[]): Edge[] {
       sourceHandle,
       targetHandle,
       type: 'smoothstep',
+      pathOptions: { borderRadius: 12, offset: 24 },
       animated: false,
       label: spec.label,
       labelStyle: labelStyle(spec.variant),
-      labelBgStyle: labelBgStyle(spec.variant),
-      labelBgPadding: [6, 4],
-      labelBgBorderRadius: 4,
+      labelBgStyle: labelBgStyle(),
+      labelBgPadding: [8, 5] as [number, number],
+      labelBgBorderRadius: 6,
+      labelShowBg: true,
       markerEnd: {
         type: MarkerType.ArrowClosed,
-        width: 16,
-        height: 16,
+        width: 18,
+        height: 18,
         color: edgeColor(spec.variant),
       },
       style: {
         stroke: edgeColor(spec.variant),
         strokeWidth: isBranch ? 1.5 : 2,
-        strokeDasharray: isReassign ? '4 4' : undefined,
+        strokeDasharray: isReassign ? '5 5' : undefined,
       },
     };
   });
@@ -140,13 +163,13 @@ function labelStyle(variant?: string): React.CSSProperties {
   };
 }
 
-function labelBgStyle(_variant?: string): React.CSSProperties {
+function labelBgStyle(): React.CSSProperties {
   return {
-    fill: 'var(--panel-2)',
+    fill: 'var(--panel)',
     stroke: 'var(--line)',
     strokeWidth: 1,
   };
 }
 
-// Silence unused-import lint on NODE_WIDTH.
+// Silence unused-import lint on NODE_WIDTH re-export shim.
 export const _NODE_W = NODE_WIDTH;

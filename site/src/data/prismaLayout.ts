@@ -22,19 +22,22 @@ export interface DiagramEdgeSpec {
 
 const COL_X: Record<DiagramNodeSpec['column'], number> = {
   track1: 0,
-  branch: 320,
-  track2: 640,
-  combined: 320,
+  branch: 380,   // pushed further right so the "reassigned to Track 2" label sits in clear space
+  track2: 720,   // widen the outer column too so Track 2's spine keeps clear of the branch
+  combined: 380,
 };
 
 export const NODE_WIDTH = 260;
-export const NODE_HEIGHT = 96;
-export const ROW_GAP = 44;
+export const NODE_HEIGHT = 100;
+export const ROW_GAP = 64;   // more vertical breathing room between rows
 
 export function nodePosition(spec: DiagramNodeSpec): { x: number; y: number } {
+  // The overlaps node sits at a half-row offset so it visibly straddles the
+  // 312 → 307 transition without colliding with either row's edges/labels.
+  const rowOffset = spec.id === 'cross_track_overlaps' ? -0.4 : 0;
   return {
     x: COL_X[spec.column],
-    y: spec.row * (NODE_HEIGHT + ROW_GAP),
+    y: (spec.row + rowOffset) * (NODE_HEIGHT + ROW_GAP),
   };
 }
 
