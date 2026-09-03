@@ -1,0 +1,84 @@
+.inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: var(--ink);
+}
+.logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: 12px;
+}
+.brand small {
+  color: var(--ink-mute);
+  font-weight: 500;
+  font-size: 12px;
+  display: block;
+}
+.headerActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.theme {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.theme:hover { color: var(--ink); border-color: var(--accent); }
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tab {
+  background: var(--panel);
+  color: var(--ink-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.tab:hover:not(.active) {
+  color: var(--ink);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+:global(html[data-theme="dark"]) .active { color: #051019; }

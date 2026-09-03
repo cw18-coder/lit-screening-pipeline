@@ -1,0 +1,91 @@
+@import './tokens.css';
+
+* { box-sizing: border-box; }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15.5px/1.55 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  transition: background .18s ease, color .18s ease;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+h1 { font-size: 30px; margin: 4px 0 10px; letter-spacing: -.015em; }
+h2 { font-size: 21px; margin: 28px 0 10px; }
+h3 { font-size: 16px; margin: 18px 0 6px; }
+h4 { font-size: 14px; margin: 12px 0 4px; color: var(--ink-dim); text-transform: uppercase; letter-spacing: .08em; }
+
+p { color: var(--ink); }
+
+/* Base table styling. Components can override via CSS Modules. */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  background: var(--panel);
+}
+th, td {
+  text-align: left;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  color: var(--ink-dim);
+  font-weight: 600;
+  font-size: 13px;
+}
+tbody tr:hover { background: var(--panel-2); }
+
+/* Sticky top header shared by all routes. */
+header.top {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+/* Fade-in transitions for route content. */
+.route-view {
+  animation: fade .18s ease;
+}
+@keyframes fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Reduced-motion contract. */
+@media (prefers-reduced-motion: reduce) {
+  .route-view { animation: none; }
+  html, body { transition: none; }
+}
+
+/* Focus rings only for keyboard navigation. */
+:focus:not(:focus-visible) { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+hr.sep {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 24px 0;
+}

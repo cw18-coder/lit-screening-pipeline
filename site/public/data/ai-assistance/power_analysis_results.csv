@@ -1,0 +1,5 @@
+framing,question,n_target,n_total,n_total_pct_of_pool,pool_size,include_prevalence,alpha,power_or_confidence,assumption,detail
+A_sens,Sensitivity CI half-width <= 0.075,38,127,41.4,307,0.3,0.05,0.95,Assumed sensitivity p; Wald-normal CI; FPC over pool positives,"p_expected=0.9, alpha=0.05, n_inf=61.5 positives, FPC over 92 pool positives"
+A_spec,Specificity CI half-width <= 0.075,73,105,34.2,307,0.3,0.05,0.95,Assumed specificity p; Wald-normal CI; FPC over pool negatives,"p_expected=0.8, alpha=0.05, n_inf=109.3 negatives, FPC over 215 pool negatives"
+B_kappa,Detect kappa >= 0.70 vs 0.40,105,105,34.2,307,0.3,0.05,0.8,Fleiss / Flack asymptotic variance; equal marginals; FPC over pool,"p=0.3, alpha=0.05, power=0.8, V0=2.171, V1=1.129, n_inf=158.9"
+C_mcnemar,McNemar detect pi >= 0.100 vs 0.050,84,168,54.7,307,0.3,0.05,0.8,Miettinen approximation; discordant_share=0.5; FPC over pool,"alpha=0.05, power=0.8, discordant_share=0.5, n_discordant_inf=184.8"

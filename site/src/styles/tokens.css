@@ -1,0 +1,50 @@
+/* Design tokens — ported verbatim from the reference deck
+   `six-sigma-for-agentic-ai.html`. Do not edit these individually to change
+   a component's colour; edit the token here and every component follows. */
+
+:root {
+  --bg: #f7f8fb;
+  --panel: #ffffff;
+  --panel-2: #f0f3f8;
+  --line: #d9dfe8;
+  --ink: #1a2233;
+  --ink-dim: #556477;
+  --ink-mute: #7a8699;
+  --accent: #1f6feb;
+  --accent-2: #b7791f;
+  --accent-soft: #e7f0ff;
+  --good: #0f8a5f;
+  --warn: #b34a4a;
+  --shadow: 0 1px 2px rgba(20, 30, 50, .06), 0 4px 12px rgba(20, 30, 50, .05);
+  --chip: #eef2f8;
+  --link: #1f6feb;
+  --max: 1180px;
+  --radius: 12px;
+  --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, Consolas, monospace;
+
+  /* PRISMA-specific additions layered on top of the base tokens. */
+  --node-fill: var(--panel);
+  --node-border: var(--line);
+  --node-fill-hover: var(--accent-soft);
+  --node-fill-active: color-mix(in srgb, var(--accent) 15%, var(--panel));
+  --edge-stroke: var(--ink-mute);
+  --edge-label: var(--ink-dim);
+}
+
+html[data-theme="dark"] {
+  --bg: #0b0f14;
+  --panel: #121821;
+  --panel-2: #1a2230;
+  --line: #24324a;
+  --ink: #e6edf5;
+  --ink-dim: #a9b6c7;
+  --ink-mute: #8996aa;
+  --accent: #7bd3ff;
+  --accent-2: #ffcf6b;
+  --accent-soft: rgba(123, 211, 255, 0.08);
+  --good: #6ee7b7;
+  --warn: #ff8a80;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 4px 12px rgba(0, 0, 0, .3);
+  --chip: #22304a;
+  --link: #9ad9ff;
+}

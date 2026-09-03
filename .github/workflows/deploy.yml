@@ -1,0 +1,60 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+        env:
+          SKIP_DATA_REBUILD: '1'
+          SITE_BASE: /lit-screening-pipeline/
+          VITE_ORCID_ID: ${{ vars.ORCID_ID }}
+          VITE_ZENODO_DOI: ${{ vars.ZENODO_DOI }}
+          VITE_RELEASE_VERSION: ${{ vars.RELEASE_VERSION }}
+          VITE_REPO_URL: ${{ vars.REPO_URL }}
+      - name: Add .nojekyll to dist
+        run: touch dist/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@v4

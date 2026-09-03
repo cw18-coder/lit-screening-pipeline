@@ -1,0 +1,9 @@
+{
+  "seed": 20260903,
+  "k_per_stratum": 6,
+  "pool_size": 307,
+  "pool_fingerprint_sha256_16": "17ca7c8e1033d9e6",
+  "sample_size": 126,
+  "n_strata": 21,
+  "source_csv": "G:\\My Drive\\ESGCIDBA\\correctness-wedge\\thesis-review-method\\consensus-queries\\logs\\prisma-logs\\01c_identification_dedup.csv"
+}

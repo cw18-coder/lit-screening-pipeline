@@ -1,0 +1,118 @@
+{
+  "sections": [
+    {
+      "section": "skills",
+      "label": "Skills",
+      "pages": [
+        {
+          "page_id": "skill-ai-assisted-screening",
+          "title": "ai-assisted-screening",
+          "description": "Sample-size, stratified-sampling, and cross-validation utilities for AI-assisted title/abstract screening under PRISMA 2020 automation-tool-use rules. Computes calibration sample size using scipy for four framings (sensitivity CI, specificity CI, Cohen's kappa, McNemar's test) with finite-population correction; draws a stratified sample by Consensus question with balanced allocation; runs stratified 5-fold cross-validation against Clarence's hand-labels and reports sensitivity, specificity, precision, F1, and kappa with per-fold breakdown. Grounds all numeric outputs in scipy primitives (norm.ppf, binom, chi2) rather than in agent recall."
+        },
+        {
+          "page_id": "skill-chapter-evaluation",
+          "title": "Chapter Evaluation",
+          "description": "Evaluate drafted ESGCI DBA thesis chapters against an extensible catalogue of evaluation criteria. The first criterion is a generic carry-forward assessment that decides what prior-submission material can be reused without repeating documented supervisor pitfalls and while staying aligned to a governing amendment or design memo. Applies to every chapter of the thesis."
+        },
+        {
+          "page_id": "skill-chapter-layout",
+          "title": "Chapter Layout",
+          "description": "Generate ESGCI DBA chapter layout DOCX skeletons capped at three heading levels (chapter, section N.x, subsection N.x.y). Each subsection is annotated with a Scope line, indicative sources, and optional assessment-safeguard notes that mark where the layout answers recurring supervisor deductions. Supports the problem-first and official structure variants."
+        },
+        {
+          "page_id": "skill-citation-analytics",
+          "title": "Citation analytics",
+          "description": "Citation and page-count analytics for the ESGCI DBA thesis. Builds a normalised SQLite database from the chapter DOCX drafts and the thesis citation tally, exposes section-oriented and reference-oriented SQL views, and drives a local Streamlit dashboard. Use to audit citation coverage, spot under-cited sections, check density against rubric expectations, and identify papers cited across multiple chapters."
+        },
+        {
+          "page_id": "skill-consensus-search-log",
+          "title": "consensus-search-log",
+          "description": "Parse Consensus.app PDF exports into structured identification logs for the PRISMA / structured-review search-and-selection audit trail. Extracts per-query reference sets from a batch of Consensus PDFs, deduplicates across queries, and writes two CSV artefacts sized for the first two nodes of a PRISMA identification funnel. Question sets are external JSON files so the pipeline is reusable across retrieval dates and thesis chapters."
+        },
+        {
+          "page_id": "skill-dba-research-learning-guide",
+          "title": "DBA Research Learning Guide",
+          "description": "Coach the ESGCI DBA candidate through research concepts and viva readiness in an adversarial-reviewer voice. Explains causal inference (staggered difference-in-differences, parallel trends, event studies), the study's theory anchors (task-based labour, IT productivity paradox, absorptive capacity, Job Demands-Resources, organisational learning), measurement frameworks (SPACE, DORA), and systematic-review method (PRISMA). Uses an explain-simply-then-formalise pattern and generates the hard questions a viva panel will ask."
+        },
+        {
+          "page_id": "skill-eod-hygiene",
+          "title": "EOD hygiene",
+          "description": "End-of-day hygiene skill for the ESGCI DBA workspace. Runs a three-step pipeline that commits and pushes any working-tree changes, synthesises today's research-journal entry from the resulting commits, then commits and pushes that journal entry. Prefer invoking this at the end of a working session so nothing sits uncommitted overnight and the research journal stays in sync with the git history."
+        },
+        {
+          "page_id": "skill-lit-screening",
+          "title": "lit-screening",
+          "description": "Hybrid semi-automated screening pipeline for a systematic literature review. Combines deterministic scripts (deduplication, hard filters on date/language/venue/item type) with LLM adjudication (Claude Opus 4.7 via GitHub Copilot Chat in agent mode) to reduce a raw discovery pool of thousands of records to a human-reviewable shortlist. Designed for the ESGCI DBA thesis literature review on AI-assisted software development but generalises to any focused systematic review with a well-defined scope. Skill returns per-record decisions with rationales, keyed to the source record identifier for full audit-trail reconstruction."
+        },
+        {
+          "page_id": "skill-literature-review",
+          "title": "Literature Review",
+          "description": "Draft and revise the ESGCI DBA problem-first literature review directly as DOCX, section by section, grounded in the curated per-paper critical reviews. Maintains the running citation tally, classifies references as included studies or anchors, tracks the PRISMA funnel delta, drafts the PRISMA section last, and enforces house style. Default working mode; the .claude markdown command library is a backup used only on explicit request."
+        },
+        {
+          "page_id": "skill-research-design-methodology",
+          "title": "Research Design and Methodology",
+          "description": "Draft the ESGCI DBA Research Design and Methodology chapter directly as DOCX. Covers research philosophy, evaluation research with quasi-experimental identification, the corporate-sponsored OSS setting and sampling with power, construct operationalisation for the hypotheses, GitHub Archive and API data sources, the Callaway and Sant'Anna staggered difference-in-differences estimand and quality-discount-wedge contrast, identification assumptions and robustness, the objective decision matrix, and validity, ethics, and limitations."
+        },
+        {
+          "page_id": "skill-thesis-compilation",
+          "title": "Thesis compilation",
+          "description": "Compose the drafted title page, Chapter 1, Chapter 2 sections, Chapter 3 sections, and the reference DOCX under `G:\\My Drive\\ESGCIDBA\\Thesis\\thesis-chapter-drafts` into a single integrated thesis DOCX for review or submission. Overwrites a single `thesis_integrated.docx` on every run; Google Drive's 30-day file history preserves prior versions without cluttering the working tree."
+        },
+        {
+          "page_id": "skill-thesis-consistency-coherence",
+          "title": "Thesis consistency and coherence",
+          "description": "Consistency, coherence, managerial, editorial-economy, rubric-compliance, and reproducibility-register checks for the ESGCI DBA thesis. Runs 15 criteria across 6 tracks (A-F) over all drafted chapters. Findings and reviewer decisions live in the thesis_analytics.db so the same dashboard renders both citation analytics and consistency-and-coherence reports. Use whenever the drafted DOCX corpus changes materially or before a submission."
+        },
+        {
+          "page_id": "skill-track2-reference-scoring",
+          "title": "Track 2 Reference Scoring",
+          "description": "Enrich Track 2 (purposive-selection) anchor references with citation counts and SJR venue quartiles, and produce per-reference inclusion-decision markdowns that pair the numeric signals with a prose rationale. Fetches Semantic Scholar citation and influential-citation counts by DOI, matches ISSN against the SJR 2025 CSV to record the best-quartile venue rank, updates the target CSV in place with new columns, and links each row to a decision markdown that documents why the reference was purposively selected."
+        }
+      ]
+    },
+    {
+      "section": "instructions",
+      "label": "Instructions",
+      "pages": [
+        {
+          "page_id": "instr-csv-log-discipline",
+          "title": "CSV Log Integrity Discipline",
+          "description": "CSV log integrity discipline for the PRISMA and non-PRISMA logs of the correctness-wedge review, plus their linked corpora (abstract markdowns and Track 2 decision markdowns). Codifies the stable_id column, immutable manual IDs, atomic writes with lockfile discipline, logs-index synchronisation, and the corpus-linkage contracts enforced by csv_lint.py. Supersedes the ad-hoc conventions previously carried only inside CLAUDE.md and the individual skill SKILL.md files."
+        },
+        {
+          "page_id": "instr-dba-house-style",
+          "title": "DBA House Style (DOCX authoring)",
+          "description": "House-style enforcement for ESGCI DBA DOCX authoring (mirrors CLAUDE.md Section 5 and the submission-5 drafting rules). Applies when drafting or editing dissertation content."
+        },
+        {
+          "page_id": "instr-docx-authoring",
+          "title": "DOCX-First Authoring Conventions",
+          "description": "DOCX-first authoring conventions for the ESGCI DBA thesis: dual-drive paths, section-file workflow, heading styles, and the Word comment review loop."
+        }
+      ]
+    },
+    {
+      "section": "agents",
+      "label": "Agents",
+      "pages": [
+        {
+          "page_id": "agent-esgcidba-advisor",
+          "title": "ESGCIDBA Advisor",
+          "description": "Primary DBA dissertation advisor for the ESGCI thesis. Drafts and revises DOCX chapters, manages the literature review, plans chapter layouts, and guides research design and methodology, all under the CLAUDE.md house rules. DOCX-first; Google Drive and OneDrive paths; Zotero unchanged; the .claude markdown workflow is a backup used only on explicit request."
+        }
+      ]
+    },
+    {
+      "section": "root",
+      "label": "Copilot instructions",
+      "pages": [
+        {
+          "page_id": "copilot-instructions",
+          "title": "GitHub Copilot — ESGCI DBA Thesis Workspace",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "built_at": "2026-09-03T06:26:13.987Z",
+  "labels_frozen": false,
+  "files_written": [
+    "prisma-tally.json",
+    "identification-01a.json",
+    "identification-01b.json",
+    "identification-01c.json",
+    "screening-excluded-2b.json",
+    "non-prisma-ch3.json",
+    "non-prisma-signposts.json",
+    "questions.json",
+    "abstracts.json",
+    "track2-decisions.json",
+    "ai-assistance/ai-assisted-screening.md",
+    "ai-assistance/power_analysis_results.csv",
+    "ai-assistance/strata_availability.csv",
+    "ai-assistance/sample_manifest.csv",
+    "ai-assistance/sample_manifest.json",
+    "meta.json"
+  ],
+  "orphaned_abstracts": [
+    "2014_sanchez_7d670a2c.md"
+  ],
+  "rejected_track2_decisions": [],
+  "filtered_ignored_rows": {
+    "01a": 20,
+    "01c": 20,
+    "2b": 20
+  }
+}
