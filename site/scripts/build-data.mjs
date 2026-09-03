@@ -276,30 +276,13 @@ function mapScreeningExclusion(r) {
 }
 
 async function loadQuestions(rows01a) {
-  // Prefer a dedicated questions folder if it exists; otherwise derive the
-  // question inventory from 01a's own (query_id, query_text) pairs plus
-  // per-query counts.
+  // Text source priority: canonical questions JSON > 01a's own query_text
+  // column > truncated title reconstructed from the retrieval CSV filename.
+  // Counts are always derived from 01a so the aggregation view stays in sync
+  // with the identification funnel.
+  const jsonTextMap = await loadQuestionsTextMap();
   const filenameFallback = await queryTextFromResultsFilenames();
-  if (existsSync(QUESTIONS_DIR)) {
-    const { readdir } = await import('node:fs/promises');
-    const files = (await readdir(QUESTIONS_DIR)).filter(f => f.endsWith('.json'));
-    if (files.length > 0) {
-      const out = [];
-      for (const f of files) {
-        try {
-          const txt = await readFile(join(QUESTIONS_DIR, f), 'utf8');
-          const obj = JSON.parse(txt);
-          if (Array.isArray(obj?.questions)) out.push(...obj.questions);
-          else if (Array.isArray(obj)) out.push(...obj);
-        } catch (e) {
-          console.warn(`[build-data] failed to parse questions ${f}: ${e.message}`);
-        }
-      }
-      if (out.length > 0) return out;
-    }
-  }
 
-  // Derive: group 01a rows by query_id, collect the query_text and counts.
   const byQ = new Map();
   for (const r of rows01a) {
     const q = r.query_id;
@@ -314,13 +297,35 @@ async function loadQuestions(rows01a) {
   return Array.from(byQ.values())
     .map(b => ({
       q_id: b.q_id,
-      text: b.text || filenameFallback.get(b.q_id) || '',
+      text: jsonTextMap.get(b.q_id) || b.text || filenameFallback.get(b.q_id) || '',
       retrieval_date: b.retrieval_date,
       results_returned: b.hits.length,
       unique_track1_hits: b.stable_ids.size,
       operationalised: true,
     }))
     .sort((a, b) => a.q_id.localeCompare(b.q_id, undefined, { numeric: true }));
+}
+
+async function loadQuestionsTextMap() {
+  const map = new Map();
+  if (!existsSync(QUESTIONS_DIR)) return map;
+  const { readdir } = await import('node:fs/promises');
+  const files = (await readdir(QUESTIONS_DIR)).filter(f => f.endsWith('.json'));
+  for (const f of files) {
+    try {
+      const txt = await readFile(join(QUESTIONS_DIR, f), 'utf8');
+      const obj = JSON.parse(txt);
+      const arr = Array.isArray(obj?.questions) ? obj.questions : Array.isArray(obj) ? obj : [];
+      for (const q of arr) {
+        const qid = (q?.query_id || q?.q_id || '').toString().toUpperCase();
+        const text = (q?.text || '').toString().trim();
+        if (qid && text) map.set(qid, text);
+      }
+    } catch (e) {
+      console.warn(`[build-data] failed to parse questions ${f}: ${e.message}`);
+    }
+  }
+  return map;
 }
 
 // Fallback for queries whose query_text field never made it into 01a

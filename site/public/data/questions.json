@@ -129,7 +129,7 @@
   },
   {
     "q_id": "Q17",
-    "text": "What empirical studies have analysed GitHub or sim…",
+    "text": "What empirical studies have analysed GitHub or similar repository-mining data to evaluate how governed downstream workflows affect the quality of software contributions?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
@@ -137,7 +137,7 @@
   },
   {
     "q_id": "Q18",
-    "text": "What empirical evidence based on repository event…",
+    "text": "What empirical evidence, based on repository event data, shows how the combination of human review, automated static analysis, and AI-assisted review affects pull-request quality outcomes?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
@@ -145,7 +145,7 @@
   },
   {
     "q_id": "Q19",
-    "text": "When an AI review layer is added to an existing hu…",
+    "text": "When an AI review layer is added to an existing human plus static-analysis review pipeline in a software repository, what changes are observed in merge rates, review latency, and post-merge defect rates?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
@@ -153,7 +153,7 @@
   },
   {
     "q_id": "Q20",
-    "text": "What theoretical mechanisms in management and info…",
+    "text": "What theoretical mechanisms in management and information systems research explain why the productivity effects of information technology depend on complementary organisational assets and process changes?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
@@ -161,7 +161,7 @@
   },
   {
     "q_id": "Q21",
-    "text": "How does task-based labour economics explain the s…",
+    "text": "How does task-based labour economics explain the shift in demand for cognitive and coordination work when firms automate routine tasks with artificial intelligence?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
@@ -169,7 +169,7 @@
   },
   {
     "q_id": "Q22",
-    "text": "How does absorptive capacity theory apply to organ…",
+    "text": "How does absorptive capacity theory apply to organisations' ability to assimilate and productively use externally generated AI outputs, such as AI-generated code or content?",
     "retrieval_date": "2026-08-22",
     "results_returned": 20,
     "unique_track1_hits": 20,
