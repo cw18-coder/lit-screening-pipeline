@@ -91,12 +91,16 @@ async function main() {
   const questions = await loadQuestions(rows01a);
   await write('questions.json', questions);
 
-  // ---- Abstracts (filtered against 01c ∪ 01b, joined for title fallback) ----
+  // ---- Abstracts (filtered against 01c ∪ 01b ∪ Q15-ignored, joined for title fallback) ----
   const whitelistedStableIds = new Set([
     ...active01c.map(r => r.stable_id),
     ...rows01b.map(r => r.stable_id),
+    ...ignored01a.map(r => r.stable_id),
   ]);
   const titleAuthorsByStableId = new Map();
+  const inlineAbstractByStableId = new Map();
+  // 01c holds the canonical Track 1 metadata; 01a (including ignored) carries
+  // the inline abstract text pulled straight from the Consensus CSV export.
   for (const r of active01c) {
     if (!r.stable_id) continue;
     titleAuthorsByStableId.set(r.stable_id, {
@@ -105,8 +109,27 @@ async function main() {
       venue: r.venue || '',
       doi_url: r.doi_url || '',
     });
+    if (r.abstract) inlineAbstractByStableId.set(r.stable_id, r.abstract);
   }
-  const abstracts = await loadAbstracts(whitelistedStableIds, titleAuthorsByStableId);
+  for (const r of rows01a) {
+    if (!r.stable_id) continue;
+    if (!titleAuthorsByStableId.has(r.stable_id)) {
+      titleAuthorsByStableId.set(r.stable_id, {
+        title: r.title || '',
+        authors: r.authors || '',
+        venue: r.venue || '',
+        doi_url: r.doi_url || '',
+      });
+    }
+    if (r.abstract && !inlineAbstractByStableId.has(r.stable_id)) {
+      inlineAbstractByStableId.set(r.stable_id, r.abstract);
+    }
+  }
+  const abstracts = await loadAbstracts(
+    whitelistedStableIds,
+    titleAuthorsByStableId,
+    inlineAbstractByStableId,
+  );
   await write('abstracts.json', abstracts);
 
   // ---- Track 2 decisions (filtered against 01b anchor_ids, joined for metadata) ----
@@ -256,6 +279,7 @@ async function loadQuestions(rows01a) {
   // Prefer a dedicated questions folder if it exists; otherwise derive the
   // question inventory from 01a's own (query_id, query_text) pairs plus
   // per-query counts.
+  const filenameFallback = await queryTextFromResultsFilenames();
   if (existsSync(QUESTIONS_DIR)) {
     const { readdir } = await import('node:fs/promises');
     const files = (await readdir(QUESTIONS_DIR)).filter(f => f.endsWith('.json'));
@@ -290,7 +314,7 @@ async function loadQuestions(rows01a) {
   return Array.from(byQ.values())
     .map(b => ({
       q_id: b.q_id,
-      text: b.text,
+      text: b.text || filenameFallback.get(b.q_id) || '',
       retrieval_date: b.retrieval_date,
       results_returned: b.hits.length,
       unique_track1_hits: b.stable_ids.size,
@@ -299,35 +323,90 @@ async function loadQuestions(rows01a) {
     .sort((a, b) => a.q_id.localeCompare(b.q_id, undefined, { numeric: true }));
 }
 
-async function loadAbstracts(whitelist, titleAuthorsByStableId) {
+// Fallback for queries whose query_text field never made it into 01a
+// (wave-2 exports for Q17..Q22 had a different Consensus schema): reconstruct
+// a truncated query title from the retrieval CSV filename, which encodes
+// underscores-for-spaces and is truncated at ~60 chars.
+async function queryTextFromResultsFilenames() {
   const { readdir } = await import('node:fs/promises');
-  if (!existsSync(ABSTRACTS_DIR)) return [];
-  const files = (await readdir(ABSTRACTS_DIR)).filter(f => f.endsWith('.md'));
-  const out = [];
+  const map = new Map();
+  const csvDir = join(DRIVE_ROOT, 'query-results', 'csv');
+  if (!existsSync(csvDir)) return map;
+  const files = await readdir(csvDir);
   for (const f of files) {
-    const parsed = parseAbstractFilename(f);
-    if (!parsed) continue;
-    if (!whitelist.has(parsed.stable_id)) {
-      manifest.orphaned_abstracts.push(f);
-      continue;
+    if (!f.endsWith('.csv')) continue;
+    const m = f.match(/^(Q\d{2})_(.+?)\.csv$/i);
+    if (!m) continue;
+    const q = m[1].toUpperCase();
+    const humanised = m[2]
+      .replace(/_/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    // Add trailing ellipsis so the reader sees this is a truncated title.
+    const text = humanised + '…';
+    map.set(q, text);
+  }
+  return map;
+}
+
+async function loadAbstracts(whitelist, titleAuthorsByStableId, inlineAbstractByStableId = new Map()) {
+  const { readdir } = await import('node:fs/promises');
+  const out = new Map();
+
+  // 1. Parse every abstract markdown file on Drive. Keep only those whose
+  //    stable_id is in the whitelist.
+  if (existsSync(ABSTRACTS_DIR)) {
+    const files = (await readdir(ABSTRACTS_DIR)).filter(f => f.endsWith('.md'));
+    for (const f of files) {
+      const parsed = parseAbstractFilename(f);
+      if (!parsed) continue;
+      if (!whitelist.has(parsed.stable_id)) {
+        manifest.orphaned_abstracts.push(f);
+        continue;
+      }
+      const raw = await readFile(join(ABSTRACTS_DIR, f), 'utf8');
+      const md = parseAbstractMarkdown(raw);
+      const fallback = titleAuthorsByStableId.get(parsed.stable_id) ?? {};
+      out.set(parsed.stable_id, {
+        stable_id: parsed.stable_id,
+        year: md.year || parsed.year,
+        first_surname: parsed.surname,
+        title: md.title || fallback.title || '',
+        authors_apa: md.authors || fallback.authors || '',
+        venue: md.venue || fallback.venue || '',
+        abstract_text: md.body,
+        abstract_src: md.abstract_src || 'markdown',
+        doi_url: md.doi || fallback.doi_url || '',
+        file_name: f,
+      });
     }
-    const raw = await readFile(join(ABSTRACTS_DIR, f), 'utf8');
-    const md = parseAbstractMarkdown(raw);
-    const fallback = titleAuthorsByStableId.get(parsed.stable_id) ?? {};
-    out.push({
-      stable_id: parsed.stable_id,
-      year: md.year || parsed.year,
-      first_surname: parsed.surname,
-      title: md.title || fallback.title || '',
-      authors_apa: md.authors || fallback.authors || '',
-      venue: md.venue || fallback.venue || '',
-      abstract_text: md.body,
-      abstract_src: md.abstract_src || '',
-      doi_url: md.doi || fallback.doi_url || '',
-      file_name: f,
+  }
+
+  // 2. Fill in the gaps: every whitelist stable_id without a markdown file
+  //    gets a synthesised record built from the log-inline metadata plus
+  //    the abstract text embedded on the 01a row. This covers Q15 rows
+  //    (fetch_abstracts skipped them as 2b exclusions) and the 5 cross-track
+  //    overlaps (fetch_abstracts skipped them as Track 2 anchors).
+  for (const sid of whitelist) {
+    if (out.has(sid)) continue;
+    const meta = titleAuthorsByStableId.get(sid);
+    const abstract = inlineAbstractByStableId.get(sid);
+    if (!meta && !abstract) continue;
+    out.set(sid, {
+      stable_id: sid,
+      year: '',
+      first_surname: '',
+      title: meta?.title ?? '',
+      authors_apa: meta?.authors ?? '',
+      venue: meta?.venue ?? '',
+      abstract_text: abstract ?? '',
+      abstract_src: 'log_inline',
+      doi_url: meta?.doi_url ?? '',
+      file_name: '',
     });
   }
-  return out;
+
+  return Array.from(out.values());
 }
 
 function parseAbstractMarkdown(raw) {

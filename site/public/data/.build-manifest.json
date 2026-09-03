@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-09-03T10:11:36.100Z",
+  "built_at": "2026-09-03T10:23:21.234Z",
   "labels_frozen": false,
   "files_written": [
     "prisma-tally.json",
@@ -20,9 +20,7 @@
     "ai-assistance/sample_manifest.json",
     "meta.json"
   ],
-  "orphaned_abstracts": [
-    "2014_sanchez_7d670a2c.md"
-  ],
+  "orphaned_abstracts": [],
   "rejected_track2_decisions": [],
   "filtered_ignored_rows": {
     "01a": 20,
