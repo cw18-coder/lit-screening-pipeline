@@ -1,0 +1,15 @@
+.callout {
+  border-left: 3px solid;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  color: var(--ink);
+}
+.accent {
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
+}
+.accent-2 {
+  border-left-color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+}

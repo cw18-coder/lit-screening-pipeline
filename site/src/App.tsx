@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 const Home = lazy(() => import('./routes/Home').then(m => ({ default: m.Home })));
 const Prisma = lazy(() => import('./routes/Prisma').then(m => ({ default: m.Prisma })));
@@ -34,6 +35,7 @@ export function App() {
           </Routes>
         </Suspense>
       </main>
+      <Footer />
     </>
   );
 }

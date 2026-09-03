@@ -1,0 +1,25 @@
+.stat {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.n {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.l {
+  color: var(--ink-dim);
+  font-size: 12px;
+  margin-top: 4px;
+}
+.d {
+  color: var(--ink-mute);
+  font-size: 11px;
+  margin-top: 4px;
+}
+.accent    { color: var(--accent); }
+.accent-2  { color: var(--accent-2); }
+.good      { color: var(--good); }
+.warn      { color: var(--warn); }

@@ -1,0 +1,26 @@
+.wrap {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+  overflow-x: auto;
+}
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 640px;
+}
+.colHdr {
+  font-size: 11px;
+  fill: var(--ink-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.edge {
+  stroke: var(--edge-stroke);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: .75;
+}

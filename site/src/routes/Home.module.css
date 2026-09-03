@@ -1,0 +1,59 @@
+.hero {
+  background: linear-gradient(135deg, var(--accent-soft), var(--panel));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 26px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--accent) 25%, transparent), transparent 70%);
+}
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.hero p {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 16px;
+  max-width: 78ch;
+}
+.sub {
+  color: var(--ink-mute);
+  font-size: 13px;
+  margin-top: 10px;
+}
+.stats {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.quicklinks {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 900px) {
+  .stats, .quicklinks { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,20 @@
+.details {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 8px 0;
+  box-shadow: var(--shadow);
+}
+.details[open] {
+  background: var(--panel-2);
+}
+.summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+}
+.body {
+  margin-top: 8px;
+  color: var(--ink);
+}

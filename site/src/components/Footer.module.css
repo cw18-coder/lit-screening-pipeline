@@ -1,0 +1,19 @@
+.foot {
+  max-width: var(--max);
+  margin: 40px auto 0;
+  padding: 20px;
+  color: var(--ink-mute);
+  font-size: 12px;
+  border-top: 1px solid var(--line);
+}
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.mono {
+  font-family: var(--mono);
+  color: var(--ink);
+}
