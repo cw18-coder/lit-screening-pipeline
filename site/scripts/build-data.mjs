@@ -61,6 +61,14 @@ async function main() {
   const active01a = filterActive(rows01a, '01a');
   await write('identification-01a.json', active01a.map(mapT1Hit));
 
+  // Also emit the Q15-ignored subset so the "optional queries not operationalised"
+  // drill-down has data to show.
+  const ignored01a = rows01a.filter(r => {
+    const s = (r.pipeline_status || '').trim().toLowerCase();
+    return s.startsWith('ignored_');
+  });
+  await write('identification-01a-ignored.json', ignored01a.map(mapT1Hit));
+
   const rows01b = await loadCsv(join(PRISMA_LOGS, '01b_identification_track2_anchors.csv'));
   await write('identification-01b.json', rows01b.map(mapT2Anchor));
 

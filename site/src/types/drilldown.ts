@@ -1,118 +1,65 @@
-import type { AbstractRecord, Track1Hit, Track1UniqueRef, Track2Anchor, ScreeningExclusion } from './prisma';
-
-// A drill-down config maps a PRISMA node to what the page should show.
-// Kept in TS (not JSON) so type inference and column render functions
-// remain terse.
-
-export type DrilldownSource =
-  | 'identification-01a'
-  | 'identification-01b'
-  | 'identification-01c'
-  | 'screening-excluded-2b'
-  | 'track2-decisions'
-  | 'none';
+export type DrilldownVariant =
+  | 'query_aggregation'    // 440 — group by Consensus query
+  | 'duplicates'           // 108 — papers surfaced by multiple queries
+  | 'q15_ignored'          // 20 — Q15 removed, with decision text
+  | 'overlaps'             // 5 — cross-track overlaps
+  | 'track2_anchors'       // 22 — anchor list with decision viewer
+  | 'transit'              // 312, 307, screening-pending — no click-through
+  | 'reserved';            // screening-excluded pending AI screening
 
 export interface DrilldownConfig {
-  node_id: string;
-  source: DrilldownSource;
+  variant: DrilldownVariant;
   intro?: string;
-  columns?: string[];
-  filter?: (row: unknown) => boolean;
-  extraPanels?: Array<'query_barchart' | 'track2_overlap_table' | 'sanchez_note'>;
 }
-
-// Row-type discriminators for the drill-down page.
-export type DrilldownRow =
-  | Track1Hit
-  | Track1UniqueRef
-  | Track2Anchor
-  | ScreeningExclusion
-  | AbstractRecord;
 
 export const DRILLDOWN_CONFIG: Record<string, DrilldownConfig> = {
   identification_records_track1: {
-    node_id: 'identification_records_track1',
-    source: 'identification-01a',
+    variant: 'query_aggregation',
     intro:
-      'Every Track 1 identification hit — one row per (paper, Consensus query) pair, active-only. Sortable by query, year, or venue.',
-    columns: ['query_id', 'title', 'authors', 'year', 'venue', 'doi_url'],
-    extraPanels: ['query_barchart'],
+      'Every reference identified by the Consensus.app queries, grouped by query. Click a query to see the papers it returned; click a paper to read its abstract.',
   },
 
   identification_duplicates_removed_track1: {
-    node_id: 'identification_duplicates_removed_track1',
-    source: 'identification-01a',
+    variant: 'duplicates',
     intro:
-      'The 108 intra-Track-1 duplicate hits: same paper returned by multiple Consensus queries. Grouped by canonical dedup key. Below shows all 01a rows; sort by DOI or title to see the duplicates that collapsed into a single 01c row.',
-    columns: ['query_id', 'title', 'authors', 'year', 'doi_url'],
+      'Papers that were returned by more than one Consensus query. Each row shows the queries that surfaced the paper — the record itself was kept once, the extra hits were removed at deduplication.',
   },
 
   identification_optional_queries_removed_track1: {
-    node_id: 'identification_optional_queries_removed_track1',
-    source: 'identification-01a',
+    variant: 'q15_ignored',
     intro:
-      'The 20 Q15 rows marked pipeline_status=ignored_optional_q15. Q15 was pre-specified as optional in the search protocol; the reviewer decided post-retrieval not to operationalise it. Rows retained here for audit; excluded from every downstream count.',
-    columns: ['title', 'authors', 'year', 'venue', 'doi_url'],
-    extraPanels: ['sanchez_note'],
+      'Records that came from an optional Consensus query the reviewer chose not to operationalise. Reasoning is shown below the paper list.',
   },
 
-  identification_unique_records_track1: {
-    node_id: 'identification_unique_records_track1',
-    source: 'identification-01c',
-    intro:
-      'Every unique Track 1 reference after intra-Track-1 dedup. Includes Track 2 overlaps (5 rows carrying a non-empty track2_status); these are shown here for audit but bypass screening.',
-    columns: ['primary_query_id', 'title', 'authors', 'year', 'venue', 'track2_status', 'doi_url'],
-  },
+  identification_unique_records_track1:  { variant: 'transit' },
+  screening_records_input_track1:        { variant: 'transit' },
+  screening_records_pending_track1:      { variant: 'transit' },
+  eligibility_sought_full_text_track1:   { variant: 'transit' },
+  eligibility_not_retrieved_track1:      { variant: 'transit' },
+  eligibility_assessed_full_text_track1: { variant: 'transit' },
+  eligibility_excluded_full_text_track1: { variant: 'transit' },
+  included_studies_track1:               { variant: 'transit' },
+  included_studies_total:                { variant: 'transit' },
 
   cross_track_overlaps: {
-    node_id: 'cross_track_overlaps',
-    source: 'identification-01c',
-    filter: (r) => Boolean((r as Track1UniqueRef).track2_status),
+    variant: 'overlaps',
     intro:
-      'The 5 references that appear in both 01c (Track 1 dedup) and 01b (Track 2 anchors). These are reassigned to Track 2 for the funnel and do not enter title-abstract screening — their inclusion is anchored by the Track 2 purposive-selection decision.',
-    columns: ['track2_status', 'title', 'authors', 'year', 'doi_url'],
-    extraPanels: ['track2_overlap_table'],
-  },
-
-  screening_records_input_track1: {
-    node_id: 'screening_records_input_track1',
-    source: 'identification-01c',
-    filter: (r) => !(r as Track1UniqueRef).track2_status,
-    intro:
-      'The 307 records that enter title-abstract screening: unique after dedup (312) minus 5 Track 2 overlaps.',
-    columns: ['primary_query_id', 'title', 'authors', 'year', 'venue', 'doi_url'],
-  },
-
-  screening_excluded_title_abstract_track1: {
-    node_id: 'screening_excluded_title_abstract_track1',
-    source: 'screening-excluded-2b',
-    intro:
-      'Reserved for AI-adjudicated + human-calibrated screening exclusions. Populates after the 5-fold CV run against the labelling sample. The 19 rows previously here (Q15 en-bloc) were reclassified as pre-screening optional-query removals; see the corresponding node.',
-    columns: ['excluded_at_stage', 'title', 'authors', 'year', 'exclusion_reason', 'doi_url'],
+      'Five references that were both surfaced by a Consensus query and independently selected as Track 2 anchors. For counting purposes they are attributed to Track 2 and bypass the title-and-abstract screening step.',
   },
 
   identification_records_track2: {
-    node_id: 'identification_records_track2',
-    source: 'identification-01b',
+    variant: 'track2_anchors',
     intro:
-      'The 22 Track 2 anchors, purposively selected under the register-tagged process. Each row links to its inclusion decision markdown.',
-    columns: ['anchor_id', 'title', 'authors', 'year', 'register_tag', 'journal_sjr_quartile', 'doi_url'],
+      'The 22 anchor references selected purposively for their theoretical or methodological weight. Click any row to read the full inclusion rationale.',
   },
 
   included_studies_track2: {
-    node_id: 'included_studies_track2',
-    source: 'identification-01b',
+    variant: 'track2_anchors',
     intro:
-      'All 22 Track 2 anchors are included by purposive-selection design. Full inclusion decision rationales are visible when a row is clicked.',
-    columns: ['anchor_id', 'title', 'authors', 'year', 'register_tag'],
+      'All 22 Track 2 anchors are included by design. Click a row to see the reasoning that anchored the reference.',
   },
 
-  // Placeholder configs for nodes still awaiting data.
-  screening_records_pending_track1: { node_id: 'screening_records_pending_track1', source: 'none' },
-  eligibility_sought_full_text_track1: { node_id: 'eligibility_sought_full_text_track1', source: 'none' },
-  eligibility_not_retrieved_track1: { node_id: 'eligibility_not_retrieved_track1', source: 'none' },
-  eligibility_assessed_full_text_track1: { node_id: 'eligibility_assessed_full_text_track1', source: 'none' },
-  eligibility_excluded_full_text_track1: { node_id: 'eligibility_excluded_full_text_track1', source: 'none' },
-  included_studies_track1: { node_id: 'included_studies_track1', source: 'none' },
-  included_studies_total: { node_id: 'included_studies_total', source: 'none' },
+  screening_excluded_title_abstract_track1: {
+    variant: 'reserved',
+  },
 };

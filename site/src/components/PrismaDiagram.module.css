@@ -2,25 +2,41 @@
   background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 12px;
-  overflow-x: auto;
+  overflow: hidden;
+  position: relative;
+  min-height: 640px;
 }
-.svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-width: 640px;
+.bg {
+  color: var(--line);
+  opacity: 0.6;
 }
-.colHdr {
-  font-size: 11px;
-  fill: var(--ink-dim);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .08em;
+
+/* React Flow overrides so the diagram inherits our token system. */
+.wrap :global(.react-flow__attribution) { display: none; }
+
+.wrap :global(.react-flow__controls) {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
 }
-.edge {
-  stroke: var(--edge-stroke);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  opacity: .75;
+.wrap :global(.react-flow__controls button) {
+  background: var(--panel);
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-dim);
+  width: 32px;
+  height: 32px;
+  transition: background .1s ease;
+}
+.wrap :global(.react-flow__controls button:last-child) { border-bottom: none; }
+.wrap :global(.react-flow__controls button:hover) {
+  background: var(--panel-2);
+  color: var(--accent);
+}
+.wrap :global(.react-flow__controls button path) { fill: currentColor; }
+
+.wrap :global(.react-flow__edge-path) {
+  transition: stroke .15s ease;
 }

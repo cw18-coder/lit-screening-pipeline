@@ -1,23 +1,22 @@
-import { useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { AbstractDrawer } from '../components/AbstractDrawer';
-import { Barchart } from '../components/Barchart';
 import { Callout } from '../components/Callout';
-import { Card } from '../components/Card';
 import { Chip } from '../components/Chip';
+import { MarkdownRenderer } from '../components/MarkdownRenderer';
 import { RowTable, type RowTableColumn } from '../components/RowTable';
 import { useJson } from '../hooks/useJson';
+import { humaneSourceLabel } from '../lib/humane';
+import { DRILLDOWN_CONFIG, type DrilldownConfig } from '../types/drilldown';
 import type {
   AbstractRecord,
   ConsensusQuestion,
   PrismaTallyNode,
-  ScreeningExclusion,
   Track1Hit,
   Track1UniqueRef,
   Track2Anchor,
   Track2Decision,
 } from '../types/prisma';
-import { DRILLDOWN_CONFIG, type DrilldownConfig } from '../types/drilldown';
 import styles from './PrismaNode.module.css';
 
 export function PrismaNode() {
@@ -30,395 +29,473 @@ export function PrismaNode() {
   if (!config) {
     return (
       <div className="route-view">
-        <p><Link to="/prisma">← PRISMA</Link></p>
+        <BackLink />
         <h1>Unknown node: <code>{nodeId}</code></h1>
         <Callout variant="accent-2">
-          This node id does not appear in the drill-down configuration. If it was added recently,
-          rebuild the site with <code>pnpm build:data</code>.
+          This node is not registered in the drill-down catalogue.
         </Callout>
       </div>
     );
   }
 
+  const source = node ? humaneSourceLabel(node.source_log) : null;
+
   return (
     <div className="route-view">
-      <p>
-        <Link to="/prisma">← PRISMA</Link>
-      </p>
+      <BackLink />
       <div className={styles.header}>
         <div className={styles.headerMeta}>
-          <Chip variant="accent">{node?.prisma_stage ?? '—'}</Chip>
-          <Chip variant={node?.track === 'track2' ? 'good' : 'accent'}>{node?.track ?? '—'}</Chip>
-          <Chip mono>{nodeId}</Chip>
+          {node && <Chip variant="accent">{stageLabel(node.prisma_stage)}</Chip>}
+          {node && <Chip variant={node.track === 'track2' ? 'good' : 'accent'}>{trackLabel(node.track)}</Chip>}
         </div>
         <h1>{node?.label ?? nodeId}</h1>
         <div className={styles.headerCounts}>
           <span className={styles.count}>{node?.count ?? '—'}</span>
           <span className={styles.countLabel}>records</span>
         </div>
-        {node && (
+        {source && (
           <div className={styles.headerFooter}>
-            <span>source: <code>{node.source_log}</code></span>
-            <span>updated: {node.last_updated}</span>
+            Sourced from the {source}.
           </div>
         )}
         {config.intro && <p className={styles.intro}>{config.intro}</p>}
-        {node?.notes && <p className={styles.notes}>{node.notes}</p>}
       </div>
 
-      <NodePrimary config={config} nodeId={nodeId} />
-
-      <NodeSecondary config={config} />
+      <NodeBody variant={config.variant} />
     </div>
   );
 }
 
-// -----------------------------------------------------------------------------
-// Primary panel: row table sourced from `config.source`.
-// -----------------------------------------------------------------------------
+function BackLink() {
+  return (
+    <p className={styles.back}>
+      <Link to="/prisma">← Back to PRISMA overview</Link>
+    </p>
+  );
+}
 
-function NodePrimary({ config }: { config: DrilldownConfig; nodeId: string }) {
-  if (config.source === 'none') {
-    return (
-      <Callout>
-        This node is defined in the funnel but does not have underlying rows yet — it populates
-        as the review advances to later PRISMA stages (screening, eligibility, included).
-      </Callout>
-    );
-  }
-
-  switch (config.source) {
-    case 'identification-01a': return <T1HitsTable config={config} />;
-    case 'identification-01b': return <T2AnchorsTable config={config} />;
-    case 'identification-01c': return <T1UniqueTable config={config} />;
-    case 'screening-excluded-2b': return <ScreeningExcludedTable config={config} />;
-    case 'track2-decisions': return <T2DecisionsTable />;
-    default: return null;
+function NodeBody({ variant }: { variant: DrilldownConfig['variant'] }) {
+  switch (variant) {
+    case 'query_aggregation': return <QueryAggregationView />;
+    case 'duplicates':        return <DuplicatesView />;
+    case 'q15_ignored':       return <Q15IgnoredView />;
+    case 'overlaps':          return <OverlapsView />;
+    case 'track2_anchors':    return <Track2AnchorsView />;
+    case 'transit':
+      return (
+        <Callout variant="accent">
+          This is a summary count carried forward from the earlier stage. There is nothing further
+          to drill into — the underlying records are visible on the source and destination nodes.
+        </Callout>
+      );
+    case 'reserved':
+      return (
+        <Callout variant="accent-2" title="Populates after screening runs.">
+          {' '}Records excluded at title-and-abstract screening will appear here once the
+          AI-assisted screening pass completes its cross-validation against the hand-labelled
+          calibration set.
+        </Callout>
+      );
+    default:
+      return null;
   }
 }
 
 // -----------------------------------------------------------------------------
-// Row-source tables. Each one is a thin adapter over RowTable.
+// Query-level aggregation for identification_records_track1.
 // -----------------------------------------------------------------------------
 
-function T1HitsTable({ config }: { config: DrilldownConfig }) {
-  const { data: rows } = useJson<Track1Hit[]>('identification-01a.json');
+function QueryAggregationView() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeQuery = searchParams.get('q');
+
+  const { data: hits } = useJson<Track1Hit[]>('identification-01a.json');
+  const { data: questions } = useJson<ConsensusQuestion[]>('questions.json');
+  const { data: uniqueRefs } = useJson<Track1UniqueRef[]>('identification-01c.json');
   const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
+
+  const abstractsById = useIndex(abstracts, a => a.stable_id);
   const [selected, setSelected] = useState<AbstractRecord | null>(null);
 
-  const filtered = useMemo(() => {
-    if (!rows) return [];
-    return config.filter ? rows.filter(config.filter) : rows;
-  }, [rows, config.filter]);
-
-  const abstractsById = useMemo(() => {
-    const m = new Map<string, AbstractRecord>();
-    (abstracts ?? []).forEach(a => m.set(a.stable_id, a));
+  const questionsById = useMemo(() => {
+    const m = new Map<string, ConsensusQuestion>();
+    (questions ?? []).forEach(q => m.set(q.q_id, q));
     return m;
-  }, [abstracts]);
+  }, [questions]);
 
-  if (!rows) return <p>Loading…</p>;
+  const summaries = useMemo(() => {
+    if (!hits) return [];
+    const groups = new Map<string, Track1Hit[]>();
+    for (const h of hits) {
+      const q = h.query_id;
+      if (!q) continue;
+      const arr = groups.get(q) ?? [];
+      arr.push(h);
+      groups.set(q, arr);
+    }
+    const uniqueByQuery = new Map<string, Set<string>>();
+    for (const [q, arr] of groups.entries()) {
+      const s = new Set<string>();
+      arr.forEach(h => s.add(h.stable_id));
+      uniqueByQuery.set(q, s);
+    }
+    return Array.from(groups.entries()).map(([q, arr]) => {
+      const meta = questionsById.get(q);
+      return {
+        q_id: q,
+        text: meta?.text ?? '',
+        results_returned: arr.length,
+        unique_papers: uniqueByQuery.get(q)?.size ?? arr.length,
+        retrieval_date: meta?.retrieval_date ?? '',
+      };
+    }).sort((a, b) => a.q_id.localeCompare(b.q_id, undefined, { numeric: true }));
+  }, [hits, questionsById]);
+
+  if (!hits) return <p>Loading…</p>;
+
+  if (!activeQuery) {
+    // Query-level table
+    const columns: RowTableColumn<typeof summaries[number]>[] = [
+      { key: 'q_id', label: 'Query', width: '90px',
+        render: r => <Chip variant="accent" mono>{r.q_id}</Chip> },
+      { key: 'text', label: 'Query text',
+        render: r => <span className={styles.queryText}>{r.text || '—'}</span> },
+      { key: 'results_returned', label: 'Returned', width: '90px' },
+      { key: 'unique_papers', label: 'Unique', width: '90px' },
+    ];
+    return (
+      <>
+        <RowTable
+          rows={summaries}
+          columns={columns}
+          searchFields={['q_id', 'text']}
+          pageSize={25}
+          initialSort={['q_id', 'asc']}
+          onRowClick={row => setSearchParams({ q: row.q_id })}
+          emptyMessage="No queries in the active pool."
+        />
+        <p className={styles.hint}>
+          Click a query to see the papers it returned. Click a paper to read its abstract.
+        </p>
+      </>
+    );
+  }
+
+  // Per-query paper table
+  const rows = hits.filter(h => h.query_id === activeQuery);
+  const q = questionsById.get(activeQuery);
+  const uniqueRefsById = useIndex(uniqueRefs, u => u.stable_id);
 
   const columns: RowTableColumn<Track1Hit>[] = [
-    { key: 'query_id', label: 'Q', width: '60px' },
-    { key: 'title', label: 'Title', render: r => <span className={styles.title}>{r.title || '—'}</span> },
+    { key: 'title', label: 'Title', render: r => {
+      const inActive = uniqueRefsById.get(r.stable_id) != null;
+      return (
+        <div>
+          <div className={styles.paperTitle}>{r.title || '(no title)'}</div>
+          {!inActive && <div className={styles.paperTag}>collapsed into another hit at dedup</div>}
+        </div>
+      );
+    } },
     { key: 'authors', label: 'Authors', render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
     { key: 'year', label: 'Year', width: '60px' },
     { key: 'venue', label: 'Venue', render: r => <span className={styles.dim}>{r.venue || '—'}</span> },
-    { key: 'doi_url', label: 'Link', width: '90px', render: r => (
-      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>
-        DOI ↗
-      </a>
-    ) },
+    { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
+      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    ) : <span className={styles.dim}>—</span> },
   ];
-
-  const handleRow = (row: Track1Hit) => {
-    const abs = abstractsById.get(row.stable_id);
-    if (abs) setSelected(abs);
-  };
 
   return (
     <>
+      <div className={styles.subheader}>
+        <button className={styles.crumbBtn} onClick={() => setSearchParams({})}>← All queries</button>
+        <div className={styles.subtitle}>
+          <Chip variant="accent" mono>{activeQuery}</Chip>{' '}
+          {q?.text && <span className={styles.queryText}>{q.text}</span>}
+        </div>
+      </div>
       <RowTable
-        rows={filtered}
+        rows={rows}
         columns={columns}
-        searchFields={['title', 'authors', 'doi_url', 'query_id']}
-        pageSize={25}
-        initialSort={['query_id', 'asc']}
-        onRowClick={handleRow}
-        emptyMessage="No matching identification hits."
+        searchFields={['title', 'authors']}
+        pageSize={20}
+        onRowClick={r => { const a = abstractsById.get(r.stable_id); if (a) setSelected(a); }}
       />
+      <p className={styles.hint}>Click a paper for its abstract.</p>
       <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
     </>
   );
 }
 
-function T1UniqueTable({ config }: { config: DrilldownConfig }) {
-  const { data: rows } = useJson<Track1UniqueRef[]>('identification-01c.json');
+// -----------------------------------------------------------------------------
+// 108 duplicates: papers with hit_count > 1
+// -----------------------------------------------------------------------------
+
+function DuplicatesView() {
+  const { data: uniqueRefs } = useJson<Track1UniqueRef[]>('identification-01c.json');
   const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
+  const abstractsById = useIndex(abstracts, a => a.stable_id);
   const [selected, setSelected] = useState<AbstractRecord | null>(null);
 
-  const filtered = useMemo(() => {
-    if (!rows) return [];
-    return config.filter ? rows.filter(config.filter) : rows;
-  }, [rows, config.filter]);
-
-  const abstractsById = useMemo(() => {
-    const m = new Map<string, AbstractRecord>();
-    (abstracts ?? []).forEach(a => m.set(a.stable_id, a));
-    return m;
-  }, [abstracts]);
-
-  if (!rows) return <p>Loading…</p>;
+  if (!uniqueRefs) return <p>Loading…</p>;
+  const rows = uniqueRefs.filter(r => (r.hit_count ?? 1) > 1);
 
   const columns: RowTableColumn<Track1UniqueRef>[] = [
-    { key: 'primary_query_id', label: 'Q', width: '60px' },
-    { key: 'title', label: 'Title', render: r => <span className={styles.title}>{r.title || '—'}</span> },
-    { key: 'authors', label: 'Authors', render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
+    { key: 'title', label: 'Title',
+      render: r => <div className={styles.paperTitle}>{r.title || '(no title)'}</div> },
+    { key: 'authors', label: 'Authors',
+      render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
     { key: 'year', label: 'Year', width: '60px' },
-    { key: 'venue', label: 'Venue', render: r => <span className={styles.dim}>{r.venue || '—'}</span> },
-    { key: 'track2_status', label: 'T2', width: '80px', render: r => r.track2_status
-      ? <Chip variant="good">{r.track2_status}</Chip>
-      : <span className={styles.dim}>—</span> },
-    { key: 'doi_url', label: 'Link', width: '90px', render: r => (
-      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    { key: 'query_ids', label: 'Surfaced by', render: r => (
+      <div className={styles.chipRow}>
+        {(r.query_ids || '').split('|').filter(Boolean).map(q => (
+          <Chip key={q} variant="accent" mono>{q}</Chip>
+        ))}
+      </div>
     ) },
+    { key: 'hit_count', label: 'Times', width: '70px' },
   ];
 
-  return (
-    <>
-      <RowTable
-        rows={filtered}
-        columns={columns}
-        searchFields={['title', 'authors', 'doi_url', 'primary_query_id', 'track2_status']}
-        pageSize={25}
-        initialSort={['primary_query_id', 'asc']}
-        onRowClick={r => {
-          const abs = abstractsById.get(r.stable_id);
-          if (abs) setSelected(abs);
-        }}
-        emptyMessage="No matching records."
-      />
-      <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
-    </>
-  );
-}
-
-function T2AnchorsTable({ config }: { config: DrilldownConfig }) {
-  const { data: rows } = useJson<Track2Anchor[]>('identification-01b.json');
-  const { data: decisions } = useJson<Track2Decision[]>('track2-decisions.json');
-  const [selectedDec, setSelectedDec] = useState<Track2Decision | null>(null);
-
-  const filtered = useMemo(() => {
-    if (!rows) return [];
-    return config.filter ? rows.filter(config.filter) : rows;
-  }, [rows, config.filter]);
-
-  const decisionsById = useMemo(() => {
-    const m = new Map<string, Track2Decision>();
-    (decisions ?? []).forEach(d => m.set(d.anchor_id, d));
-    return m;
-  }, [decisions]);
-
-  if (!rows) return <p>Loading…</p>;
-
-  const columns: RowTableColumn<Track2Anchor>[] = [
-    { key: 'anchor_id', label: 'Anchor', width: '90px', render: r => <Chip variant="good" mono>{r.anchor_id}</Chip> },
-    { key: 'title', label: 'Title', render: r => <span className={styles.title}>{r.title}</span> },
-    { key: 'authors', label: 'Authors', render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
-    { key: 'year', label: 'Year', width: '60px' },
-    { key: 'register_tag', label: 'Register' },
-    { key: 'journal_sjr_quartile', label: 'SJR', width: '60px', render: r => r.journal_sjr_quartile
-      ? <Chip variant="accent" mono>{r.journal_sjr_quartile}</Chip>
-      : <span className={styles.dim}>—</span> },
-    { key: 'doi_url', label: 'Link', width: '90px', render: r => (
-      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
-    ) },
-  ];
-
-  return (
-    <>
-      <RowTable
-        rows={filtered}
-        columns={columns}
-        searchFields={['title', 'authors', 'anchor_id', 'register_tag']}
-        pageSize={25}
-        initialSort={['anchor_id', 'asc']}
-        onRowClick={r => {
-          const d = decisionsById.get(r.anchor_id);
-          if (d) setSelectedDec(d);
-        }}
-        emptyMessage="No matching Track 2 anchors."
-      />
-      {selectedDec && (
-        <DecisionOverlay decision={selectedDec} onClose={() => setSelectedDec(null)} />
-      )}
-    </>
-  );
-}
-
-function ScreeningExcludedTable({ config }: { config: DrilldownConfig }) {
-  const { data: rows } = useJson<ScreeningExclusion[]>('screening-excluded-2b.json');
-
-  const filtered = useMemo(() => {
-    if (!rows) return [];
-    return config.filter ? rows.filter(config.filter) : rows;
-  }, [rows, config.filter]);
-
-  if (!rows) return <p>Loading…</p>;
-  if (filtered.length === 0) {
-    return (
-      <Callout variant="accent-2" title="Reserved.">
-        {' '}This node is populated after the AI adjudicator runs the 5-fold CV against the
-        labelling sample. The former 19 Q15 en-bloc rows were reclassified as pre-screening
-        removals — see the corresponding node.
-      </Callout>
-    );
-  }
-
-  const columns: RowTableColumn<ScreeningExclusion>[] = [
-    { key: 'title', label: 'Title', render: r => <span className={styles.title}>{r.title}</span> },
-    { key: 'authors', label: 'Authors', render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
-    { key: 'year', label: 'Year', width: '60px' },
-    { key: 'excluded_at_stage', label: 'Stage' },
-    { key: 'exclusion_reason', label: 'Reason', render: r => <span className={styles.dim}>{r.exclusion_reason || '—'}</span> },
-    { key: 'doi_url', label: 'Link', width: '90px', render: r => (
-      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
-    ) },
-  ];
-
-  return (
-    <RowTable
-      rows={filtered}
-      columns={columns}
-      searchFields={['title', 'authors', 'exclusion_reason']}
-      pageSize={25}
-      initialSort={['title', 'asc']}
-      emptyMessage="No screening exclusions."
-    />
-  );
-}
-
-function T2DecisionsTable() {
-  const { data: rows } = useJson<Track2Decision[]>('track2-decisions.json');
-  const [selectedDec, setSelectedDec] = useState<Track2Decision | null>(null);
-  if (!rows) return <p>Loading…</p>;
-
-  const columns: RowTableColumn<Track2Decision>[] = [
-    { key: 'anchor_id', label: 'Anchor', width: '90px' },
-    { key: 'title', label: 'Title' },
-    { key: 'authors', label: 'Authors' },
-    { key: 'year', label: 'Year', width: '60px' },
-    { key: 'unit_alignment', label: 'Unit alignment' },
-  ];
   return (
     <>
       <RowTable
         rows={rows}
         columns={columns}
-        searchFields={['title', 'authors', 'anchor_id']}
+        searchFields={['title', 'authors', 'query_ids']}
+        pageSize={25}
+        initialSort={['hit_count', 'desc']}
+        onRowClick={r => { const a = abstractsById.get(r.stable_id); if (a) setSelected(a); }}
+        emptyMessage="No duplicate hits in the active pool."
+      />
+      <p className={styles.hint}>Click a paper for its abstract.</p>
+      <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
+    </>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Q15 optional: 20 papers + decision text
+// -----------------------------------------------------------------------------
+
+function Q15IgnoredView() {
+  const { data: ignored } = useJson<Track1Hit[]>('identification-01a-ignored.json');
+  const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
+  const abstractsById = useIndex(abstracts, a => a.stable_id);
+  const [selected, setSelected] = useState<AbstractRecord | null>(null);
+
+  // De-duplicate ignored hits by stable_id so we show 20 distinct papers, not
+  // multiple query-tagged rows for the same paper.
+  const q15Rows = useMemo(() => {
+    const seen = new Set<string>();
+    const unique: Track1Hit[] = [];
+    for (const r of ignored ?? []) {
+      if (seen.has(r.stable_id)) continue;
+      seen.add(r.stable_id);
+      unique.push(r);
+    }
+    return unique;
+  }, [ignored]);
+
+  const columns: RowTableColumn<Track1Hit>[] = [
+    { key: 'title', label: 'Title',
+      render: r => <div className={styles.paperTitle}>{r.title || '(no title)'}</div> },
+    { key: 'authors', label: 'Authors',
+      render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
+    { key: 'year', label: 'Year', width: '60px' },
+    { key: 'venue', label: 'Venue',
+      render: r => <span className={styles.dim}>{r.venue || '—'}</span> },
+    { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
+      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    ) : <span className={styles.dim}>—</span> },
+  ];
+
+  return (
+    <>
+      <Callout variant="accent-2" title="Reviewer decision.">
+        {' '}Q15 was an optional Consensus query that probed the psychology-adjacent literature on
+        automation trust, complacency, and workload. After reading the returned abstracts, the
+        reviewer concluded these papers do not carry the correctness-wedge signal that anchors the
+        review (they measure operator vigilance rather than developer productivity or code review
+        outcomes). Q15 was therefore not operationalised. The 20 hits stay on record for audit but
+        do not enter any downstream count.
+      </Callout>
+      {q15Rows.length === 0 ? (
+        <p className={styles.dim}>No Q15 hits are present in the current data snapshot.</p>
+      ) : (
+        <>
+          <RowTable
+            rows={q15Rows}
+            columns={columns}
+            searchFields={['title', 'authors']}
+            pageSize={25}
+            initialSort={['year', 'desc']}
+            onRowClick={r => { const a = abstractsById.get(r.stable_id); if (a) setSelected(a); }}
+          />
+          <p className={styles.hint}>Click a paper for its abstract.</p>
+        </>
+      )}
+      <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
+    </>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// 5 overlaps
+// -----------------------------------------------------------------------------
+
+function OverlapsView() {
+  const { data: uniqueRefs } = useJson<Track1UniqueRef[]>('identification-01c.json');
+  const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
+  const abstractsById = useIndex(abstracts, a => a.stable_id);
+  const [selected, setSelected] = useState<AbstractRecord | null>(null);
+
+  if (!uniqueRefs) return <p>Loading…</p>;
+  const rows = uniqueRefs.filter(r => Boolean(r.track2_status));
+
+  const columns: RowTableColumn<Track1UniqueRef>[] = [
+    { key: 'track2_status', label: 'Anchor', width: '110px',
+      render: r => <Chip variant="good" mono>{r.track2_status}</Chip> },
+    { key: 'title', label: 'Title',
+      render: r => <div className={styles.paperTitle}>{r.title || '(no title)'}</div> },
+    { key: 'authors', label: 'Authors',
+      render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
+    { key: 'year', label: 'Year', width: '60px' },
+    { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
+      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    ) : <span className={styles.dim}>—</span> },
+  ];
+
+  return (
+    <>
+      <RowTable
+        rows={rows}
+        columns={columns}
+        searchFields={['title', 'authors', 'track2_status']}
+        pageSize={25}
+        initialSort={['track2_status', 'asc']}
+        onRowClick={r => { const a = abstractsById.get(r.stable_id); if (a) setSelected(a); }}
+      />
+      <p className={styles.hint}>Click a paper for its abstract.</p>
+      <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
+    </>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// Track 2 anchors: 22 rows with rich decision viewer.
+// -----------------------------------------------------------------------------
+
+function Track2AnchorsView() {
+  const { data: anchors } = useJson<Track2Anchor[]>('identification-01b.json');
+  const { data: decisions } = useJson<Track2Decision[]>('track2-decisions.json');
+  const decisionsById = useIndex(decisions, d => d.anchor_id);
+  const [selected, setSelected] = useState<Track2Decision | null>(null);
+
+  if (!anchors) return <p>Loading…</p>;
+
+  const columns: RowTableColumn<Track2Anchor>[] = [
+    { key: 'anchor_id', label: 'Anchor', width: '90px',
+      render: r => <Chip variant="good" mono>{r.anchor_id}</Chip> },
+    { key: 'title', label: 'Title',
+      render: r => <div className={styles.paperTitle}>{r.title || '(no title)'}</div> },
+    { key: 'authors', label: 'Authors',
+      render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
+    { key: 'year', label: 'Year', width: '60px' },
+    { key: 'register_tag', label: 'Register' },
+    { key: 'journal_sjr_quartile', label: 'SJR', width: '70px',
+      render: r => r.journal_sjr_quartile
+        ? <Chip variant="accent" mono>{r.journal_sjr_quartile}</Chip>
+        : <span className={styles.dim}>—</span> },
+    { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
+      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    ) : <span className={styles.dim}>—</span> },
+  ];
+
+  return (
+    <>
+      <RowTable
+        rows={anchors}
+        columns={columns}
+        searchFields={['title', 'authors', 'anchor_id', 'register_tag']}
         pageSize={25}
         initialSort={['anchor_id', 'asc']}
-        onRowClick={r => setSelectedDec(r)}
+        onRowClick={r => { const d = decisionsById.get(r.anchor_id); if (d) setSelected(d); }}
       />
-      {selectedDec && (
-        <DecisionOverlay decision={selectedDec} onClose={() => setSelectedDec(null)} />
+      <p className={styles.hint}>Click a row to read the full inclusion rationale.</p>
+      {selected && (
+        <DecisionOverlay decision={selected} onClose={() => setSelected(null)} />
       )}
     </>
   );
 }
 
-// -----------------------------------------------------------------------------
-// Secondary panels: query barchart, overlap table, Sanchez note.
-// -----------------------------------------------------------------------------
-
-function NodeSecondary({ config }: { config: DrilldownConfig }) {
-  if (!config.extraPanels?.length) return null;
-  return (
-    <div className={styles.secondary}>
-      {config.extraPanels.map(p => {
-        switch (p) {
-          case 'query_barchart': return <QueryBarchart key={p} />;
-          case 'track2_overlap_table': return <OverlapNote key={p} />;
-          case 'sanchez_note': return <SanchezNote key={p} />;
-          default: return null;
-        }
-      })}
-    </div>
-  );
-}
-
-function QueryBarchart() {
-  const { data: questions } = useJson<ConsensusQuestion[]>('questions.json');
-  if (!questions || questions.length === 0) return null;
-  const rows = questions
-    .filter(q => q.operationalised !== false)
-    .map(q => ({
-      label: q.q_id,
-      value: q.results_returned ?? 0,
-      detail: `${q.q_id}: ${q.results_returned} results, ${q.unique_track1_hits} unique Track 1 hits`,
-    }));
-  return (
-    <>
-      <h2>Records returned per Consensus query</h2>
-      <Card>
-        <Barchart rows={rows} />
-      </Card>
-    </>
-  );
-}
-
-function OverlapNote() {
-  return (
-    <Callout variant="accent" title="Cross-track overlap.">
-      {' '}These 5 references are picked up by Consensus and also purposively selected as Track 2
-      anchors. For counting purposes they are attributed to Track 2 and bypass title-abstract
-      screening (their inclusion rationale lives in the anchor decision markdown).
-    </Callout>
-  );
-}
-
-function SanchezNote() {
-  return (
-    <Callout variant="accent-2" title="Sanchez et al. 2014.">
-      {' '}One row in 01c had Q15 as primary query but was previously not written to 2b. Under the
-      Q15-not-operationalised model, all 20 Q15-primary rows are marked
-      <code> ignored_optional_q15 </code>, including Sanchez, so audit symmetry is preserved.
-    </Callout>
-  );
-}
-
-// -----------------------------------------------------------------------------
-// Track 2 decision overlay — reuses the AbstractDrawer look for now.
-// -----------------------------------------------------------------------------
-
 function DecisionOverlay({ decision, onClose }: { decision: Track2Decision; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
   return (
     <div className={styles.overlay} onClick={onClose} role="dialog" aria-modal="true">
       <div className={styles.overlayInner} onClick={e => e.stopPropagation()}>
         <div className={styles.overlayHead}>
-          <div>
+          <div className={styles.overlayChips}>
             <Chip variant="good" mono>{decision.anchor_id}</Chip>
-            <Chip mono>{decision.year}</Chip>
+            {decision.year && <Chip mono>{String(decision.year)}</Chip>}
             {decision.unit_alignment && <Chip variant="accent">{decision.unit_alignment}</Chip>}
           </div>
           <button className={styles.overlayClose} onClick={onClose} aria-label="Close">✕</button>
         </div>
         <div className={styles.overlayBody}>
-          <h2>{decision.title}</h2>
+          <h2 className={styles.overlayTitle}>{decision.title || '(no title)'}</h2>
           <p className={styles.overlayAuthors}>{decision.authors}</p>
           {decision.research_unit && (
             <p className={styles.overlayField}><b>Research unit:</b> {decision.research_unit}</p>
           )}
-          <h3>Inclusion rationale</h3>
-          <pre className={styles.rationale}>{decision.rationale_md}</pre>
+          <h3 className={styles.overlaySection}>Inclusion rationale</h3>
+          <MarkdownRenderer source={decision.rationale_md || '_No rationale recorded._'} />
         </div>
       </div>
     </div>
   );
 }
 
+// -----------------------------------------------------------------------------
+// helpers
+// -----------------------------------------------------------------------------
+
+function useIndex<T>(rows: T[] | null | undefined, keyFn: (t: T) => string): Map<string, T> {
+  return useMemo(() => {
+    const m = new Map<string, T>();
+    (rows ?? []).forEach(r => m.set(keyFn(r), r));
+    return m;
+  }, [rows, keyFn]);
+}
+
 function shortAuthors(a: string, cap = 65): string {
   if (!a) return '—';
   return a.length > cap ? a.slice(0, cap) + '…' : a;
+}
+
+function stageLabel(stage: string): string {
+  switch (stage) {
+    case 'identification': return 'Identification';
+    case 'screening':      return 'Screening';
+    case 'eligibility':    return 'Eligibility';
+    case 'included':       return 'Included';
+    default:               return stage;
+  }
+}
+
+function trackLabel(track: string): string {
+  switch (track) {
+    case 'track1':   return 'Track 1 · Consensus';
+    case 'track2':   return 'Track 2 · Purposive';
+    case 'combined': return 'Combined';
+    default:         return track;
+  }
 }

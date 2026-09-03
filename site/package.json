@@ -4,21 +4,24 @@
   "private": true,
   "type": "module",
   "description": "Interactive PRISMA and .github/ wiki front-end for the lit-screening-pipeline release.",
-  "engines": { "node": ">=20 <21" },
+  "engines": {
+    "node": ">=20 <21"
+  },
   "packageManager": "pnpm@9.7.0",
   "scripts": {
     "build:data": "node scripts/build-data.mjs",
     "build:wiki": "node scripts/build-wiki.mjs",
-    "predev":  "node scripts/build-data.mjs && node scripts/build-wiki.mjs",
-    "dev":     "vite",
+    "predev": "node scripts/build-data.mjs && node scripts/build-wiki.mjs",
+    "dev": "vite",
     "prebuild": "node scripts/gate-prebuild.mjs",
-    "build":   "vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "lint":    "eslint src scripts --ext .ts,.tsx,.mjs",
-    "format":  "prettier --check src scripts"
+    "lint": "eslint src scripts --ext .ts,.tsx,.mjs",
+    "format": "prettier --check src scripts"
   },
   "dependencies": {
+    "@xyflow/react": "12.3.5",
     "flexsearch": "0.7.43",
     "react": "18.3.1",
     "react-dom": "18.3.1",

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Chip } from './Chip';
+import { MarkdownRenderer } from './MarkdownRenderer';
 import type { AbstractRecord } from '../types/prisma';
 import styles from './AbstractDrawer.module.css';
 
@@ -52,7 +53,11 @@ export function AbstractDrawer({ record, onClose }: AbstractDrawerProps) {
             </p>
           )}
           <h3 className={styles.section}>Abstract</h3>
-          <p className={styles.abstract}>{record.abstract_text || '(no abstract text captured)'}</p>
+          {record.abstract_text ? (
+            <MarkdownRenderer source={record.abstract_text} />
+          ) : (
+            <p className={styles.abstract}>(no abstract text captured for this record)</p>
+          )}
         </div>
       </div>
     </div>

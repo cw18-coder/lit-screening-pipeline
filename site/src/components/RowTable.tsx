@@ -11,7 +11,7 @@ export interface RowTableColumn<T> {
   width?: string;
 }
 
-export interface RowTableProps<T extends { stable_id?: string; sample_id?: string }> {
+export interface RowTableProps<T> {
   rows: T[];
   columns: RowTableColumn<T>[];
   searchFields?: Array<keyof T | string>;
@@ -24,9 +24,7 @@ export interface RowTableProps<T extends { stable_id?: string; sample_id?: strin
 
 type SortDir = 'asc' | 'desc';
 
-export function RowTable<T extends { stable_id?: string; sample_id?: string }>(
-  props: RowTableProps<T>
-) {
+export function RowTable<T>(props: RowTableProps<T>) {
   const {
     rows,
     columns,
@@ -85,8 +83,10 @@ export function RowTable<T extends { stable_id?: string; sample_id?: string }>(
     }
   };
 
-  const defaultKey = (r: T, i: number) =>
-    r.sample_id ?? r.stable_id ?? String(pageStart + i);
+  const defaultKey = (r: T, i: number) => {
+    const rec = r as unknown as { sample_id?: string; stable_id?: string };
+    return rec.sample_id ?? rec.stable_id ?? String(pageStart + i);
+  };
 
   return (
     <div className={styles.wrap}>

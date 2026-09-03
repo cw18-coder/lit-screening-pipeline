@@ -1,0 +1,84 @@
+.node {
+  width: 260px;
+  padding: 14px 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 1px 3px rgba(20, 30, 50, .08), 0 8px 20px rgba(20, 30, 50, .06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.clickable { cursor: pointer; }
+.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(20, 30, 50, .1), 0 12px 28px rgba(20, 30, 50, .1);
+  border-color: var(--accent);
+}
+.clickable:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.transit {
+  opacity: 0.94;
+  background: var(--panel-2);
+  cursor: default;
+}
+.transit .count { color: var(--ink); }
+
+.count {
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--mono);
+  letter-spacing: -.02em;
+  line-height: 1;
+  color: var(--accent-2);
+  margin-top: 2px;
+}
+.label {
+  font-size: 12.5px;
+  color: var(--ink);
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.hint {
+  font-size: 10.5px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.transit .hint { display: none; }
+
+/* Stage colour accents on the left rail */
+.node::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+.identification::before { background: var(--accent); }
+.screening::before      { background: var(--accent-2); }
+.eligibility::before    { background: color-mix(in srgb, var(--accent-2) 60%, var(--warn)); }
+.included::before       { background: var(--good); }
+
+/* Track tint on the big count */
+.track2 .count   { color: var(--good); }
+.combined .count { color: var(--accent); }
+
+.handle {
+  width: 8px;
+  height: 8px;
+  background: var(--ink-mute);
+  border: 2px solid var(--panel);
+  opacity: 0;
+}
