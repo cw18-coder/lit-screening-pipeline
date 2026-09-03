@@ -1,0 +1,100 @@
+.wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-2);
+}
+.search {
+  flex: 1 1 auto;
+  min-width: 200px;
+  max-width: 380px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font: inherit;
+}
+.search:focus { outline: none; border-color: var(--accent); }
+.count {
+  color: var(--ink-mute);
+  font-size: 12px;
+  font-family: var(--mono);
+}
+.tableWrap {
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  background: var(--panel);
+}
+.table thead th {
+  text-align: left;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-dim);
+  font-weight: 600;
+  font-size: 12.5px;
+  background: var(--panel);
+  user-select: none;
+}
+.sortable { cursor: pointer; }
+.sortable:hover { color: var(--accent); }
+.sortArrow {
+  margin-left: 6px;
+  color: var(--accent);
+  font-family: var(--mono);
+}
+.table tbody td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--ink);
+}
+.table tbody tr:hover { background: var(--panel-2); }
+.clickable { cursor: pointer; }
+.empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+.dim { color: var(--ink-mute); }
+.link { color: var(--link); font-family: var(--mono); font-size: 12.5px; }
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  background: var(--panel-2);
+}
+.pager button {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.pager button:hover:not(:disabled) { border-color: var(--accent); }
+.pager button:disabled { opacity: 0.5; cursor: not-allowed; }
+.pageInfo {
+  color: var(--ink-mute);
+  font-size: 12px;
+  font-family: var(--mono);
+}

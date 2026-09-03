@@ -10,6 +10,7 @@ const Wiki = lazy(() => import('./routes/Wiki').then(m => ({ default: m.Wiki }))
 const WikiPage = lazy(() => import('./routes/WikiPage').then(m => ({ default: m.WikiPage })));
 const Search = lazy(() => import('./routes/Search').then(m => ({ default: m.Search })));
 const About = lazy(() => import('./routes/About').then(m => ({ default: m.About })));
+const LogsPage = lazy(() => import('./routes/LogsPage').then(m => ({ default: m.LogsPage })));
 
 const LoadingFallback = () => (
   <div className="route-view" style={{ padding: '24px 0', color: 'var(--ink-mute)' }}>
@@ -31,6 +32,7 @@ export function App() {
             <Route path="/wiki/:section/:pageId" element={<WikiPage />} />
             <Route path="/search" element={<Search />} />
             <Route path="/about" element={<About />} />
+            <Route path="/logs/:logId" element={<LogsPage />} />
             <Route path="*" element={<div className="route-view">Route not found.</div>} />
           </Routes>
         </Suspense>

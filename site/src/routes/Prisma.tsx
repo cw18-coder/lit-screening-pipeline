@@ -5,6 +5,7 @@ import { Chip } from '../components/Chip';
 import { PrismaDiagram } from '../components/PrismaDiagram';
 import { useJson } from '../hooks/useJson';
 import type { ConsensusQuestion, PrismaTallyNode } from '../types/prisma';
+import { Link } from 'react-router-dom';
 
 export function Prisma() {
   const { data: tally, loading } = useJson<PrismaTallyNode[]>('prisma-tally.json');
@@ -57,6 +58,24 @@ export function Prisma() {
         identification and screening. They are PRISMA 2020 "records removed before screening" per
         Figure 2 — click each to see the underlying rows.
       </Callout>
+
+      <h2>Non-PRISMA logs</h2>
+      <p style={{ color: 'var(--ink-dim)', maxWidth: '78ch' }}>
+        References cited alongside the review but sitting outside the PRISMA funnel. Recorded here
+        as separate logs for audit; land in the final reference list without entering a Track.
+      </p>
+      <div style={{ display: 'grid', gap: 14, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+        <Card>
+          <h3>Chapter 3 methodology anchors</h3>
+          <p>Identification-strategy literature (DiD, event studies, quasi-experimental design).</p>
+          <p><Link to="/logs/ch3-methods-anchors">Open →</Link></p>
+        </Card>
+        <Card>
+          <h3>Signpost citations</h3>
+          <p>Framing, definitions, method precedents cited in the narrative.</p>
+          <p><Link to="/logs/signpost-citations">Open →</Link></p>
+        </Card>
+      </div>
     </div>
   );
 }
