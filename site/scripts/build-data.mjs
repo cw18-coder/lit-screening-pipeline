@@ -70,7 +70,8 @@ async function main() {
   await write('identification-01a-ignored.json', ignored01a.map(mapT1Hit));
 
   const rows01b = await loadCsv(join(PRISMA_LOGS, '01b_identification_track2_anchors.csv'));
-  await write('identification-01b.json', rows01b.map(mapT2Anchor));
+  const mappedT2 = rows01b.map(mapT2Anchor);
+  await write('identification-01b.json', mappedT2);
 
   const rows01c = await loadCsv(join(PRISMA_LOGS, '01c_identification_dedup.csv'));
   const active01c = filterActive(rows01c, '01c');
@@ -86,21 +87,45 @@ async function main() {
   const signposts = await loadCsv(join(NON_PRISMA_LOGS, 'signpost_citations.csv'));
   await write('non-prisma-signposts.json', signposts);
 
-  // ---- Questions ----
-  const questions = await loadQuestions();
+  // ---- Questions (derived from 01a's query_text field) ----
+  const questions = await loadQuestions(rows01a);
   await write('questions.json', questions);
 
-  // ---- Abstracts (filtered against 01c ∪ 01b) ----
+  // ---- Abstracts (filtered against 01c ∪ 01b, joined for title fallback) ----
   const whitelistedStableIds = new Set([
     ...active01c.map(r => r.stable_id),
     ...rows01b.map(r => r.stable_id),
   ]);
-  const abstracts = await loadAbstracts(whitelistedStableIds);
+  const titleAuthorsByStableId = new Map();
+  for (const r of active01c) {
+    if (!r.stable_id) continue;
+    titleAuthorsByStableId.set(r.stable_id, {
+      title: r.title || '',
+      authors: r.authors || '',
+      venue: r.venue || '',
+      doi_url: r.doi_url || '',
+    });
+  }
+  const abstracts = await loadAbstracts(whitelistedStableIds, titleAuthorsByStableId);
   await write('abstracts.json', abstracts);
 
-  // ---- Track 2 decisions (filtered against 01b anchor_ids) ----
+  // ---- Track 2 decisions (filtered against 01b anchor_ids, joined for metadata) ----
   const anchorIds = new Set(rows01b.map(r => r.anchor_id));
-  const decisions = await loadTrack2Decisions(anchorIds);
+  const anchorMetaById = new Map();
+  for (const r of mappedT2) {
+    if (!r.anchor_id) continue;
+    anchorMetaById.set(r.anchor_id, {
+      stable_id: r.stable_id,
+      title: r.title,
+      authors: r.authors,
+      year: r.year,
+      first_author: r.first_author,
+      research_unit: r.research_unit,
+      unit_alignment: r.unit_alignment,
+      psychology_adjacent: r.psychology_adjacent,
+    });
+  }
+  const decisions = await loadTrack2Decisions(anchorIds, anchorMetaById);
   await write('track2-decisions.json', decisions);
 
   // ---- AI-assistance CSVs ----
@@ -191,40 +216,90 @@ function mapT1Unique(r) {
 }
 
 function mapT2Anchor(r) {
+  // Alias raw 01b column names to the reader-oriented shape the site expects.
+  // full_citation carries "Authors (Year). Title. Venue, ..." in APA style;
+  // pull the title out with a tolerant regex that stops at the first sentence
+  // boundary followed by an italic venue or comma.
+  const title = parseTitleFromCitation(r.full_citation);
+  const authors = parseAuthorsFromCitation(r.full_citation) || r.first_author || '';
   return {
     ...r,
     year: toIntOrNull(r.year),
     s2_citation_count: toIntOrNull(r.s2_citation_count),
     s2_influential_citations: toIntOrNull(r.s2_influential_citations),
+    // Reader-facing aliases (leave originals in place for future consumers).
+    title,
+    authors,
+    register_tag: r.register || '',
+    journal_sjr_quartile: r.sjr_quartile || '',
+    inclusion_decision_path: r.inclusion_decision_path || '',
   };
+}
+
+// "Authors (Year). Title of paper. Venue, 12(3), 45-67. https://doi.org/..."
+function parseTitleFromCitation(citation) {
+  if (!citation) return '';
+  const m = citation.match(/\(\d{4}[a-z]?\)\.\s+([^.]+?[^.])\.\s+/);
+  return m ? m[1].trim().replace(/\s+/g, ' ') : '';
+}
+function parseAuthorsFromCitation(citation) {
+  if (!citation) return '';
+  const m = citation.match(/^(.+?)\s+\(\d{4}[a-z]?\)/);
+  return m ? m[1].trim() : '';
 }
 
 function mapScreeningExclusion(r) {
   return { ...r, year: toIntOrNull(r.year) };
 }
 
-async function loadQuestions() {
-  if (!existsSync(QUESTIONS_DIR)) return [];
-  const { readdir } = await import('node:fs/promises');
-  const files = (await readdir(QUESTIONS_DIR)).filter(f => f.endsWith('.json'));
-  const out = [];
-  for (const f of files) {
-    try {
-      const txt = await readFile(join(QUESTIONS_DIR, f), 'utf8');
-      const obj = JSON.parse(txt);
-      if (Array.isArray(obj?.questions)) {
-        out.push(...obj.questions);
-      } else if (Array.isArray(obj)) {
-        out.push(...obj);
+async function loadQuestions(rows01a) {
+  // Prefer a dedicated questions folder if it exists; otherwise derive the
+  // question inventory from 01a's own (query_id, query_text) pairs plus
+  // per-query counts.
+  if (existsSync(QUESTIONS_DIR)) {
+    const { readdir } = await import('node:fs/promises');
+    const files = (await readdir(QUESTIONS_DIR)).filter(f => f.endsWith('.json'));
+    if (files.length > 0) {
+      const out = [];
+      for (const f of files) {
+        try {
+          const txt = await readFile(join(QUESTIONS_DIR, f), 'utf8');
+          const obj = JSON.parse(txt);
+          if (Array.isArray(obj?.questions)) out.push(...obj.questions);
+          else if (Array.isArray(obj)) out.push(...obj);
+        } catch (e) {
+          console.warn(`[build-data] failed to parse questions ${f}: ${e.message}`);
+        }
       }
-    } catch (e) {
-      console.warn(`[build-data] failed to parse questions ${f}: ${e.message}`);
+      if (out.length > 0) return out;
     }
   }
-  return out;
+
+  // Derive: group 01a rows by query_id, collect the query_text and counts.
+  const byQ = new Map();
+  for (const r of rows01a) {
+    const q = r.query_id;
+    if (!q) continue;
+    const bucket = byQ.get(q) ?? { q_id: q, text: '', hits: [], stable_ids: new Set(), retrieval_date: '' };
+    if (!bucket.text && r.query_text) bucket.text = r.query_text.trim();
+    if (!bucket.retrieval_date && r.retrieval_date) bucket.retrieval_date = r.retrieval_date;
+    bucket.hits.push(r);
+    if (r.stable_id) bucket.stable_ids.add(r.stable_id);
+    byQ.set(q, bucket);
+  }
+  return Array.from(byQ.values())
+    .map(b => ({
+      q_id: b.q_id,
+      text: b.text,
+      retrieval_date: b.retrieval_date,
+      results_returned: b.hits.length,
+      unique_track1_hits: b.stable_ids.size,
+      operationalised: true,
+    }))
+    .sort((a, b) => a.q_id.localeCompare(b.q_id, undefined, { numeric: true }));
 }
 
-async function loadAbstracts(whitelist) {
+async function loadAbstracts(whitelist, titleAuthorsByStableId) {
   const { readdir } = await import('node:fs/promises');
   if (!existsSync(ABSTRACTS_DIR)) return [];
   const files = (await readdir(ABSTRACTS_DIR)).filter(f => f.endsWith('.md'));
@@ -237,20 +312,68 @@ async function loadAbstracts(whitelist) {
       continue;
     }
     const raw = await readFile(join(ABSTRACTS_DIR, f), 'utf8');
-    const { data, content } = matter(raw);
+    const md = parseAbstractMarkdown(raw);
+    const fallback = titleAuthorsByStableId.get(parsed.stable_id) ?? {};
     out.push({
       stable_id: parsed.stable_id,
-      year: parsed.year,
+      year: md.year || parsed.year,
       first_surname: parsed.surname,
-      title: data.title || '',
-      authors_apa: data.authors_apa || data.authors || '',
-      abstract_text: extractBody(content),
-      abstract_src: data.abstract_src || '',
-      doi_url: data.doi_url || '',
+      title: md.title || fallback.title || '',
+      authors_apa: md.authors || fallback.authors || '',
+      venue: md.venue || fallback.venue || '',
+      abstract_text: md.body,
+      abstract_src: md.abstract_src || '',
+      doi_url: md.doi || fallback.doi_url || '',
       file_name: f,
     });
   }
   return out;
+}
+
+function parseAbstractMarkdown(raw) {
+  // Abstract markdowns follow the format:
+  //   # Title as an H1
+  //   - **field**: value
+  //   - **field**: value
+  //   ...
+  //   ## Abstract
+  //   <abstract prose>
+  const lines = raw.replace(/\r\n/g, '\n').split('\n');
+  const meta = {};
+  let title = '';
+  let bodyStart = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!title) {
+      const h1 = line.match(/^#\s+(.+?)\s*$/);
+      if (h1) { title = h1[1]; continue; }
+    }
+    const bullet = line.match(/^\s*-\s+\*\*(.+?)\*\*\s*:\s*(.+?)\s*$/);
+    if (bullet) {
+      meta[bullet[1].trim().toLowerCase()] = bullet[2].trim();
+      continue;
+    }
+    if (/^##\s+abstract/i.test(line)) {
+      bodyStart = i + 1;
+      break;
+    }
+  }
+
+  const body = lines.slice(bodyStart).join('\n')
+    // strip leftover H2 dividers and horizontal rules
+    .replace(/^\s*---+\s*$/gm, '')
+    .trim();
+
+  return {
+    title,
+    authors: meta['authors'] || '',
+    year: meta['year'] || '',
+    venue: meta['venue'] || '',
+    doi: meta['doi'] || '',
+    abstract_src: meta['fetched_at'] ? 'consensus_csv' : '',
+    body,
+  };
 }
 
 function parseAbstractFilename(f) {
@@ -260,42 +383,49 @@ function parseAbstractFilename(f) {
 }
 
 function extractBody(content) {
-  // Strip a leading provenance block (delimited by "---" or "***") if present.
+  // Kept for backwards compatibility only; the new parser handles bodies.
   const parts = content.split(/^-{3,}$|^\*{3,}$/m);
   return (parts.length > 1 ? parts.slice(1).join('\n') : content).trim();
 }
 
-async function loadTrack2Decisions(whitelist) {
+async function loadTrack2Decisions(whitelist, anchorMetaById) {
   const { readdir } = await import('node:fs/promises');
   if (!existsSync(DECISIONS_DIR)) return [];
   const files = (await readdir(DECISIONS_DIR)).filter(f => f.endsWith('.md'));
   const out = [];
   for (const f of files) {
     const raw = await readFile(join(DECISIONS_DIR, f), 'utf8');
-    const { data, content } = matter(raw);
-    const anchor_id = data.anchor_id || parseAnchorFromFilename(f);
+    const anchor_id = parseAnchorFromFilename(f);
     if (!anchor_id || !whitelist.has(anchor_id)) {
       manifest.rejected_track2_decisions.push(f);
       continue;
     }
-    const decision = (data.decision || 'accepted').toLowerCase();
-    if (decision === 'rejected') {
-      manifest.rejected_track2_decisions.push(f);
-      continue;
-    }
+    // Decision markdowns follow: "# T2-XXX — Authors (Year), \"Title\"" then
+    // free-form prose. Parse the H1 for authors/year/title; fall back to
+    // 01b if the H1 does not match.
+    const parsed = parseDecisionH1(raw);
+    const meta = anchorMetaById.get(anchor_id) ?? {};
     out.push({
-      stable_id: data.stable_id || '',
+      stable_id: meta.stable_id || '',
       anchor_id,
-      title: data.title || '',
-      authors: data.authors || '',
-      year: toIntOrNull(data.year),
-      research_unit: data.research_unit || '',
-      unit_alignment: data.unit_alignment || '',
-      psychology_adjacent: data.psychology_adjacent || '',
-      rationale_md: content.trim(),
+      title: parsed.title || meta.title || '',
+      authors: parsed.authors || meta.authors || meta.first_author || '',
+      year: parsed.year || meta.year || null,
+      research_unit: meta.research_unit || '',
+      unit_alignment: meta.unit_alignment || '',
+      psychology_adjacent: meta.psychology_adjacent || '',
+      rationale_md: raw.trim(),
     });
   }
   return out;
+}
+
+function parseDecisionH1(raw) {
+  const line = raw.split(/\r?\n/, 1)[0] || '';
+  // "# T2-A01 — Acemoglu & Restrepo (2018), \"Title\""
+  const m = line.match(/^#\s*T2-\w+\s*[—-]\s*(.+?)\s*\((\d{4})\)\s*,\s*["“](.+?)["”]/);
+  if (!m) return { title: '', authors: '', year: null };
+  return { authors: m[1].trim(), year: parseInt(m[2], 10), title: m[3].trim() };
 }
 
 function parseAnchorFromFilename(f) {

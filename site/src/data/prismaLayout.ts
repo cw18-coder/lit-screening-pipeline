@@ -58,8 +58,6 @@ export const DIAGRAM_NODES: DiagramNodeSpec[] = [
 
   { id: 'screening_records_input_track1',                   column: 'track1',  row: 5, clickable: false },
 
-  { id: 'included_studies_track2',                          column: 'track2',  row: 5, clickable: true, hint: 'Click for anchor list' },
-
   { id: 'screening_excluded_title_abstract_track1',         column: 'track1',  row: 6, clickable: true },
 ];
 
@@ -69,15 +67,13 @@ export const DIAGRAM_EDGES: DiagramEdgeSpec[] = [
   { from: 'identification_duplicates_removed_track1',       to: 'identification_optional_queries_removed_track1', variant: 'main' },
   { from: 'identification_optional_queries_removed_track1', to: 'identification_unique_records_track1',           variant: 'main' },
 
-  // 312 → 5 overlaps → 22 anchors (branch off before Track 1 goes to screening)
+  // 312 → 5 overlaps → 22 anchors: the branch peels 5 records out of Track 1
+  // and reassigns them to the single Track 2 identified/included node at top-right.
   { from: 'identification_unique_records_track1',           to: 'cross_track_overlaps',                           label: 'reassigned to Track 2', variant: 'branch' },
-  { from: 'cross_track_overlaps',                           to: 'included_studies_track2',                        variant: 'reassign' },
+  { from: 'cross_track_overlaps',                           to: 'identification_records_track2',                  variant: 'reassign' },
 
   // 312 → 307 (main flow continues after overlaps are peeled off)
   { from: 'identification_unique_records_track1',           to: 'screening_records_input_track1',                 label: 'minus overlaps', variant: 'main' },
-
-  // Track 2 spine
-  { from: 'identification_records_track2',                  to: 'included_studies_track2',                        variant: 'main' },
 
   // Screening
   { from: 'screening_records_input_track1',                 to: 'screening_excluded_title_abstract_track1',       variant: 'main' },

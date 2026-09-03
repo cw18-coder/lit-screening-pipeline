@@ -51,20 +51,29 @@ function PrismaDiagramInner({ nodes }: PrismaDiagramProps) {
   );
 
   const rfNodes: Node<PrismaFlowNodeData>[] = useMemo(() => {
-    return DIAGRAM_NODES.filter(spec => byId[spec.id]).map(spec => ({
-      id: spec.id,
-      type: 'prismaNode',
-      position: nodePosition(spec),
-      data: {
-        node: byId[spec.id],
-        clickable: spec.clickable,
-        hint: spec.hint,
-      },
-      draggable: false,
-      selectable: false,
-      connectable: false,
-      style: { width: NODE_WIDTH, cursor: spec.clickable ? 'pointer' : 'default' },
-    }));
+    return DIAGRAM_NODES.filter(spec => byId[spec.id]).map(spec => {
+      const raw = byId[spec.id];
+      // The Track 2 identification node is also the Track 2 included node
+      // (all anchors are included by design), so give it a label that reads
+      // right without duplicating a downstream count.
+      const label = spec.id === 'identification_records_track2'
+        ? 'References included as Track 2 anchors'
+        : raw.label;
+      return {
+        id: spec.id,
+        type: 'prismaNode' as const,
+        position: nodePosition(spec),
+        data: {
+          node: { ...raw, label },
+          clickable: spec.clickable,
+          hint: spec.hint,
+        },
+        draggable: false,
+        selectable: false,
+        connectable: false,
+        style: { width: NODE_WIDTH, cursor: spec.clickable ? 'pointer' : 'default' },
+      };
+    });
   }, [byId]);
 
   const rfEdges: Edge[] = useMemo(() => toRfEdges(DIAGRAM_EDGES), []);
@@ -96,8 +105,11 @@ function PrismaDiagramInner({ nodes }: PrismaDiagramProps) {
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
-        panOnScroll={false}
+        panOnScroll
+        panOnScrollSpeed={0.6}
         zoomOnScroll={false}
+        zoomOnPinch
+        zoomOnDoubleClick={false}
         panOnDrag
         proOptions={{ hideAttribution: true }}
       >

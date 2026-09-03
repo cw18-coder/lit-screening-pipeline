@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { RouteErrorBoundary } from './components/RouteErrorBoundary';
 
 const Home = lazy(() => import('./routes/Home').then(m => ({ default: m.Home })));
 const Prisma = lazy(() => import('./routes/Prisma').then(m => ({ default: m.Prisma })));
@@ -23,19 +24,21 @@ export function App() {
     <>
       <Header />
       <main>
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/prisma" element={<Prisma />} />
-            <Route path="/prisma/:nodeId" element={<PrismaNode />} />
-            <Route path="/wiki" element={<Wiki />} />
-            <Route path="/wiki/:section/:pageId" element={<WikiPage />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/logs/:logId" element={<LogsPage />} />
-            <Route path="*" element={<div className="route-view">Route not found.</div>} />
-          </Routes>
-        </Suspense>
+        <RouteErrorBoundary>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/prisma" element={<Prisma />} />
+              <Route path="/prisma/:nodeId" element={<PrismaNode />} />
+              <Route path="/wiki" element={<Wiki />} />
+              <Route path="/wiki/:section/:pageId" element={<WikiPage />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/logs/:logId" element={<LogsPage />} />
+              <Route path="*" element={<div className="route-view">Route not found.</div>} />
+            </Routes>
+          </Suspense>
+        </RouteErrorBoundary>
       </main>
       <Footer />
     </>

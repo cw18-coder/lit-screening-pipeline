@@ -115,6 +115,7 @@ function QueryAggregationView() {
   const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
 
   const abstractsById = useIndex(abstracts, a => a.stable_id);
+  const uniqueRefsById = useIndex(uniqueRefs, u => u.stable_id);
   const [selected, setSelected] = useState<AbstractRecord | null>(null);
 
   const questionsById = useMemo(() => {
@@ -141,9 +142,12 @@ function QueryAggregationView() {
     }
     return Array.from(groups.entries()).map(([q, arr]) => {
       const meta = questionsById.get(q);
+      // Fall back to the query_text embedded on each 01a row when no
+      // dedicated question metadata is available.
+      const rawText = meta?.text || arr[0]?.query_text || '';
       return {
         q_id: q,
-        text: meta?.text ?? '',
+        text: rawText,
         results_returned: arr.length,
         unique_papers: uniqueByQuery.get(q)?.size ?? arr.length,
         retrieval_date: meta?.retrieval_date ?? '',
@@ -183,8 +187,8 @@ function QueryAggregationView() {
 
   // Per-query paper table
   const rows = hits.filter(h => h.query_id === activeQuery);
-  const q = questionsById.get(activeQuery);
-  const uniqueRefsById = useIndex(uniqueRefs, u => u.stable_id);
+  const queryMeta = questionsById.get(activeQuery);
+  const queryText = queryMeta?.text || rows[0]?.query_text || '';
 
   const columns: RowTableColumn<Track1Hit>[] = [
     { key: 'title', label: 'Title', render: r => {
@@ -210,7 +214,7 @@ function QueryAggregationView() {
         <button className={styles.crumbBtn} onClick={() => setSearchParams({})}>← All queries</button>
         <div className={styles.subtitle}>
           <Chip variant="accent" mono>{activeQuery}</Chip>{' '}
-          {q?.text && <span className={styles.queryText}>{q.text}</span>}
+          {queryText && <span className={styles.queryText}>{queryText}</span>}
         </div>
       </div>
       <RowTable

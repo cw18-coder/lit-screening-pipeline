@@ -1,1 +1,178 @@
-[]
+[
+  {
+    "q_id": "Q01",
+    "text": "To what extent does the adoption of governed, repository-level downstream workflows causally moderate the correctness wedge - specifically narrowing the gap between raw merge velocity and quality-adjusted software stability - in corporate-sponsored open-source software (OSS) repositories experiencing an influx of AI-generated code?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q02",
+    "text": "Does the adoption of generative AI coding assistants increase the volume of code commits and pull requests submitted to software repositories?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q03",
+    "text": "How does AI-generated code affect defect rates, security vulnerabilities, and change failure rates in production software repositories?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q04",
+    "text": "How does AI code assistance affect software delivery outcomes in complex, mature, or high-stakes production codebases?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 19,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q05",
+    "text": "How does an increase in pull request volume affect code review throughput and merge cycle time in collaborative software engineering?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q06",
+    "text": "Do automated continuous integration pipelines and multi-stage validation gates reduce defect leakage and improve software delivery performance?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q07",
+    "text": "What is the empirical evidence that AI-assisted or agentic code review workflows improve pull request quality outcomes at the repository level?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q08",
+    "text": "Do investments in information technology require complementary organizational or process changes to translate into measured productivity gains?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q09",
+    "text": "How does high-velocity software delivery affect the accumulation of technical debt and long-term maintenance burden in software repositories?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q10",
+    "text": "How do DORA metrics - change failure rate, deployment frequency, lead time for changes, and time to restore service - relate to overall software delivery performance and quality?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q11",
+    "text": "How do formal repository governance structures - branch protection rules, mandatory code review, required status checks, and code ownership policies - affect defect density, change failure rates, and delivery reliability in software repositories?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q12",
+    "text": "Is there empirical evidence that increases in software delivery velocity are associated with degradation in software quality, reliability, or maintainability?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q13",
+    "text": "How do software engineering practices such as continuous integration, automated code review, and quality gates diffuse across organizations and repositories over time?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q14",
+    "text": "How are generative AI coding assistants deployed at organizational scale in enterprise software engineering, and what governance mechanisms accompany their adoption?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q15",
+    "text": "How does over-reliance on automated systems affect the verification, monitoring, and error-detection behaviours of professionals who work with those systems?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q16",
+    "text": "How do continuous delivery and DevOps practices relate to organisational-level performance outcomes such as software reliability, deployment frequency, and business impact?",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q17",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q18",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q19",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q20",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q21",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  },
+  {
+    "q_id": "Q22",
+    "text": "",
+    "retrieval_date": "2026-08-22",
+    "results_returned": 20,
+    "unique_track1_hits": 20,
+    "operationalised": true
+  }
+]

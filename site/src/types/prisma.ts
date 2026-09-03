@@ -21,6 +21,7 @@ export interface Track1Hit {
   stable_id: string;
   ref_id: string;
   query_id: string;
+  query_text: string;
   wave: string;
   retrieval_date: string;
   authors: string;

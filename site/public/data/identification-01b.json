@@ -24,7 +24,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "The race between man and machine: Implications of technology for growth, factor shares, and employment",
+    "authors": "Acemoglu, D., & Restrepo, P.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A02",
@@ -51,7 +55,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "Learning curves in manufacturing",
+    "authors": "Argote, L., & Epple, D.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A03",
@@ -78,7 +86,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "The skill content of recent technological change: An empirical exploration",
+    "authors": "Autor, D. H., Levy, F., & Murnane, R. J.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A04",
@@ -105,7 +117,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "The productivity paradox of information technology",
+    "authors": "Brynjolfsson, E.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A05",
@@ -132,7 +148,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "The productivity J-curve: How intangibles complement general purpose technologies",
+    "authors": "Brynjolfsson, E., Rock, D., & Syverson, C.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A06",
@@ -159,7 +179,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "Absorptive capacity: A new perspective on learning and innovation",
+    "authors": "Cohen, W. M., & Levinthal, D. A.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A07",
@@ -186,7 +210,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "Absorptive capacity: A review, reconceptualization, and extension",
+    "authors": "Zahra, S. A., & George, G.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A08",
@@ -213,7 +241,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "The illusory diffusion of innovation: An examination of assimilation gaps",
+    "authors": "Fichman, R. G., & Kemerer, C. F.",
+    "register_tag": "valid_carryover",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-A09",
@@ -240,7 +272,11 @@
     "research_unit": "theory_anchor",
     "unit_alignment": "n_a",
     "psychology_adjacent": "no",
-    "screening_notes": "Theory anchor; classification not applicable"
+    "screening_notes": "Theory anchor; classification not applicable",
+    "title": "Information technology, workplace organization, and the demand for skilled labor: Firm-level evidence",
+    "authors": "Bresnahan, T. F., Brynjolfsson, E., & Hitt, L. M.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-B01",
@@ -267,7 +303,11 @@
     "research_unit": "developer",
     "unit_alignment": "mismatch",
     "psychology_adjacent": "no",
-    "screening_notes": "Developer-level (17 Microsoft interviews). Use for MCR construct definition only; do not extend developer-perception claims to repository-level defect outcomes."
+    "screening_notes": "Developer-level (17 Microsoft interviews). Use for MCR construct definition only; do not extend developer-perception claims to repository-level defect outcomes.",
+    "title": "Expectations, outcomes, and challenges of modern code review",
+    "authors": "Bacchelli, A., & Bird, C.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-B02",
@@ -294,7 +334,11 @@
     "research_unit": "organization",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Google-wide MCR system; organizational proxy for corporate-sponsored OSS setting."
+    "screening_notes": "Google-wide MCR system; organizational proxy for corporate-sponsored OSS setting.",
+    "title": "Modern code review: A case study at Google",
+    "authors": "Sadowski, C., Soderberg, E., Church, L., Sipko, M., & Bacchelli, A.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-B03",
@@ -321,7 +365,11 @@
     "research_unit": "repository",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Repository-level defect models on Qt, VTK, ITK (file/component-level)."
+    "screening_notes": "Repository-level defect models on Qt, VTK, ITK (file/component-level).",
+    "title": "An empirical study of the impact of modern code review practices on software quality",
+    "authors": "McIntosh, S., Kamei, Y., Adams, B., & Hassan, A. E.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-B04",
@@ -348,7 +396,11 @@
     "research_unit": "organization",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Cross-organisational comparison (Microsoft, Google, AMD, Bing, OSS)."
+    "screening_notes": "Cross-organisational comparison (Microsoft, Google, AMD, Bing, OSS).",
+    "title": "Convergent contemporary software peer review practices",
+    "authors": "Rigby, P. C., & Bird, C.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-B05",
@@ -375,7 +427,11 @@
     "research_unit": "repository",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Repository-level parameter modelling across 11 OSS projects."
+    "screening_notes": "Repository-level parameter modelling across 11 OSS projects.",
+    "title": "Peer review on open-source software projects: Parameters, statistical models, and theory",
+    "authors": "Rigby, P. C., German, D. M., Cowen, L., & Storey, M.-A.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-B06",
@@ -402,7 +458,11 @@
     "research_unit": "developer",
     "unit_alignment": "mismatch",
     "psychology_adjacent": "borderline",
-    "screening_notes": "Google engineer self-reports; use as framing statement for the quality-productivity coupling only, not as evidence for repository-level productivity claims. Self-report methodology places the paper at the psychology-adjacent border."
+    "screening_notes": "Google engineer self-reports; use as framing statement for the quality-productivity coupling only, not as evidence for repository-level productivity claims. Self-report methodology places the paper at the psychology-adjacent border.",
+    "title": "What improves developer productivity at Google? Code quality",
+    "authors": "Cheng, L., Rios, M., Nagappan, N., & Zimmermann, T.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-C01",
@@ -429,7 +489,11 @@
     "research_unit": "team",
     "unit_alignment": "partial",
     "psychology_adjacent": "no",
-    "screening_notes": "Agile team case studies; team ≈ repository proxy but not identical. Cite with a team-versus-repository framing sentence."
+    "screening_notes": "Agile team case studies; team ≈ repository proxy but not identical. Cite with a team-versus-repository framing sentence.",
+    "title": "Interpretative case studies on agile team productivity and technical debt",
+    "authors": "Melo, C. O., Cruzes, D. S., Kon, F., & Conradi, R.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-C02",
@@ -456,7 +520,11 @@
     "research_unit": "organization",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Multi-firm industrial CD study; organizational proxy for corporate-sponsored OSS setting."
+    "screening_notes": "Multi-firm industrial CD study; organizational proxy for corporate-sponsored OSS setting.",
+    "title": "Continuous delivery in practice: An industrial study",
+    "authors": "Vassallo, C., Palomba, F., Bacchelli, A., & Gall, H. C.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-D01",
@@ -483,7 +551,11 @@
     "research_unit": "developer",
     "unit_alignment": "mismatch",
     "psychology_adjacent": "no",
-    "screening_notes": "Three field experiments with individual developer randomization. Best available causal evidence at developer level; cite as motivation for the thesis' repository-level extension, not as evidence for repository outcomes."
+    "screening_notes": "Three field experiments with individual developer randomization. Best available causal evidence at developer level; cite as motivation for the thesis' repository-level extension, not as evidence for repository outcomes.",
+    "title": "The effects of generative AI on high-skilled work: Evidence from three field experiments with software developers",
+    "authors": "Cui, K. Z., Demirer, M., Jaffe, S., Musolff, L., Peng, S., & Salz, T.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   },
   {
     "anchor_id": "T2-D03",
@@ -510,7 +582,11 @@
     "research_unit": "ai_system_output",
     "unit_alignment": "neutral",
     "psychology_adjacent": "no",
-    "screening_notes": "Audit of Copilot's code output across 89 CWE scenarios; no human research unit, so unit-alignment screen does not apply."
+    "screening_notes": "Audit of Copilot's code output across 89 CWE scenarios; no human research unit, so unit-alignment screen does not apply.",
+    "title": "Asleep at the keyboard? Assessing the security of GitHub Copilot's code contributions",
+    "authors": "Pearce, H., Ahmad, B., Tan, B., Dolan-Gavitt, B., & Karri, R.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-D04",
@@ -537,7 +613,11 @@
     "research_unit": "ai_system_output",
     "unit_alignment": "neutral",
     "psychology_adjacent": "no",
-    "screening_notes": "DL reviewer evaluated on code corpora; no human research unit."
+    "screening_notes": "DL reviewer evaluated on code corpora; no human research unit.",
+    "title": "Deep learning-based code reviews: A paradigm shift or a double-edged sword? In Proceedings of the 47th IEEE/ACM International Conference on Software Engineering (ICSE '25)",
+    "authors": "Tufano, R., Martin-Lopez, A., Tayeb, A., Dabic, O., Haiduc, S., & Bavota, G.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-D05",
@@ -564,7 +644,11 @@
     "research_unit": "organization",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Industrial practice of automated code review; organizational proxy."
+    "screening_notes": "Industrial practice of automated code review; organizational proxy.",
+    "title": "Automated code review in practice",
+    "authors": "Cihan, U., Haratian, V., Icoz, A., Gul, M. K., Devran, O., Bayendur, E. F., Ucar, B. M., & Tuzun, E.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "n_a"
   },
   {
     "anchor_id": "T2-D09",
@@ -591,6 +675,10 @@
     "research_unit": "repository",
     "unit_alignment": "aligned",
     "psychology_adjacent": "no",
-    "screening_notes": "Case study of GitHub Actions repositories; repository-level dependent variable."
+    "screening_notes": "Case study of GitHub Actions repositories; repository-level dependent variable.",
+    "title": "Does AI code review lead to code changes? A case study of GitHub Actions",
+    "authors": "Sun, K., Kuang, H., Baltes, S., Zhou, X., Zhang, H., Ma, X., Rong, G., Shao, D., & Treude, C.",
+    "register_tag": "recommended_addition",
+    "journal_sjr_quartile": "Q1"
   }
 ]
