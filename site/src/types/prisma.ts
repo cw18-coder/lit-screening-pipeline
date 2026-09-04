@@ -124,6 +124,22 @@ export interface Track2Decision {
   rationale_md: string;
 }
 
+export interface ScreeningExclusionCode {
+  code: string;
+  label: string;
+  count: number;
+  description: string;
+}
+
+export interface ScreeningExclusionsByCode {
+  rubric_version: string;
+  total: number;
+  human_labelled: number;
+  ai_propagated: number;
+  notes: string;
+  codes: ScreeningExclusionCode[];
+}
+
 export interface SiteMeta {
   release_version: string;
   orcid_id: string;

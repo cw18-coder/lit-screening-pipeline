@@ -1,0 +1,69 @@
+{
+  "rubric_version": "1.2.0",
+  "total": 219,
+  "human_labelled": 114,
+  "ai_propagated": 105,
+  "notes": "114 human hand-labelled excludes were re-audited under rubric v1.2.0 as a PRISMA 2020 Item 24b protocol amendment. The 105 AI-propagated excludes were emitted by the Bayesian similarity triage against posterior threshold 0.70; they inherit their primary Consensus query but not a v1.2.0 code because the tool does not tick rubric boxes.",
+  "codes": [
+    {
+      "code": "E1",
+      "label": "Non-empirical and non-theoretical",
+      "count": 6,
+      "description": "Opinion piece, editorial, letter, position statement, book review, corrigendum, capability landscape review, maturity model, or research agenda. No primary data and no substantial theoretical contribution."
+    },
+    {
+      "code": "E2",
+      "label": "Out-of-domain application",
+      "count": 12,
+      "description": "Primary object of study is outside software engineering, developer productivity, code review, or open source, including AI x macro labour market or occupational-skill-demand studies where the unit of analysis is national employment, wages, or vacancies rather than a developer team."
+    },
+    {
+      "code": "E3",
+      "label": "IT productivity, firm/plant unit of analysis",
+      "count": 15,
+      "description": "IT investment, IT capabilities, or IT-enabled organisational change at firm, plant, or industry level. Unit of analysis is not developers, pull requests, repositories, or code artefacts. Includes absorptive capacity applied to servitization, corporate venture capital, or generic knowledge management."
+    },
+    {
+      "code": "E4",
+      "label": "AI research without software-development grounding",
+      "count": 2,
+      "description": "LLM alignment, model architecture, prompt-engineering benchmarks, LLM capability landscape comparisons, or AI safety research with no connection to software-development practice."
+    },
+    {
+      "code": "E5",
+      "label": "Programming pedagogy only",
+      "count": 2,
+      "description": "Teaching or learning programming without measuring downstream productivity, quality, or reviewer-effort outcomes on non-student software work."
+    },
+    {
+      "code": "E6",
+      "label": "Tool artefact or diffusion study without downstream evaluation",
+      "count": 2,
+      "description": "AI coding tool, model, dataset, algorithm, or benchmark without an empirical evaluation of its effect on productivity, review effort, or quality, plus prevalence, detection, or geographic-diffusion studies measuring adoption without measuring team-level outcome."
+    },
+    {
+      "code": "E7",
+      "label": "SE practice study without an AI, GenAI, LLM, or agent angle",
+      "count": 48,
+      "description": "CI/CD, DevOps, code review, pull-request dynamics, developer experience, or another software-engineering practice with no measurement or theorisation of AI, GenAI, LLM, or agentic-coding involvement, including pre-2022 ML-based tooling papers."
+    },
+    {
+      "code": "E8",
+      "label": "Off-scope software-engineering construct",
+      "count": 14,
+      "description": "Technical debt as a human design choice, code ownership, PR-decision fairness, PR duplicates, PR governance mechanisms, PR data-quality issues, GitHub Actions internals, code-merge velocity, or similar constructs that do not map to the correctness-wedge outcomes."
+    },
+    {
+      "code": "E9",
+      "label": "Upstream AI code-generation focus",
+      "count": 7,
+      "description": "Improving the AI code generator itself: security of AI-authored code as an intrinsic property, cognitive-model prompting, trustworthy or secure LLM code generation, capability comparisons between LLMs on code tasks. No downstream team outcome measured."
+    },
+    {
+      "code": "E10",
+      "label": "Non-quantitative methodology or single-firm case study",
+      "count": 6,
+      "description": "Qualitative interview, small-n practitioner survey, ethnographic description, or single-firm case study without an external comparison group. Seminal theoretical anchors remain admissible via I1(b)."
+    }
+  ]
+}

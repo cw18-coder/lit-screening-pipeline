@@ -90,10 +90,10 @@
     "track": "track1",
     "node_id": "screening_excluded_title_abstract_track1",
     "label": "Records excluded at title/abstract screening (Track 1)",
-    "count": null,
-    "source_log": "2b_screening_excluded.csv",
-    "last_updated": "2026-09-03",
-    "notes": "Reserved for AI-adjudicated + human-calibrated screening exclusions. Populated after 5-fold CV calibration and full-pool deployment. The 19 rows previously here (Q15 en-bloc) were reclassified as pre-screening optional-query removals (see identification_optional_queries_removed_track1)."
+    "count": 219,
+    "source_log": "human_decisions.csv (v1.1.0) + similarity_triage.csv, remapped through reaudit_v11_to_v12.py to rubric v1.2.0",
+    "last_updated": "2026-09-04",
+    "notes": "82 human hand-labelled excludes from the initial n=126 stratified seed sample, plus 105 auto-propagated excludes from the Bayesian similarity triage, plus 32 hand-labelled excludes from the n=39 residual pass. All 114 human-labelled excludes re-audited under rubric v1.2.0 as a PRISMA 2020 Item 24b amendment. v1.2.0 exclusion-code distribution over the 114 human excludes: E1=6, E2=12, E3=15, E4=2, E5=2, E6=2, E7=48, E8=14, E9=7, E10=6."
   },
   {
     "stable_id": "9b9ebf70",
@@ -101,11 +101,11 @@
     "prisma_stage": "screening",
     "track": "track1",
     "node_id": "screening_records_pending_track1",
-    "label": "Records pending title/abstract screening (Track 1)",
-    "count": null,
-    "source_log": "computed",
-    "last_updated": "2026-09-03",
-    "notes": "01c minus (excluded + advanced); update as screening progresses"
+    "label": "Records advanced from title/abstract screening (Track 1)",
+    "count": 88,
+    "source_log": "computed: screening_records_input_track1 - screening_excluded_title_abstract_track1",
+    "last_updated": "2026-09-04",
+    "notes": "88 records marked include and advanced to full-text retrieval. Composition: 44 from the initial n=126 seed sample, 37 auto-propagated by the Bayesian similarity triage, and 7 from the n=39 residual pass."
   },
   {
     "stable_id": "9cdc6385",
@@ -114,10 +114,10 @@
     "track": "track1",
     "node_id": "eligibility_sought_full_text_track1",
     "label": "Reports sought for full-text retrieval (Track 1)",
-    "count": null,
-    "source_log": "computed",
-    "last_updated": "2026-09-03",
-    "notes": "seeded blank; fill during full-text stage"
+    "count": 88,
+    "source_log": "computed: same as screening_records_pending_track1",
+    "last_updated": "2026-09-04",
+    "notes": "Every record advanced from title-and-abstract screening is sought for full-text retrieval. Retrieval progress tracked in full_text_retrieval_worksheet.csv."
   },
   {
     "stable_id": "91dd474c",
@@ -126,10 +126,10 @@
     "track": "track1",
     "node_id": "eligibility_not_retrieved_track1",
     "label": "Reports not retrieved (Track 1)",
-    "count": null,
-    "source_log": "computed",
-    "last_updated": "2026-09-03",
-    "notes": "seeded blank"
+    "count": 6,
+    "source_log": "full_text_retrieval_worksheet.csv rows with retrieved = 0",
+    "last_updated": "2026-09-04",
+    "notes": "Six records sit behind paid publisher entitlements the reviewer does not hold: four Springer, one Wiley, one Elsevier. Recorded as reports not retrieved under PRISMA 2020 Item 16a. Retrieval attempted; unsuccessful; documented rather than silently dropped."
   },
   {
     "stable_id": "644cb52a",
@@ -138,10 +138,10 @@
     "track": "track1",
     "node_id": "eligibility_assessed_full_text_track1",
     "label": "Reports assessed for eligibility at full text (Track 1)",
-    "count": null,
-    "source_log": "computed",
-    "last_updated": "2026-09-03",
-    "notes": "seeded blank"
+    "count": 82,
+    "source_log": "computed: eligibility_sought_full_text_track1 - eligibility_not_retrieved_track1",
+    "last_updated": "2026-09-04",
+    "notes": "88 sought minus 6 unretrievable = 82 records available for Track 2 full-text eligibility assessment."
   },
   {
     "stable_id": "12e68450",

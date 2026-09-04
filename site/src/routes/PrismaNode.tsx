@@ -12,6 +12,8 @@ import type {
   AbstractRecord,
   ConsensusQuestion,
   PrismaTallyNode,
+  ScreeningExclusionCode,
+  ScreeningExclusionsByCode,
   Track1Hit,
   Track1UniqueRef,
   Track2Anchor,
@@ -81,6 +83,7 @@ function NodeBody({ variant }: { variant: DrilldownConfig['variant'] }) {
     case 'q15_ignored':       return <Q15IgnoredView />;
     case 'overlaps':          return <OverlapsView />;
     case 'track2_anchors':    return <Track2AnchorsView />;
+    case 'exclusions_by_code': return <ExclusionsByCodeView />;
     case 'transit':
       return (
         <Callout variant="accent">
@@ -90,10 +93,9 @@ function NodeBody({ variant }: { variant: DrilldownConfig['variant'] }) {
       );
     case 'reserved':
       return (
-        <Callout variant="accent-2" title="Populates after screening runs.">
-          {' '}Records excluded at title-and-abstract screening will appear here once the
-          AI-assisted screening pass completes its cross-validation against the hand-labelled
-          calibration set.
+        <Callout variant="accent-2" title="Populates as full-text retrieval progresses.">
+          {' '}Downstream stages populate as reports are pulled, assessed for eligibility, and
+          promoted into the final review corpus.
         </Callout>
       );
     default:
@@ -338,6 +340,50 @@ function Q15IgnoredView() {
         </>
       )}
       <AbstractDrawer record={selected} onClose={() => setSelected(null)} />
+    </>
+  );
+}
+
+// -----------------------------------------------------------------------------
+// screening exclusions grouped by rubric v1.2.0 code
+// -----------------------------------------------------------------------------
+
+function ExclusionsByCodeView() {
+  const { data } = useJson<ScreeningExclusionsByCode>('screening-excluded-by-code.json');
+
+  if (!data) return <p className={styles.dim}>Loading exclusion breakdown…</p>;
+
+  const columns: RowTableColumn<ScreeningExclusionCode>[] = [
+    { key: 'code', label: 'Code', width: '70px',
+      render: r => <Chip variant="accent">{r.code}</Chip> },
+    { key: 'label', label: 'Label',
+      render: r => <strong>{r.label}</strong> },
+    { key: 'count', label: 'Records', width: '90px',
+      render: r => <span className={styles.paperTitle}>{r.count}</span> },
+    { key: 'description', label: 'When it applies',
+      render: r => <span className={styles.dim}>{r.description}</span> },
+  ];
+
+  return (
+    <>
+      <Callout variant="accent-2" title={`Rubric v${data.rubric_version}.`}>
+        {' '}{data.notes}
+      </Callout>
+      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', margin: '12px 0 18px' }}>
+        <Chip variant="accent">Total {data.total}</Chip>
+        <Chip variant="accent">Human-labelled {data.human_labelled}</Chip>
+        <Chip variant="accent">AI-propagated {data.ai_propagated}</Chip>
+      </div>
+      <RowTable
+        rows={data.codes}
+        columns={columns}
+        pageSize={20}
+      />
+      <p className={styles.hint}>
+        The v1.1.0 to v1.2.0 rubric refinement is documented as a PRISMA 2020 Item 24b protocol
+        amendment. AI-propagated excludes carry a query but no v1.2.0 code because the Bayesian
+        triage does not tick rubric boxes.
+      </p>
     </>
   );
 }

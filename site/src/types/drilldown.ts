@@ -1,11 +1,12 @@
 export type DrilldownVariant =
-  | 'query_aggregation'    // 440 — group by Consensus query
-  | 'duplicates'           // 108 — papers surfaced by multiple queries
-  | 'q15_ignored'          // 20 — Q15 removed, with decision text
-  | 'overlaps'             // 5 — cross-track overlaps
-  | 'track2_anchors'       // 22 — anchor list with decision viewer
-  | 'transit'              // 312, 307, screening-pending — no click-through
-  | 'reserved';            // screening-excluded pending AI screening
+  | 'query_aggregation'    // 440 - group by Consensus query
+  | 'duplicates'           // 108 - papers surfaced by multiple queries
+  | 'q15_ignored'          // 20 - Q15 removed, with decision text
+  | 'overlaps'             // 5 - cross-track overlaps
+  | 'track2_anchors'       // 22 - anchor list with decision viewer
+  | 'exclusions_by_code'   // 219 - screening excludes grouped by v1.2.0 code
+  | 'transit'              // 312, 307, screening-pending - no click-through
+  | 'reserved';            // future stages pending data
 
 export interface DrilldownConfig {
   variant: DrilldownVariant;
@@ -60,6 +61,8 @@ export const DRILLDOWN_CONFIG: Record<string, DrilldownConfig> = {
   },
 
   screening_excluded_title_abstract_track1: {
-    variant: 'reserved',
+    variant: 'exclusions_by_code',
+    intro:
+      'Records excluded at title-and-abstract screening, grouped by the exclusion code that fired under rubric v1.2.0. The 114 human-labelled excludes were re-audited from v1.1.0 to v1.2.0 as a PRISMA 2020 Item 24b protocol amendment; the 105 AI-propagated excludes were emitted by the Bayesian similarity triage against a fixed posterior threshold.',
   },
 };
