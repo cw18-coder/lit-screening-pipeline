@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Callout } from '../components/Callout';
 import { Chip } from '../components/Chip';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
+import { ScreeningFlow } from '../components/ScreeningFlow';
 import { useJson } from '../hooks/useJson';
 import type { WikiPage as WikiPageMeta } from '../types/prisma';
 import styles from './WikiPage.module.css';
@@ -81,17 +82,17 @@ function BackLink() {
   );
 }
 
-// Reserved slot: the ai-assisted-screening page will render an interactive
-// ReactFlow diagram of sample-size -> Bayesian priors -> residuals in a
-// follow-up commit. For now, other pages render nothing here.
 function ScreeningFlowSlot({ pageId }: { pageId: string }) {
   if (pageId !== 'skill-ai-assisted-screening') return null;
   return (
-    <Callout variant="accent" title="Interactive flow diagram coming next.">
-      {' '}This page will host a clickable diagram of the screening workflow: n = 126 stratified
-      sample, per-query Bayesian priors, similarity triage propagation at posterior threshold
-      0.70, and the 39-record residual pass. See the version-history table below for the current
-      state.
-    </Callout>
+    <section>
+      <h2 style={{ marginTop: 4, marginBottom: 8 }}>Interactive screening workflow</h2>
+      <p style={{ color: 'var(--ink-dim)', margin: '0 0 6px', maxWidth: '82ch' }}>
+        Sample-size choice, per-query Bayesian priors, SPECTER similarity likelihood, and the
+        residual pass in one picture. Click any stage to inspect its parameters and counts in the
+        side panel.
+      </p>
+      <ScreeningFlow />
+    </section>
   );
 }
