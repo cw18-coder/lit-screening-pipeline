@@ -22,7 +22,7 @@ export function Wiki() {
   if (error) {
     return (
       <div className="route-view">
-        <Callout variant="warn" title="Failed to load wiki index.">
+        <Callout variant="accent-2" title="Failed to load wiki index.">
           {error.message}
         </Callout>
       </div>

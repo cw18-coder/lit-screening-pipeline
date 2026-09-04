@@ -32,7 +32,7 @@ export function WikiPage() {
     return (
       <div className="route-view">
         <BackLink />
-        <Callout variant="warn" title={`Failed to load ${pageId}.`}>
+        <Callout variant="accent-2" title={`Failed to load ${pageId}.`}>
           {error.message}
         </Callout>
       </div>
