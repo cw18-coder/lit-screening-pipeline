@@ -3,67 +3,2285 @@
   "total": 219,
   "human_labelled": 114,
   "ai_propagated": 105,
-  "notes": "114 human hand-labelled excludes were re-audited under rubric v1.2.0 as a PRISMA 2020 Item 24b protocol amendment. The 105 AI-propagated excludes were emitted by the Bayesian similarity triage against posterior threshold 0.70; they inherit their primary Consensus query but not a v1.2.0 code because the tool does not tick rubric boxes.",
+  "notes": "114 human hand-labelled excludes were re-audited under rubric v1.2.0 as a PRISMA 2020 Item 24b protocol amendment. The 105 AI-propagated excludes were emitted by the Bayesian similarity triage against posterior threshold 0.70; they are grouped under an AI bucket because the tool does not tick rubric boxes.",
   "codes": [
     {
       "code": "E1",
       "label": "Non-empirical and non-theoretical",
       "count": 6,
-      "description": "Opinion piece, editorial, letter, position statement, book review, corrigendum, capability landscape review, maturity model, or research agenda. No primary data and no substantial theoretical contribution."
+      "description": "Opinion piece, editorial, letter, position statement, book review, corrigendum, capability landscape review, maturity model, or research agenda. No primary data and no substantial theoretical contribution.",
+      "papers": [
+        {
+          "stable_id": "9d7680ad",
+          "title": "AI-Augmented Closed-Loop Quality Engineering: A Reference Architecture for Continuous Software Quality Intelligence",
+          "authors": "Bajaj, D.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2606.08793",
+          "source": "human_S0035",
+          "comment": "pre-print dated 7th June, can't rely on claims. E1 is the closest label I could choose"
+        },
+        {
+          "stable_id": "da4ede14",
+          "title": "The AI Codebase Maturity Model: From Assisted Coding to Fully Autonomous Systems",
+          "authors": "Anderson, A.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2604.09388",
+          "source": "human_R004",
+          "comment": "The paper presents a framework AI Codebase Maturity Model (ACMM), something which my study avoids. Additionally this is a pre-print"
+        },
+        {
+          "stable_id": "12a7d7c5",
+          "title": "Exploring the Challenges and Opportunities of AI-assisted Codebase Generation",
+          "authors": "Eibl, P., Sabouri, S., & Chattopadhyay, S.",
+          "year": 2025,
+          "venue": "2025 IEEE Symposium on Visual Languages and Human-Centric Computing (VL/HCC)",
+          "doi_url": "https://doi.org/10.1109/vl-hcc65237.2025.00034",
+          "source": "human_S0021",
+          "comment": "This is interview based, hence excluding. E1 was the closest exclusion criteria I could find"
+        },
+        {
+          "stable_id": "d4100bc9",
+          "title": "Generative AI and the Transformation of Software Development Practices",
+          "authors": "Acharya, V.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2510.10819",
+          "source": "human_S0079",
+          "comment": "a pre-print and comes across as a landscape review of Gen AI and LLMs to be of any use"
+        },
+        {
+          "stable_id": "7208de5e",
+          "title": "Human-Written vs. AI-Generated Code: A Large-Scale Study of Defects, Vulnerabilities, and Complexity",
+          "authors": "Cotroneo, D., Improta, C., & Liguori, P.",
+          "year": 2025,
+          "venue": "2025 IEEE 36th International Symposium on Software Reliability Engineering (ISSRE)",
+          "doi_url": "https://doi.org/10.1109/issre66568.2025.00035",
+          "source": "human_S0015",
+          "comment": ""
+        },
+        {
+          "stable_id": "6af9b42b",
+          "title": "Generative Artificial Intelligence for Software Engineering—A Research Agenda",
+          "authors": "Nguyen-Duc, A., Cabrero-Daniel, B., Przybyłek, A., Arora, C., Khanna, D., Herda, T., Rafiq, U., Melegati, J., Guerra, E., Kemell, K., Saari, M., Zhang, Z., Le, H., Quan, T., & Abrahamsson, P.",
+          "year": 2023,
+          "venue": "Software: Practice and Experience",
+          "doi_url": "https://doi.org/10.1002/spe.70005",
+          "source": "human_R032",
+          "comment": "Adds nothing new to similar papers I have screened and included"
+        }
+      ]
     },
     {
       "code": "E2",
       "label": "Out-of-domain application",
       "count": 12,
-      "description": "Primary object of study is outside software engineering, developer productivity, code review, or open source, including AI x macro labour market or occupational-skill-demand studies where the unit of analysis is national employment, wages, or vacancies rather than a developer team."
+      "description": "Primary object of study is outside software engineering, developer productivity, code review, or open source, including AI x macro labour market or occupational-skill-demand studies where the unit of analysis is national employment, wages, or vacancies rather than a developer team.",
+      "papers": [
+        {
+          "stable_id": "d164d42d",
+          "title": "Artificial intelligence, labor markets, and institutional adjustment: A systematic synthesis",
+          "authors": "Taghouti, Y., Abidar, B., Abid, F., Bribich, S., & Rafik, H.",
+          "year": 2026,
+          "venue": "Edelweiss Applied Science and Technology",
+          "doi_url": "https://doi.org/10.55214/2576-8484.v10i5.12854",
+          "source": "human_S0119",
+          "comment": ""
+        },
+        {
+          "stable_id": "fdf397eb",
+          "title": "Maintenance and Support in Community-Driven Scientific Pipeline Ecosystems: A Cross-Platform Empirical Study of nf-core",
+          "authors": "Alam, K., Roy, K., Rahman, M. S., & Roy, B.",
+          "year": 2026,
+          "venue": "",
+          "doi_url": "https://doi.org/10.48550/arxiv.2607.10839",
+          "source": "human_S0095",
+          "comment": ""
+        },
+        {
+          "stable_id": "ddbe440e",
+          "title": "Impact of robots and artificial intelligence on labor and skill demand: evidence from the UK",
+          "authors": "Lábaj, M., Oleš, T., & Procházka, G.",
+          "year": 2025,
+          "venue": "Eurasian Business Review",
+          "doi_url": "https://doi.org/10.1007/s40821-025-00314-w",
+          "source": "human_S0117",
+          "comment": ""
+        },
+        {
+          "stable_id": "1328007c",
+          "title": "Artificial intelligence's creation and displacement of labor demand",
+          "authors": "Choi, T., & Leigh, N. G.",
+          "year": 2024,
+          "venue": "Technological Forecasting and Social Change",
+          "doi_url": "https://doi.org/10.1016/j.techfore.2024.123824",
+          "source": "human_S0116",
+          "comment": ""
+        },
+        {
+          "stable_id": "b984b914",
+          "title": "Boosting firms’ absorptive capacity: the digital technologies edge",
+          "authors": "Tallarico, S., Pellegrini, L., Lazzarotti, V., & Lazzini, S.",
+          "year": 2024,
+          "venue": "European Journal of Innovation Management",
+          "doi_url": "https://doi.org/10.1108/ejim-09-2023-0741",
+          "source": "human_R036",
+          "comment": ""
+        },
+        {
+          "stable_id": "1501a429",
+          "title": "High-skilled Human Workers in Non-Routine Jobs are Susceptible to AI Automation but Wage Benefits Differ between Occupations",
+          "authors": "Ozgul, P., Fregin, M., Stops, M., Janssen, S., & Levels, M.",
+          "year": 2024,
+          "venue": "",
+          "doi_url": "https://doi.org/10.48550/arxiv.2404.06472",
+          "source": "human_S0115",
+          "comment": ""
+        },
+        {
+          "stable_id": "78833011",
+          "title": "Predictive Delivery Intelligence for Payments and Core Banking: Reducing Change Risk at Scale",
+          "authors": "Agade, A. D., & Balpande, S.",
+          "year": 2024,
+          "venue": "Journal of Advances in Developmental Research",
+          "doi_url": "https://doi.org/10.71097/ijaidr.v15.i1.1780",
+          "source": "human_S0059",
+          "comment": ""
+        },
+        {
+          "stable_id": "75e1fe9a",
+          "title": "The Past and Future of Absorptive Capacity",
+          "authors": "Arndt, F., Aharonson, B. S., Jansen, J., Jiang, J., & Ting, C.",
+          "year": 2023,
+          "venue": "Academy of Management Collections",
+          "doi_url": "https://doi.org/10.5465/amc.2021.0008",
+          "source": "human_R039",
+          "comment": ""
+        },
+        {
+          "stable_id": "92bd7777",
+          "title": "Artificial Intelligence and Jobs: Evidence from Online Vacancies",
+          "authors": "Acemoğlu, D., Autor, D. H., Hazell, J., & Restrepo, P.",
+          "year": 2022,
+          "venue": "Journal of Labor Economics",
+          "doi_url": "https://doi.org/10.1086/718327",
+          "source": "human_S0118",
+          "comment": ""
+        },
+        {
+          "stable_id": "44d187c9",
+          "title": "The Impact of Absorptive Capacity on Innovation: The Mediating Role of Organizational Learning",
+          "authors": "Sancho-Zamora, R., Hernández-Perlines, F., Peña-García, I., & Gutiérrez-Broncano, S.",
+          "year": 2022,
+          "venue": "International Journal of Environmental Research and Public Health",
+          "doi_url": "https://doi.org/10.3390/ijerph19020842",
+          "source": "human_S0123",
+          "comment": "Based on Absorptive Capacity but not relevant"
+        },
+        {
+          "stable_id": "5480cf0b",
+          "title": "How Individuals Engage in the Absorption of New External Knowledge: A Process Model of Absorptive Capacity",
+          "authors": "Sjödin, D., Frishammar, J., & Thorgren, S.",
+          "year": 2019,
+          "venue": "Journal of Product Innovation Management",
+          "doi_url": "https://doi.org/10.1111/jpim.12482",
+          "source": "human_R038",
+          "comment": ""
+        },
+        {
+          "stable_id": "45116645",
+          "title": "The Skill Content of Recent Technological Change: An Empirical Exploration",
+          "authors": "Autor, D. H., Levy, F., & Murnane, R.",
+          "year": 2003,
+          "venue": "Quarterly Journal of Economics",
+          "doi_url": "https://doi.org/10.3386/w8337",
+          "source": "human_S0120",
+          "comment": ""
+        }
+      ]
     },
     {
       "code": "E3",
       "label": "IT productivity, firm/plant unit of analysis",
       "count": 15,
-      "description": "IT investment, IT capabilities, or IT-enabled organisational change at firm, plant, or industry level. Unit of analysis is not developers, pull requests, repositories, or code artefacts. Includes absorptive capacity applied to servitization, corporate venture capital, or generic knowledge management."
+      "description": "IT investment, IT capabilities, or IT-enabled organisational change at firm, plant, or industry level. Unit of analysis is not developers, pull requests, repositories, or code artefacts. Includes absorptive capacity applied to servitization, corporate venture capital, or generic knowledge management.",
+      "papers": [
+        {
+          "stable_id": "a0553d54",
+          "title": "Digital transformation: the role of generative AI in the evolution of knowledge management systems",
+          "authors": "Pletsch, A. L. B., Tonial, G., Matos, F., & Koch, L. L.",
+          "year": 2026,
+          "venue": "Journal of Knowledge Management",
+          "doi_url": "https://doi.org/10.1108/jkm-09-2025-1398",
+          "source": "human_R037",
+          "comment": "Focuses on the use of AI on Knowledge Management systems - unrelated"
+        },
+        {
+          "stable_id": "f3828c79",
+          "title": "Gatekeepers of the Future: The Role of Corporate Venture Capital in Corporate Artificial Intelligence Adoptions",
+          "authors": "Müller, L., Neubert, M., & Kanbach, D. K.",
+          "year": 2026,
+          "venue": "Strategic Change",
+          "doi_url": "https://doi.org/10.1002/jsc.70061",
+          "source": "human_S0124",
+          "comment": ""
+        },
+        {
+          "stable_id": "e61710f8",
+          "title": "The impact of artificial intelligence capabilities on servitization: The moderating role of absorptive capacity-A dynamic capabilities perspective",
+          "authors": "Abou-Foul, M., Ruiz-Alba, J. L., & López-Tenorio, P. J.",
+          "year": 2023,
+          "venue": "Journal of Business Research",
+          "doi_url": "https://doi.org/10.1016/j.jbusres.2022.113609",
+          "source": "human_S0126",
+          "comment": "Based on Absorptive Capacity but not relevant"
+        },
+        {
+          "stable_id": "25c785f4",
+          "title": "The role of information technology and workplace organization in firm productivity: evidence from Spanish firms",
+          "authors": "López, A.",
+          "year": 2023,
+          "venue": "Economics of Innovation and New Technology",
+          "doi_url": "https://doi.org/10.1080/10438599.2023.2172000",
+          "source": "human_S0111",
+          "comment": ""
+        },
+        {
+          "stable_id": "67c5bc4a",
+          "title": "Lost in translation: IT business value research and resource complementarity—an integrative framework, shortcomings and future research directions",
+          "authors": "Schweikl, S., & Obermaier, R.",
+          "year": 2022,
+          "venue": "Management Review Quarterly",
+          "doi_url": "https://doi.org/10.1007/s11301-022-00284-7",
+          "source": "human_S0113",
+          "comment": ""
+        },
+        {
+          "stable_id": "a583832e",
+          "title": "Three-Way Complementarities: Performance Pay, Human Resource Analytics, and Information Technology",
+          "authors": "Aral, S., Brynjolfsson, E., & Wu, L.",
+          "year": 2012,
+          "venue": "Manag. Sci.",
+          "doi_url": "https://doi.org/10.1287/mnsc.1110.1460",
+          "source": "human_S0110",
+          "comment": ""
+        },
+        {
+          "stable_id": "5648bdde",
+          "title": "Leveraging IT Capabilities and Competitive Process Capabilities for the Management of Interorganizational Relationship Portfolios",
+          "authors": "Rai, A., & Tang, X.",
+          "year": 2010,
+          "venue": "Inf. Syst. Res.",
+          "doi_url": "https://doi.org/10.1287/isre.1100.0299",
+          "source": "human_S0109",
+          "comment": ""
+        },
+        {
+          "stable_id": "8edcfd9c",
+          "title": "Information Technology and Process Performance: An Empirical Investigation of the Interaction Between IT and Non-IT Resources",
+          "authors": "Jeffers, P., Muhanna, W. A., & Nault, B. R.",
+          "year": 2008,
+          "venue": "Decis. Sci.",
+          "doi_url": "https://doi.org/10.1111/j.1540-5915.2008.00209.x",
+          "source": "human_S0114",
+          "comment": ""
+        },
+        {
+          "stable_id": "418ebcf4",
+          "title": "How Does Information Technology Affect Productivity? Plant-Level Comparisons of Product Innovation, Process Improvement, and Worker Skills",
+          "authors": "Bartel, A., Ichniowski, C., & Shaw, K.",
+          "year": 2007,
+          "venue": "Quarterly Journal of Economics",
+          "doi_url": "https://doi.org/10.1162/qjec.2007.122.4.1721",
+          "source": "human_S0043",
+          "comment": ""
+        },
+        {
+          "stable_id": "796615a3",
+          "title": "IT Assets, Organizational Capabilities, and Firm Performance: How Resource Allocations and Organizational Differences Explain Performance Variation",
+          "authors": "Aral, S., & Weill, P.",
+          "year": 2007,
+          "venue": "Organization Science",
+          "doi_url": "https://doi.org/10.1287/orsc.1070.0306",
+          "source": "human_S0112",
+          "comment": ""
+        },
+        {
+          "stable_id": "8f15cb25",
+          "title": "Adoption of Mobile Internet Services: An Exploratory Study of Mobile Commerce Early Adopters",
+          "authors": "Pedersen, P. E.",
+          "year": 2005,
+          "venue": "Journal of Organizational Computing and Electronic Commerce",
+          "doi_url": "https://doi.org/10.1207/s15327744joce1503_2",
+          "source": "human_S0048",
+          "comment": ""
+        },
+        {
+          "stable_id": "07814831",
+          "title": "Productivity Effects of Organizational Change: Microeconometric Evidence",
+          "authors": "Bertschek, I., & Kaiser, U.",
+          "year": 2004,
+          "venue": "Manag. Sci.",
+          "doi_url": "https://doi.org/10.1287/mnsc.1030.0195",
+          "source": "human_S0046",
+          "comment": ""
+        },
+        {
+          "stable_id": "fcb76337",
+          "title": "ICT Investment, Productivity and Efficiency: Evidence at Firm Level Using a Stochastic Frontier Approach",
+          "authors": "Becchetti, L., Paganetto, L., & Bedoya, D. A. L.",
+          "year": 2003,
+          "venue": "Journal of Productivity Analysis",
+          "doi_url": "https://doi.org/10.2139/ssrn.428560",
+          "source": "human_S0045",
+          "comment": ""
+        },
+        {
+          "stable_id": "0db0123b",
+          "title": "Organisational Change and Firm Performance",
+          "authors": "Murphy, M.",
+          "year": 2002,
+          "venue": "",
+          "doi_url": "https://doi.org/10.1787/615168153531",
+          "source": "human_S0044",
+          "comment": ""
+        },
+        {
+          "stable_id": "00505a81",
+          "title": "The influence of information technology diffusion and business process change on perceived productivity: The IS executive's perspective",
+          "authors": "Grover, V., Teng, J., Segars, A. H., & Fiedler, K. D.",
+          "year": 1998,
+          "venue": "Inf. Manag.",
+          "doi_url": "https://doi.org/10.1016/s0378-7206(98)00054-8",
+          "source": "human_S0047",
+          "comment": ""
+        }
+      ]
     },
     {
       "code": "E4",
       "label": "AI research without software-development grounding",
       "count": 2,
-      "description": "LLM alignment, model architecture, prompt-engineering benchmarks, LLM capability landscape comparisons, or AI safety research with no connection to software-development practice."
+      "description": "LLM alignment, model architecture, prompt-engineering benchmarks, LLM capability landscape comparisons, or AI safety research with no connection to software-development practice.",
+      "papers": [
+        {
+          "stable_id": "fbae3b1d",
+          "title": "From boost to decline: How AI exposure shapes short-term absorptive-capacity dynamics during onboarding and knowledge sharing.",
+          "authors": "Li, C., Lv, B., Wang, C., & Lin, C.",
+          "year": 2026,
+          "venue": "Acta psychologica",
+          "doi_url": "https://doi.org/10.1016/j.actpsy.2026.106790",
+          "source": "human_S0122",
+          "comment": "Based on Absorptive Capacity but not relevant"
+        },
+        {
+          "stable_id": "60711769",
+          "title": "Generative AI as a driver of organizational creativity: Evidence from the absorptive capacity perspective",
+          "authors": "Boulitama, O., Sabiri, B., Mouchtakir, N., Rahli, D., & Sabri, K.",
+          "year": 2026,
+          "venue": "Equilibrium. Quarterly Journal of Economics and Economic Policy",
+          "doi_url": "https://doi.org/10.24136/eq.4179",
+          "source": "human_S0125",
+          "comment": "Based on Absorptive Capacity but not relevant"
+        }
+      ]
     },
     {
       "code": "E5",
       "label": "Programming pedagogy only",
       "count": 2,
-      "description": "Teaching or learning programming without measuring downstream productivity, quality, or reviewer-effort outcomes on non-student software work."
+      "description": "Teaching or learning programming without measuring downstream productivity, quality, or reviewer-effort outcomes on non-student software work.",
+      "papers": [
+        {
+          "stable_id": "7d3a7b5e",
+          "title": "Assessing the Quality and Security of AI-Generated Code: A Quantitative Analysis",
+          "authors": "Sabra, A., Schmitt, O., & Tyler, J.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2508.14727",
+          "source": "human_S0017",
+          "comment": ""
+        },
+        {
+          "stable_id": "484a4a47",
+          "title": "Significant Productivity Gains through Programming with Large Language Models",
+          "authors": "Weber, T., Brandmaier, M., Schmidt, A., & Mayer, S.",
+          "year": 2024,
+          "venue": "Proceedings of the ACM on Human-Computer Interaction",
+          "doi_url": "https://doi.org/10.1145/3661145",
+          "source": "human_R002",
+          "comment": ""
+        }
+      ]
     },
     {
       "code": "E6",
       "label": "Tool artefact or diffusion study without downstream evaluation",
       "count": 2,
-      "description": "AI coding tool, model, dataset, algorithm, or benchmark without an empirical evaluation of its effect on productivity, review effort, or quality, plus prevalence, detection, or geographic-diffusion studies measuring adoption without measuring team-level outcome."
+      "description": "AI coding tool, model, dataset, algorithm, or benchmark without an empirical evaluation of its effect on productivity, review effort, or quality, plus prevalence, detection, or geographic-diffusion studies measuring adoption without measuring team-level outcome.",
+      "papers": [
+        {
+          "stable_id": "a5242371",
+          "title": "Detecting AI Coding Agents in Open Source: A Validated Multi-Method Census of 180 Million Repositories",
+          "authors": "Khosravani, A., & Mockus, A.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2606.24429",
+          "source": "human_S0007",
+          "comment": ""
+        },
+        {
+          "stable_id": "62748d65",
+          "title": "Who is using AI to code? Global diffusion and impact of generative AI",
+          "authors": "Daniotti, S., Wachs, J., Feng, X., & Neffke, F. M. H.",
+          "year": 2025,
+          "venue": "Science",
+          "doi_url": "https://doi.org/10.48550/arxiv.2506.08945",
+          "source": "human_S0010",
+          "comment": ""
+        }
+      ]
     },
     {
       "code": "E7",
       "label": "SE practice study without an AI, GenAI, LLM, or agent angle",
       "count": 48,
-      "description": "CI/CD, DevOps, code review, pull-request dynamics, developer experience, or another software-engineering practice with no measurement or theorisation of AI, GenAI, LLM, or agentic-coding involvement, including pre-2022 ML-based tooling papers."
+      "description": "CI/CD, DevOps, code review, pull-request dynamics, developer experience, or another software-engineering practice with no measurement or theorisation of AI, GenAI, LLM, or agentic-coding involvement, including pre-2022 ML-based tooling papers.",
+      "papers": [
+        {
+          "stable_id": "134335b5",
+          "title": "Assessing the Impact of AI-Augmented DevSecOps on Lead Time in Agile Release Management",
+          "authors": "Gunawan, J. A., Singgih, M. L., & Hari, G. R. V.",
+          "year": 2026,
+          "venue": "F1000Research",
+          "doi_url": "https://doi.org/10.12688/f1000research.178067.1",
+          "source": "human_S0057",
+          "comment": "Generic DevOps study, nothing in relation to Agents or Gen AI"
+        },
+        {
+          "stable_id": "9658f0e0",
+          "title": "Automated Software Quality Assurance Using CI/CD Tools",
+          "authors": "Wakhare, A. D., & Jaybhaye, T. D.",
+          "year": 2026,
+          "venue": "International Journal of Scientific Research in Engineering and Management",
+          "doi_url": "https://doi.org/10.55041/ijsrem56830",
+          "source": "human_R012",
+          "comment": "Generic CI/CD paper"
+        },
+        {
+          "stable_id": "fc7113e1",
+          "title": "How AI Coding Agents Communicate: A Study of Pull Request Description Characteristics and Human Review Responses",
+          "authors": "Watanabe, K., Tsuchida, R., Monno, T., Huang, B., Yamasaki, K., Fan, Y., Shimari, K., & Matsumoto, K.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2602.17084",
+          "source": "human_R006",
+          "comment": "This is a pre-print and I have similar peer reviewed studies from reputed venues like ACM and IEEE covering this, hence excluding"
+        },
+        {
+          "stable_id": "abde1955",
+          "title": "Measuring Delivery Consistency in Practice: A DORA Extension from a Multi-Platform Release Setting",
+          "authors": "Parente, L., & Davis, J. C.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2606.00364",
+          "source": "human_R016",
+          "comment": "Promising but a pre-print, have enough examples of innovative adaptations of automated DORA frameworks for full text screening"
+        },
+        {
+          "stable_id": "c813b7cf",
+          "title": "Security in the Age of AI Teammates: An Empirical Study of Agentic Pull Requests on GitHub",
+          "authors": "Siddiq, M. L., Zhao, X., Lopes, V. C., Casey, B., & Santos, J. C. S.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2601.00477",
+          "source": "human_S0038",
+          "comment": "This is a pre-print and the study reads as repetitive of previously reviewed abstracts. E4 was the closes label I could choose"
+        },
+        {
+          "stable_id": "9841a411",
+          "title": "Usage, Effects and Requirements for AI Coding Assistants in the Enterprise: An Empirical Study",
+          "authors": "Merler, M., Pan, R., Krishna, R., Ho, T., Pavuluri, R., & Vukovic, M.",
+          "year": 2026,
+          "venue": "Proceedings of the 3rd International Workshop on Large Language Models For Code",
+          "doi_url": "https://doi.org/10.1145/3786181.3788727",
+          "source": "human_R034",
+          "comment": "Paper tries to answer the question, if LLMs are suitable to be deployed for software engineering tasks in organizations. This is no longer relevant since they already are, regardless of the outcomes being good, bad or ugly. Not relevant to my study"
+        },
+        {
+          "stable_id": "b643f7b4",
+          "title": "An empirical study on performance comparisons of different types of DevOps team formations",
+          "authors": "Korkmaz, H. E., & Aydın, M. N.",
+          "year": 2025,
+          "venue": "Frontiers Comput. Sci.",
+          "doi_url": "https://doi.org/10.3389/fcomp.2025.1554299",
+          "source": "human_S0055",
+          "comment": "Generic DevOps study, nothing in relation to Agents or Gen AI"
+        },
+        {
+          "stable_id": "f10fb0e8",
+          "title": "Boost-Classifier-Driven Fault Prediction Across Heterogeneous Open-Source Repositories",
+          "authors": "König, P., Raubitzek, S., Schatten, A., Toth, D., Obermann, F., König, C., & Mallinger, K.",
+          "year": 2025,
+          "venue": "Big Data Cogn. Comput.",
+          "doi_url": "https://doi.org/10.3390/bdcc9070174",
+          "source": "human_S0066",
+          "comment": "This is a Gradient Boosting ML paper on failure prediction. Not convinced about relevance"
+        },
+        {
+          "stable_id": "0685edcb",
+          "title": "Comparative Analysis of AI Software and Traditional Software GitHub Repositories Using Process Mining",
+          "authors": "Tasci, O., & Erdogan, T.",
+          "year": 2025,
+          "venue": "2025 20th Conference on Computer Science and Intelligence Systems (FedCSIS)",
+          "doi_url": "https://doi.org/10.15439/2025f3421",
+          "source": "human_S0093",
+          "comment": "not relevant"
+        },
+        {
+          "stable_id": "3d70bc34",
+          "title": "Continuous Integration and Deployment Strategies for Streamlined DevOps in Software Engineering and Application Delivery",
+          "authors": "",
+          "year": 2025,
+          "venue": "International Journal of Computer Applications Technology and Research",
+          "doi_url": "https://doi.org/10.7753/ijcatr1401.1001",
+          "source": "human_S0090",
+          "comment": "One more in the long line of DevOps papers with no mention of Gen AI, Agents or LLMs."
+        },
+        {
+          "stable_id": "7762abb5",
+          "title": "Dealing with SonarQube Cloud: Initial Results from a Mining Software Repository Study",
+          "authors": "Nocera, S., Fucci, D., & Scanniello, G.",
+          "year": 2025,
+          "venue": "2025 ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM)",
+          "doi_url": "https://doi.org/10.1109/esem64174.2025.00035",
+          "source": "human_S0078",
+          "comment": "This is a SonarCube Cloud focused study having no bearing on the RQ"
+        },
+        {
+          "stable_id": "d96e6361",
+          "title": "Enhanced code reviews using pull request based change impact analysis",
+          "authors": "Göçmen, I. S., Cezayir, A. S., & Tüzün, E.",
+          "year": 2025,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-024-10600-2",
+          "source": "human_S0062",
+          "comment": "Not applicable"
+        },
+        {
+          "stable_id": "758e8e46",
+          "title": "Evaluating the Impact of Data Cleaning on the Quality of Generated Pull Request Descriptions",
+          "authors": "Tire, K., Çakar, B., & Tüzün, E.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2505.01120",
+          "source": "human_S0102",
+          "comment": "Not relevant"
+        },
+        {
+          "stable_id": "c5fd598d",
+          "title": "Evolving DevOps Practices in Modern Software Engineering: Trends, Challenges, and Impacts on Quality and Delivery Performance",
+          "authors": "Alamin, Z., Dahlan, Khaeruddin, & Ramadhan, S.",
+          "year": 2025,
+          "venue": "Journix: Journal of Informatics and Computing",
+          "doi_url": "https://doi.org/10.63866/journix.v1i1.4",
+          "source": "human_R017",
+          "comment": "Generic DevOps paper"
+        },
+        {
+          "stable_id": "037d1738",
+          "title": "EXPLORING THE IMPACT OF DEVOPS MATURITY ON PROJECT SUCCESS: A SYSTEMATIC LITERATURE REVIEW",
+          "authors": "Madhushan, T.",
+          "year": 2025,
+          "venue": "Third Desk Research Conference",
+          "doi_url": "https://doi.org/10.64920/drc2025073",
+          "source": "human_S0056",
+          "comment": "Generic DevOps review paper, not relevant. No mention of AI as an actor in the DevOps ecosystem"
+        },
+        {
+          "stable_id": "8767cdc4",
+          "title": "From First Use to Final Commit: Studying the Evolution of Multi-CI Service Adoption",
+          "authors": "Chopra, N., & Ghaleb, T. A.",
+          "year": 2025,
+          "venue": "2025 IEEE International Conference on Software Maintenance and Evolution (ICSME)",
+          "doi_url": "https://doi.org/10.1109/icsme64153.2025.00078",
+          "source": "human_S0075",
+          "comment": "Longitudinal adoption of CI. Not relevant"
+        },
+        {
+          "stable_id": "2fc6fc42",
+          "title": "How do Developers Use Code Suggestions in Pull Request Reviews?",
+          "authors": "Bouraffa, A., Pham, Y. D., & Maalej, W.",
+          "year": 2025,
+          "venue": "2025 IEEE/ACM 18th International Conference on Cooperative and Human Aspects of Software Engineering (CHASE)",
+          "doi_url": "https://doi.org/10.1109/chase66643.2025.00033",
+          "source": "human_S0028",
+          "comment": ""
+        },
+        {
+          "stable_id": "33052c83",
+          "title": "Impact of Agile Methodologies on Project Success in Software Engineering",
+          "authors": "Sharma, S.",
+          "year": 2025,
+          "venue": "International Journal of Engineering and Computer Science",
+          "doi_url": "https://doi.org/10.18535/ijecs.v14i07.5179",
+          "source": "human_R028",
+          "comment": "Focused on Agile, not applicable"
+        },
+        {
+          "stable_id": "0813a43e",
+          "title": "Mapping DevOps capabilities to the software life cycle: A systematic literature review",
+          "authors": "Amaro, R., Pereira, R., & Silva, M.",
+          "year": 2025,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2024.107583",
+          "source": "human_S0088",
+          "comment": "One more in the long line of DevOps papers with no mention of Gen AI, Agents or LLMs."
+        },
+        {
+          "stable_id": "cbe78b08",
+          "title": "Optimizing continuous integration and continuous deployment pipelines with machine learning: Enhancing performance and predicting failures",
+          "authors": "S.R., D., & Mathew, J.",
+          "year": 2025,
+          "venue": "Advances in Science and Technology Research Journal",
+          "doi_url": "https://doi.org/10.12913/22998624/197406",
+          "source": "human_S0031",
+          "comment": "Not relevant to the Research Question, E4"
+        },
+        {
+          "stable_id": "86728314",
+          "title": "Continuous Integration and Delivery of Software products: Pipeline implementation",
+          "authors": "Namsraidorj, M., Lkhaasuren, S., Gendensuren, B., Radnaa, K., Rentsendorj, J., & Enkhtur, A.",
+          "year": 2024,
+          "venue": "International Journal of Engineering and Computer Science",
+          "doi_url": "https://doi.org/10.18535/ijecs/v13i05.4821",
+          "source": "human_R010",
+          "comment": "Generic CI/CD study, have better examples in the full text candidate corpus"
+        },
+        {
+          "stable_id": "e486e5ba",
+          "title": "DevOps Adoption Guidelines, Challenges and Benefits: A Systematic Literature Review",
+          "authors": "Hamza, U., Abdullah, N. L., & Syed-Mohamad, S.",
+          "year": 2024,
+          "venue": "Journal of Advanced Research in Applied Sciences and Engineering Technology",
+          "doi_url": "https://doi.org/10.37934/araset.63.2.114136",
+          "source": "human_S0077",
+          "comment": "A pre AI era DevOps study, not relevant"
+        },
+        {
+          "stable_id": "b19c90fd",
+          "title": "DevOps Metrics and KPIs: A Multivocal Literature Review",
+          "authors": "Amaro, R., Pereira, R., & Silva, M. M. D.",
+          "year": 2024,
+          "venue": "ACM Computing Surveys",
+          "doi_url": "https://doi.org/10.1145/3652508",
+          "source": "human_S0089",
+          "comment": "One more in the long line of DevOps papers with no mention of Gen AI, Agents or LLMs."
+        },
+        {
+          "stable_id": "036dc5c9",
+          "title": "Ecosystem-wide influences on pull request decisions: insights from NPM",
+          "authors": "Meijer, W., Riveni, M., & Rastogi, A.",
+          "year": 2024,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-025-10706-1",
+          "source": "human_S0096",
+          "comment": "This ventures into psychology so dropping"
+        },
+        {
+          "stable_id": "1ec4d8fd",
+          "title": "Gaining an Understanding of DevOps from its Enablers to Its Impact on Performance",
+          "authors": "Bhardwaj, A. K., & Rangineni, S.",
+          "year": 2024,
+          "venue": "ICST Transactions on Scalable Information Systems",
+          "doi_url": "https://doi.org/10.4108/eetsis.5228",
+          "source": "human_S0086",
+          "comment": "One more in the long line of DevOps papers with no mention of Gen AI, Agents or LLMs."
+        },
+        {
+          "stable_id": "abfc39d8",
+          "title": "Integration of DevOps Practices for Continuous Delivery and System Optimization",
+          "authors": "Zaman, A., Rahman, K., Dhali, A., Kabir, J., & Roy, A.",
+          "year": 2024,
+          "venue": "The Eastasouth Journal of Information System and Computer Science",
+          "doi_url": "https://doi.org/10.58812/esiscs.v2i02.1076",
+          "source": "human_S0087",
+          "comment": "One more in the long line of DevOps papers with no mention of Gen AI, Agents or LLMs."
+        },
+        {
+          "stable_id": "29264262",
+          "title": "On Association of Code Change Types and CI Build Failures in Software Repositories",
+          "authors": "Shimmi, S., & Rahimi, M.",
+          "year": 2024,
+          "venue": "European Journal of Information Technologies and Computer Science",
+          "doi_url": "https://doi.org/10.24018/compute.2024.4.2.124",
+          "source": "human_R024",
+          "comment": "Generic CI paper"
+        },
+        {
+          "stable_id": "14fd4b74",
+          "title": "Efficient CI/CD Strategies: Integrating Git with automated testing and deployment",
+          "authors": "Kodi, D.",
+          "year": 2023,
+          "venue": "World Journal of Advanced Research and Reviews",
+          "doi_url": "https://doi.org/10.30574/wjarr.2023.20.2.2363",
+          "source": "human_R011",
+          "comment": "Another generic CI/CD based study"
+        },
+        {
+          "stable_id": "35d9a93f",
+          "title": "How Agile Feedback Practice Use Impacts Software Quality",
+          "authors": "Tripp, J., & Sambamurthy, V.",
+          "year": 2023,
+          "venue": "Journal of Computer Information Systems",
+          "doi_url": "https://doi.org/10.1080/08874417.2023.2286557",
+          "source": "human_R026",
+          "comment": "Not applicable"
+        },
+        {
+          "stable_id": "63a5b3f6",
+          "title": "Pull Request Decisions Explained: An Empirical Overview",
+          "authors": "Zhang, X., Yu, Y., Gousios, G., & Rastogi, A.",
+          "year": 2023,
+          "venue": "IEEE Transactions on Software Engineering",
+          "doi_url": "https://doi.org/10.1109/tse.2022.3165056",
+          "source": "human_S0027",
+          "comment": "Scope of the study is very narrow by focusing on PR Decisions. It is an emperical study based on historical data and is silent on AI authored PRs' inclusion"
+        },
+        {
+          "stable_id": "8f7a45dc",
+          "title": "State‐of‐the‐practice in quality assurance in Java‐based open source software development",
+          "authors": "Khatami, A., & Zaidman, A.",
+          "year": 2023,
+          "venue": "Software: Practice and Experience",
+          "doi_url": "https://doi.org/10.1002/spe.3321",
+          "source": "human_S0073",
+          "comment": "Not applicable"
+        },
+        {
+          "stable_id": "13523901",
+          "title": "Using Continuous Integration Techniques in Open Source Projects—An Exploratory Study",
+          "authors": "Wróbel, M. R., Szymukowicz, J., & Weichbroth, P.",
+          "year": 2023,
+          "venue": "IEEE Access",
+          "doi_url": "https://doi.org/10.1109/access.2023.3324536",
+          "source": "human_R020",
+          "comment": "Generic CI paper"
+        },
+        {
+          "stable_id": "9b726638",
+          "title": "A Quality Gate Role in a Software Delivery Pipeline",
+          "authors": "Gluhak, M., & Pavlič, L.",
+          "year": 2022,
+          "venue": "",
+          "doi_url": "",
+          "source": "human_S0034",
+          "comment": "Not convinced of suitability to the research question, hence excluding. E4 was the closest option I could choose"
+        },
+        {
+          "stable_id": "3c994d11",
+          "title": "Do Small Code Changes Merge Faster? A Multi-Language Empirical Investigation",
+          "authors": "Kudrjavets, G., Nagappan, N., & Rastogi, A.",
+          "year": 2022,
+          "venue": "2022 IEEE/ACM 19th International Conference on Mining Software Repositories (MSR)",
+          "doi_url": "https://doi.org/10.1145/3524842.3528448",
+          "source": "human_S0025",
+          "comment": "Study only focuses on code merges and is silent about AI adoption"
+        },
+        {
+          "stable_id": "a30100c3",
+          "title": "Taking Flight with Copilot",
+          "authors": "Bird, C., Ford, D., Zimmermann, T., Forsgren, N., Kalliamvakou, E., Lowdermilk, T., & Gazit, I.",
+          "year": 2022,
+          "venue": "Queue",
+          "doi_url": "https://doi.org/10.1145/3582083",
+          "source": "human_S0103",
+          "comment": "This paper is outdated. Published in 2023 it talks about early insights into Copilot usage."
+        },
+        {
+          "stable_id": "e9f065ec",
+          "title": "Let's Supercharge the Workflows: An Empirical Study of GitHub Actions",
+          "authors": "Chen, T., Zhang, Y., Chen, S., & Wu, Y.",
+          "year": 2021,
+          "venue": "2021 IEEE 21st International Conference on Software Quality, Reliability and Security Companion (QRS-C)",
+          "doi_url": "https://doi.org/10.1109/qrs-c55045.2021.00163",
+          "source": "human_S0091",
+          "comment": ""
+        },
+        {
+          "stable_id": "277118c1",
+          "title": "The effects of continuous integration on software development: a systematic literature review",
+          "authors": "Soares, E., Sizílio, G., Santos, J., Costa, D. A. D., & Kulesza, U.",
+          "year": 2021,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-021-10114-1",
+          "source": "human_R007",
+          "comment": "Another systematic review on CI offering nothing different from the previous papers I have included for the full text eligibility screening, hence excluding"
+        },
+        {
+          "stable_id": "38aa8b52",
+          "title": "An empirical characterization of bad practices in continuous integration",
+          "authors": "Zampetti, F., Vassallo, C., Panichella, S., Canfora, G., Gall, H., & Penta, M. (. D.",
+          "year": 2020,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-019-09785-8",
+          "source": "human_R029",
+          "comment": "CI paper"
+        },
+        {
+          "stable_id": "251c4a32",
+          "title": "DevOps and software quality: A systematic mapping",
+          "authors": "Mishra, A., & Otaiwi, Z.",
+          "year": 2020,
+          "venue": "Comput. Sci. Rev.",
+          "doi_url": "https://doi.org/10.1016/j.cosrev.2020.100308",
+          "source": "human_R014",
+          "comment": "Generic DevOps paper - have enough for full text screening"
+        },
+        {
+          "stable_id": "7a167739",
+          "title": "Do code review measures explain the incidence of post-release defects?",
+          "authors": "Krutauz, A., Dey, T., Rigby, P. C., & Mockus, A.",
+          "year": 2020,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-020-09837-4",
+          "source": "human_S0061",
+          "comment": "Extends the original code review paper, without bringing an AI angle to the table, hence rejecting. Used E4, since it is the closest available option"
+        },
+        {
+          "stable_id": "c997852f",
+          "title": "Software Product Quality in DevOps Contexts: A Systematic Literature Review",
+          "authors": "Céspedes, D., Angeleri, P., Melendez, K., & Dávila, A.",
+          "year": 2019,
+          "venue": "Advances in Intelligent Systems and Computing",
+          "doi_url": "https://doi.org/10.1007/978-3-030-33547-2_5",
+          "source": "human_S0069",
+          "comment": "Another generic DevOps paper, hence rejecting"
+        },
+        {
+          "stable_id": "7a6cbb25",
+          "title": "Continuous Code Quality: Are We (Really) Doing That?",
+          "authors": "Vassallo, C., Palomba, F., Bacchelli, A., & Gall, H.",
+          "year": 2018,
+          "venue": "2018 33rd IEEE/ACM International Conference on Automated Software Engineering (ASE)",
+          "doi_url": "https://doi.org/10.1145/3238147.3240729",
+          "source": "human_R031",
+          "comment": "Generic CI paper"
+        },
+        {
+          "stable_id": "c93e7278",
+          "title": "Early prediction of merged code changes to prioritize reviewing tasks",
+          "authors": "Fan, Y., Xia, X., Lo, D., & Li, S.",
+          "year": 2018,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-018-9602-0",
+          "source": "human_S0105",
+          "comment": "ML based prediction model, pre-dates the Gen AI era hence rejecting"
+        },
+        {
+          "stable_id": "3cc4eba1",
+          "title": "Continuous software engineering—A microservices architecture perspective",
+          "authors": "O'Connor, R. V., Elger, P., & Clarke, P. M.",
+          "year": 2017,
+          "venue": "Journal of Software: Evolution and Process",
+          "doi_url": "https://doi.org/10.1002/smr.1866",
+          "source": "human_S0071",
+          "comment": "Given that the publication year is 2017, well before Agents, Gen AI and LLMs in general I don't believe this paper will be applicable."
+        },
+        {
+          "stable_id": "2fa06104",
+          "title": "Studying Pull Request Merges: A Case Study of Shopify's Active Merchant",
+          "authors": "Kononenko, O., Rose, T., Baysal, O., Godfrey, M. W., Theisen, D., & Water, B.",
+          "year": 2017,
+          "venue": "2018 IEEE/ACM 40th International Conference on Software Engineering: Software Engineering in Practice Track (ICSE-SEIP)",
+          "doi_url": "https://doi.org/10.1145/3183519.3183542",
+          "source": "human_S0029",
+          "comment": ""
+        },
+        {
+          "stable_id": "bfcdedba",
+          "title": "Reviewer recommendation for pull-requests in GitHub: What can we learn from code review and bug assignment?",
+          "authors": "Yu, Y., Wang, H., Yin, G., & Wang, T.",
+          "year": 2016,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2016.01.004",
+          "source": "human_S0094",
+          "comment": "Not relevant"
+        },
+        {
+          "stable_id": "cf03169a",
+          "title": "Usage, costs, and benefits of continuous integration in open-source projects",
+          "authors": "Hilton, M. C., Tunnell, T., Huang, K., Marinov, D., & Dig, D.",
+          "year": 2016,
+          "venue": "2016 31st IEEE/ACM International Conference on Automated Software Engineering (ASE)",
+          "doi_url": "https://doi.org/10.1145/2970276.2970358",
+          "source": "human_S0074",
+          "comment": "Another CI paper with no mention of AI, culling"
+        },
+        {
+          "stable_id": "c9eb5c8b",
+          "title": "Understanding the impact of rapid releases on software quality",
+          "authors": "Khomh, F., Adams, B., Dhaliwal, T., & Zou, Y.",
+          "year": 2015,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-014-9308-x",
+          "source": "human_R025",
+          "comment": "Another paper on the effect of time pressure on code quality - have enough candidates for full text review covering this. Plus this is a small dimension of my study, not on critical path"
+        }
+      ]
     },
     {
       "code": "E8",
       "label": "Off-scope software-engineering construct",
       "count": 14,
-      "description": "Technical debt as a human design choice, code ownership, PR-decision fairness, PR duplicates, PR governance mechanisms, PR data-quality issues, GitHub Actions internals, code-merge velocity, or similar constructs that do not map to the correctness-wedge outcomes."
+      "description": "Technical debt as a human design choice, code ownership, PR-decision fairness, PR duplicates, PR governance mechanisms, PR data-quality issues, GitHub Actions internals, code-merge velocity, or similar constructs that do not map to the correctness-wedge outcomes.",
+      "papers": [
+        {
+          "stable_id": "524bccf5",
+          "title": "A Large-Scale Investigation Into the Loss of Pull Request Data on GitHub",
+          "authors": "Tang, B., & Maruyama, K.",
+          "year": 2026,
+          "venue": "IEEE Access",
+          "doi_url": "https://doi.org/10.1109/access.2026.3652670",
+          "source": "human_S0092",
+          "comment": "This paper explores the causes behind the loss of PR data from GitHub, not crucial for the proposed literature review"
+        },
+        {
+          "stable_id": "7477a341",
+          "title": "An Empirical Study of the Evolution of GitHub Actions Workflows",
+          "authors": "Mazrae, P. R., Decan, A., Mens, T., & Wessel, M.",
+          "year": 2026,
+          "venue": "J. Syst. Softw.",
+          "doi_url": "https://doi.org/10.1016/j.jss.2026.112824",
+          "source": "human_R019",
+          "comment": "Deals with the evolution of GitHub Actions, too narrow to be applicable for my study"
+        },
+        {
+          "stable_id": "4143bd9d",
+          "title": "Beyond Production Code: A Pull Request–Based Study of Technical Debt in Test Code",
+          "authors": "Neto, J. R. D. A., Alves, E. L. G., & Araújo, E. C.",
+          "year": 2026,
+          "venue": "Proceedings of the 2026 ACM/IEEE International Conference on Technical Debt",
+          "doi_url": "https://doi.org/10.1145/3794915.3795781",
+          "source": "human_R013",
+          "comment": "Technical Debt paper, focused on test code - not relevant"
+        },
+        {
+          "stable_id": "afb6d0c9",
+          "title": "From Technical Debt to Cognitive and Intent Debt",
+          "authors": "Storey, M.",
+          "year": 2026,
+          "venue": "Queue",
+          "doi_url": "https://doi.org/10.1145/3807966",
+          "source": "human_S0049",
+          "comment": "the focus of the study is cognitive and intent debt, not related to the research question - E4 was the closest option to choose. There is mention of Generative AI but the area of study doesn't overlap with the RQ."
+        },
+        {
+          "stable_id": "84e6d863",
+          "title": "An Exploration of Technical Debt over the Lifetime of Open-Source Software",
+          "authors": "Molnar, A., & Motogna, S.",
+          "year": 2023,
+          "venue": "",
+          "doi_url": "https://doi.org/10.1007/978-3-031-36597-3_14",
+          "source": "human_S0053",
+          "comment": "Another technical debt related rejection"
+        },
+        {
+          "stable_id": "2d8c632d",
+          "title": "Code Red: The Business Impact of Code Quality - A Quantitative Study of 39 Proprietary Production Codebases",
+          "authors": "Tornhill, A., & Borg, M.",
+          "year": 2022,
+          "venue": "2022 IEEE/ACM International Conference on Technical Debt (TechDebt)",
+          "doi_url": "https://doi.org/10.1145/3524843.3528091",
+          "source": "human_R027",
+          "comment": "Adds nothing unique to the full text screening candidate corpus"
+        },
+        {
+          "stable_id": "32eb7fb0",
+          "title": "GitHub Actions: The Impact on the Pull Request Process",
+          "authors": "Wessel, M., Vargovich, J., Gerosa, M., & Treude, C.",
+          "year": 2022,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-023-10369-w",
+          "source": "human_R018",
+          "comment": "Focuses on GitHub Actions impact on PRs - too narrow to be applicable for my study"
+        },
+        {
+          "stable_id": "2abc9aac",
+          "title": "Pull Request Governance in Open Source Communities",
+          "authors": "Alami, A., Pardo, R., Cohn, M., & Wąsowski, A.",
+          "year": 2022,
+          "venue": "IEEE Transactions on Software Engineering",
+          "doi_url": "https://doi.org/10.1109/tse.2021.3128356",
+          "source": "human_R022",
+          "comment": "Paper focusing on PR governance - too narrow to be applicable"
+        },
+        {
+          "stable_id": "d66aa313",
+          "title": "Redundancy, Context, and Preference: An Empirical Study of Duplicate Pull Requests in OSS Projects",
+          "authors": "Li, Z., Yu, Y., Zhou, M., Wang, T., Yin, G., Lan, L., & Wang, H.",
+          "year": 2022,
+          "venue": "IEEE Transactions on Software Engineering",
+          "doi_url": "https://doi.org/10.1109/tse.2020.3018726",
+          "source": "human_S0030",
+          "comment": "Too narrow a scope, focusing only on duplicate PRs. E4 is the closest choice I could pick"
+        },
+        {
+          "stable_id": "42844a37",
+          "title": "Characterizing and Mitigating Self-Admitted Technical Debt in Build Systems",
+          "authors": "Xiao, T., Wang, D., McIntosh, S., Hata, H., Kula, R., Ishio, T., & Matsumoto, K.",
+          "year": 2021,
+          "venue": "IEEE Transactions on Software Engineering",
+          "doi_url": "https://doi.org/10.1109/tse.2021.3115772",
+          "source": "human_S0050",
+          "comment": "Paper focuses on Technical Debt which is a design choice by human devs, so out of scope. E4 seemed the best match"
+        },
+        {
+          "stable_id": "b5ab27bd",
+          "title": "Prevalence, Common Causes and Effects of Technical Debt: Results from a Family of Surveys with the IT Industry",
+          "authors": "Ramač, R., Mandic, V., Taušan, N., Rios, N., Freire, S., Pérez, B., Castellanos, C., Correal, D., Pacheco, A., López, G., Izurieta, C., Seaman, C., & Spínola, R.",
+          "year": 2021,
+          "venue": "J. Syst. Softw.",
+          "doi_url": "https://doi.org/10.1016/j.jss.2021.111114",
+          "source": "human_S0051",
+          "comment": "Another paper on techical debt, which is not the scope of the RQ. This and previous papers rejected on the same grounds may have been considered if they were to include or isolate debt injected by AI Agents"
+        },
+        {
+          "stable_id": "f402db36",
+          "title": "Can Clean New Code Reduce Technical Debt Density?",
+          "authors": "Digkas, G., Chatzigeorgiou, A., Ampatzoglou, A., & Avgeriou, P.",
+          "year": 2020,
+          "venue": "IEEE Transactions on Software Engineering",
+          "doi_url": "https://doi.org/10.1109/tse.2020.3032557",
+          "source": "human_S0052",
+          "comment": "Rejected because of the Technical Debt theme"
+        },
+        {
+          "stable_id": "ee28cd8e",
+          "title": "Revisiting Code Ownership and Its Relationship with Software Quality in the Scope of Modern Code Review",
+          "authors": "Thongtanunam, P., McIntosh, S., Hassan, A., & Iida, H.",
+          "year": 2016,
+          "venue": "2016 IEEE/ACM 38th International Conference on Software Engineering (ICSE)",
+          "doi_url": "https://doi.org/10.1145/2884781.2884852",
+          "source": "human_R023",
+          "comment": "Study on Code Ownership - not applicable"
+        },
+        {
+          "stable_id": "8900636d",
+          "title": "Don't touch my code!: examining the effects of ownership on software quality",
+          "authors": "Bird, C., Nagappan, N., Murphy, B., Gall, H., & Devanbu, P. T.",
+          "year": 2011,
+          "venue": "",
+          "doi_url": "https://doi.org/10.1145/2025113.2025119",
+          "source": "human_S0063",
+          "comment": "Paper focuses on code ownership, not relevant"
+        }
+      ]
     },
     {
       "code": "E9",
       "label": "Upstream AI code-generation focus",
       "count": 7,
-      "description": "Improving the AI code generator itself: security of AI-authored code as an intrinsic property, cognitive-model prompting, trustworthy or secure LLM code generation, capability comparisons between LLMs on code tasks. No downstream team outcome measured."
+      "description": "Improving the AI code generator itself: security of AI-authored code as an intrinsic property, cognitive-model prompting, trustworthy or secure LLM code generation, capability comparisons between LLMs on code tasks. No downstream team outcome measured.",
+      "papers": [
+        {
+          "stable_id": "ce8ce078",
+          "title": "Comparative Analysis of Security Vulnerabilities in Ai-Generated Versus Human-Written Python Code: an Automated Static Analysis Approach",
+          "authors": "Bukenbayev, N., Sembayev, N., Seralinov, A., Omirgaliyev, R., & Zhussipkaliyeva, S.",
+          "year": 2026,
+          "venue": "2026 IEEE 6th International Conference on Smart Information Systems and Technologies (SIST)",
+          "doi_url": "https://doi.org/10.1109/sist61674.2026.11596372",
+          "source": "human_S0013",
+          "comment": ""
+        },
+        {
+          "stable_id": "50d2328f",
+          "title": "Trustworthy and Secure LLM-Assisted Code Generation for Enterprise Software Development",
+          "authors": "Kongari, S. S. R., Kumar, S., & Kumar, A.",
+          "year": 2026,
+          "venue": "International journal of data science and machine learning",
+          "doi_url": "https://doi.org/10.55640/ijdsml-06-01-04",
+          "source": "human_R035",
+          "comment": "This paper focuses on trustworthy and secure LLM code generation. This is an upstream fix, my study focuses on the downstream governance and how to improve it in the face of AI, so adjacent objectives"
+        },
+        {
+          "stable_id": "68f894cc",
+          "title": "AI-Driven Augmented Software Engineering: Leveraging Cognitive Models for Enhanced Code Generation",
+          "authors": "Shaheen, A., Khaldy, M. A., Alzyadat, W., & Alhroob, A. M.",
+          "year": 2025,
+          "venue": "Journal of Computational and Cognitive Engineering",
+          "doi_url": "https://doi.org/10.47852/bonviewjcce52026123",
+          "source": "human_S0023",
+          "comment": "Excluding since the focus is on improving upstream developer productivity via better AI assisted code authorship"
+        },
+        {
+          "stable_id": "b0be1766",
+          "title": "Comment Traps: How Defective Commented-Out Code Augment Defects in AI-Assisted Code Generation",
+          "authors": "Huang, Y., Zhou, Y., Chen, X., & Zheng, Z.",
+          "year": 2025,
+          "venue": "Proceedings of the ACM on Software Engineering",
+          "doi_url": "https://doi.org/10.1145/3797102",
+          "source": "human_S0018",
+          "comment": ""
+        },
+        {
+          "stable_id": "04dd866b",
+          "title": "Generating Java Methods: An Empirical Assessment of Four AI-Based Code Assistants",
+          "authors": "Corso, V., Mariani, L., Micucci, D., & Riganelli, O.",
+          "year": 2024,
+          "venue": "2024 IEEE/ACM 32nd International Conference on Program Comprehension (ICPC)",
+          "doi_url": "https://doi.org/10.1145/3643916.3644402",
+          "source": "human_S0024",
+          "comment": "This study is improving AI Coding authorship for JAVA methods"
+        },
+        {
+          "stable_id": "57bf8fcf",
+          "title": "How secure is AI-generated code: a large-scale comparison of large language models",
+          "authors": "Tihanyi, N., Bisztray, T., Ferrag, M., Jain, R., & Cordeiro, L. C.",
+          "year": 2024,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-024-10590-1",
+          "source": "human_S0014",
+          "comment": ""
+        },
+        {
+          "stable_id": "f372b145",
+          "title": "Large Language Models for Software Engineering: A Systematic Literature Review",
+          "authors": "Hou, X., Zhao, Y., Liu, Y., Yang, Z., Wang, K., Li, L., Luo, X., Lo, D., & Grundy, J. C.",
+          "year": 2023,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3695988",
+          "source": "human_R033",
+          "comment": "This reads more like a capability analysis of LLMs for different SE tasks. to broad to be applicable to my RQ"
+        }
+      ]
     },
     {
       "code": "E10",
       "label": "Non-quantitative methodology or single-firm case study",
       "count": 6,
-      "description": "Qualitative interview, small-n practitioner survey, ethnographic description, or single-firm case study without an external comparison group. Seminal theoretical anchors remain admissible via I1(b)."
+      "description": "Qualitative interview, small-n practitioner survey, ethnographic description, or single-firm case study without an external comparison group. Seminal theoretical anchors remain admissible via I1(b).",
+      "papers": [
+        {
+          "stable_id": "256a512a",
+          "title": "AI-driven Software Development: A Pragmatic Path to Agentic Development Processes",
+          "authors": "Mandl, P., & Mandl, P.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2606.15283",
+          "source": "human_S0082",
+          "comment": "ArXiv pre-print, single firm case study, lacks scale the study requires and differs in methodolgy"
+        },
+        {
+          "stable_id": "6baa5052",
+          "title": "Last Flight of Maverick: An Exploratory Qualitative Interview Study of GitHub Copilot Use in Software Development Team",
+          "authors": "Cavalcante, S., Messias, E., Ribeiro, E., & Oran, A.",
+          "year": 2026,
+          "venue": "",
+          "doi_url": "https://doi.org/10.5220/0014729100004018",
+          "source": "human_S0083",
+          "comment": "Qualitative interview study with a small sample size. Scale and method issues"
+        },
+        {
+          "stable_id": "fca394ba",
+          "title": "The State of Generative AI in Software Development: Insights from Literature and a Developer Survey",
+          "authors": "Gurgul, V., Gubela, R., & Lessmann, S.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2603.16975",
+          "source": "human_S0080",
+          "comment": "Pre-print based on a survey, which differs from the quasi-experimental methodology of the study"
+        },
+        {
+          "stable_id": "23fdbcab",
+          "title": "Paradigm shift on Coding Productivity Using GenAI",
+          "authors": "Yu, L.",
+          "year": 2025,
+          "venue": "Proceedings of the 29th International Conference on Evaluation and Assessment in Software Engineering",
+          "doi_url": "https://doi.org/10.1145/3756681.3757081",
+          "source": "human_R003",
+          "comment": "The study focuses on developer productivity due to AI Coding assistance, nothing on quality adjustments. The methodology is qualitative, using surveys and interviews differing from our quantitative, quasi-experimental approach"
+        },
+        {
+          "stable_id": "32ef7560",
+          "title": "Test Automation Maturity Improves Product Quality - Quantitative Study of Open Source Projects Using Continuous Integration",
+          "authors": "Wang, Y., Mäntylä, M., Liu, Z., & Markkula, J.",
+          "year": 2022,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.1016/j.jss.2022.111259",
+          "source": "human_S0072",
+          "comment": "This is a survey based study, restricted to only Java projects. Not relevant to the RQ"
+        },
+        {
+          "stable_id": "0f2a1ebe",
+          "title": "DevOps in practice: A multiple case study of five companies",
+          "authors": "Lwakatare, L. E., Kilamo, T., Karvonen, T., Sauvola, T., Heikkilä, V., Itkonen, J., Kuvaja, P., Mikkonen, T., Oivo, M., & Lassenius, C.",
+          "year": 2019,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2019.06.010",
+          "source": "human_S0085",
+          "comment": "Another DevOps paper sans AI, Gen AI or LLM"
+        }
+      ]
+    },
+    {
+      "code": "AI",
+      "label": "AI-propagated by Bayesian similarity triage",
+      "count": 105,
+      "description": "The 105 records the Bayesian similarity triage auto-propagated as exclude because their per-record posterior P(exclude) >= 0.70. They do not carry a v1.2.0 rubric code because the tool does not tick rubric boxes; the propagation is a similarity-driven inheritance from labelled excludes in the same primary query stratum.",
+      "papers": [
+        {
+          "stable_id": "1789af69",
+          "title": "Artificial Intelligence in Organizations: A Systematic Review of Operationalizing Generative Artificial Intelligence Capabilities for Organizational Performance",
+          "authors": "Machkour, B., & Abriane, A.",
+          "year": 2026,
+          "venue": "IEEE Access",
+          "doi_url": "https://doi.org/10.1109/access.2026.3692425",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.964); nearest labelled exclude: doi:10.1016/j.jbusres.2022.113609"
+        },
+        {
+          "stable_id": "0b66ecb1",
+          "title": "Automation, AI, and the Future of Work: A Unified Framework With Evidence From Agriculture Literature",
+          "authors": "Da, X.",
+          "year": 2026,
+          "venue": "Journal of Economic Surveys",
+          "doi_url": "https://doi.org/10.1111/joes.70134",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "1cc7b48d",
+          "title": "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
+          "authors": "Blain, D., & Noiseux, M.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2604.05292",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.845); nearest labelled exclude: doi:10.48550/arxiv.2508.14727"
+        },
+        {
+          "stable_id": "31149be0",
+          "title": "Cheap Code, Costly Judgment: A Case Study on Governable Agentic Software Engineering",
+          "authors": "Davis, J. C., Amusuo, P. C., Singla, T., cCakar, B., & Davis, K. A.",
+          "year": 2026,
+          "venue": "",
+          "doi_url": "https://doi.org/10.48550/arxiv.2607.01087",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.741); nearest labelled exclude: doi:10.48550/arxiv.2606.15283"
+        },
+        {
+          "stable_id": "00f5d08f",
+          "title": "Contrasting pathways of automation: routine task substitution vs. AI complementarity",
+          "authors": "Lee, S., Jeong, D., & Lee, J.",
+          "year": 2026,
+          "venue": "Humanities and Social Sciences Communications",
+          "doi_url": "https://doi.org/10.1057/s41599-026-07415-5",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "c56619a2",
+          "title": "DevOps and CI/CD Maturity in Large-Scale Organizations: A SonarQube and Jenkins Approach",
+          "authors": "Subramanyam, S. P.",
+          "year": 2026,
+          "venue": "2026 IEEE 5th International Conference on AI in Cybersecurity (ICAIC)",
+          "doi_url": "https://doi.org/10.1109/icaic67076.2026.11395828",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.904); nearest labelled exclude: doi:10.1109/icsme64153.2025.00078"
+        },
+        {
+          "stable_id": "233fbaa8",
+          "title": "Explainable Machine Learning for Software Defect Prediction in Large-Scale Code Repositories Using Code Embeddings and Repository-Level Knowledge Graphs",
+          "authors": "Bhadra, P., V., V., T, K., & S., S.",
+          "year": 2026,
+          "venue": "International Journal of Computer Science and Engineering Innovations",
+          "doi_url": "https://doi.org/10.64137/31079458/ijcsei-v2i2p102",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.737); nearest labelled exclude: doi:10.1007/s10664-020-09837-4"
+        },
+        {
+          "stable_id": "68611986",
+          "title": "Faster Code, Deeper Debt? A Multivocal Literature Review on Technical Debt and Its Early Signs in LLM-Assisted Software Development",
+          "authors": "Ehsani, R., Rawal, S., Cai, Y., & Chatterjee, P.",
+          "year": 2026,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3820165",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.776); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "5db41482",
+          "title": "From Code-Centric to Intent-Centric Software Engineering: A Reflexive Thematic Analysis of Generative AI, Agentic Systems, and Engineering Accountability",
+          "authors": "Cruz, E. D. L.",
+          "year": 2026,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2605.11027",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.729); nearest labelled exclude: doi:10.48550/arxiv.2510.10819"
+        },
+        {
+          "stable_id": "0c352fa3",
+          "title": "Pipelines for Proof: Devops Automation for Sustainable Research Software",
+          "authors": "Kavitha, J. J. S.",
+          "year": 2026,
+          "venue": "2026 5th International Conference on Innovative Practices in Technology and Management (ICIPTM)",
+          "doi_url": "https://doi.org/10.1109/iciptm69057.2026.11466246",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.743); nearest labelled exclude: title:aqualitygateroleinasoftwaredeliverypipeline|year:2022"
+        },
+        {
+          "stable_id": "34dd403f",
+          "title": "Quality and Security Signals in AI-Generated Python Refactoring Pull Requests",
+          "authors": "Almukhtar, M., Ghammam, A., & Ming, H.",
+          "year": 2026,
+          "venue": "Proceedings of the 3rd ACM International Conference on AI-Powered Software",
+          "doi_url": "https://doi.org/10.1145/3805760.3814886",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.701); nearest labelled exclude: doi:10.1109/issre66568.2025.00035"
+        },
+        {
+          "stable_id": "79b9fbf4",
+          "title": "Technical Debt Quantification and Its Impact on Software Delivery Performance: A Cost-Benefit Analysis Framework for Enterprise Systems",
+          "authors": "Karelin, A., Kowalski, T., Belous, N., & Bondarchuk, O.",
+          "year": 2026,
+          "venue": "American Impact Review",
+          "doi_url": "https://doi.org/10.66308/air.e2026034",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.900); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "0aaf5ad0",
+          "title": "The Value of Effective Pull Request Description",
+          "authors": "Pirouzkhah, S., Gonçalves, P., & Bacchelli, A.",
+          "year": 2026,
+          "venue": "Proceedings of the 23rd International Conference on Mining Software Repositories",
+          "doi_url": "https://doi.org/10.1145/3793302.3793368",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.887); nearest labelled exclude: doi:10.1109/chase66643.2025.00033"
+        },
+        {
+          "stable_id": "9cd81f62",
+          "title": "A Survey of Bugs in AI-Generated Code",
+          "authors": "Gao, R., Tahir, A., Liang, P., Sušnjak, T., & Khomh, F.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2512.05239",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.762); nearest labelled exclude: doi:10.1109/issre66568.2025.00035"
+        },
+        {
+          "stable_id": "036c3002",
+          "title": "AI Code in the Wild: Measuring Security Risks and Ecosystem Shifts of AI-Generated Code in Modern Software",
+          "authors": "Wang, B., Yu, W., Zhong, Y., Yu, H., Lian, K., Lu, C., Zheng, H., Zhang, D., & Li, H.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2512.18567",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.768); nearest labelled exclude: doi:10.1109/issre66568.2025.00035"
+        },
+        {
+          "stable_id": "f63a3952",
+          "title": "An AI-Augmented Framework for Continuous Quality in CI/CD Pipelines",
+          "authors": "Perla, S.",
+          "year": 2025,
+          "venue": "Journal of Computer Science and Technology Studies",
+          "doi_url": "https://doi.org/10.32996/jcsts.2025.7.10.47",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.702); nearest labelled exclude: doi:10.12913/22998624/197406"
+        },
+        {
+          "stable_id": "98ecfd3b",
+          "title": "An Empirical Study of Complexity, Heterogeneity, and Compliance of GitHub Actions Workflows",
+          "authors": "Abrokwah, E., & Ghaleb, T. A.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2507.18062",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1109/qrs-c55045.2021.00163"
+        },
+        {
+          "stable_id": "ebe1991e",
+          "title": "Analyzing DevOps Practices Through Merge Request Data: A Case Study in Networking Software Company",
+          "authors": "Kansab, S., Hanania, M., Bordeleau, F., & Tizghadam, A.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2503.14677",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.886); nearest labelled exclude: doi:10.1145/3183519.3183542"
+        },
+        {
+          "stable_id": "073868f3",
+          "title": "Code Improvement Practices at Meta",
+          "authors": "Mockus, A., Rigby, P. C., Abreu, R., Akkerman, A., Bhootada, Y., Bhuptani, P., Ghardhora, G., Dao, L. H., Hawley, C., He, R., Krishnamoorthy, S., Krauze, S., Li, J., Lunov, A., Martac, D., Morin, F., Mitchell, N., Montes, V., Saba, M., Steiner, M., Valori, A., Wang, S., & Nagappan, N.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2504.12517",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.913); nearest labelled exclude: doi:10.1109/tse.2020.3032557"
+        },
+        {
+          "stable_id": "18c15710",
+          "title": "EFFECTS OF ARTIFICIAL INTELLIGENCE AND ROBOTIC TECHNOLOGIES ON THE FUTURE OF WORK: A META-ANALYSIS STUDY",
+          "authors": "Zehir, C., & Mayaer, E.",
+          "year": 2025,
+          "venue": "Journal of Global Strategic Management",
+          "doi_url": "https://doi.org/10.20460/jgsm.2025.347",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "b0ee9d88",
+          "title": "How Are Technologies Changing the Requirements for Skills and Education? (A Discussion Review)",
+          "authors": "Maltseva, V., & Nikitin, M.",
+          "year": 2025,
+          "venue": "World Economy and International Relations",
+          "doi_url": "https://doi.org/10.20542/0131-2227-2025-69-5-121-131",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/j.techfore.2024.123824"
+        },
+        {
+          "stable_id": "568e76b0",
+          "title": "How Organizations Choose Open-Source Generative AI Under Normative Uncertainty: The Moderating Role of Exploitative and Exploratory Behaviors",
+          "authors": "Hong, S., Ryee, H., Jin, X., & Yang, D.",
+          "year": 2025,
+          "venue": "J. Theor. Appl. Electron. Commer. Res.",
+          "doi_url": "https://doi.org/10.3390/jtaer20030250",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.929); nearest labelled exclude: doi:10.24136/eq.4179"
+        },
+        {
+          "stable_id": "6a0a8629",
+          "title": "Human-AI Collaboration in Software Development: A Mixed-Methods Study of Developers’ Use of GitHub Copilot and ChatGPT",
+          "authors": "Stray, V., Barbala, A., & Wivestad, V.",
+          "year": 2025,
+          "venue": "Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering",
+          "doi_url": "https://doi.org/10.1145/3696630.3730566",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.806); nearest labelled exclude: doi:10.5220/0014729100004018"
+        },
+        {
+          "stable_id": "f14f0e58",
+          "title": "Improving Merge Pipeline Throughput in Continuous Integration via Pull Request Prioritization",
+          "authors": "Jungwirth, M., Gruber, M., & Fraser, G.",
+          "year": 2025,
+          "venue": "2025 IEEE International Conference on Software Maintenance and Evolution (ICSME)",
+          "doi_url": "https://doi.org/10.1109/icsme64153.2025.00057",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.931); nearest labelled exclude: doi:10.1145/3524842.3528448"
+        },
+        {
+          "stable_id": "5e35e19b",
+          "title": "Measuring the Impact of Technical Debt on Development Effort in Software Projects",
+          "authors": "Gupta, K.",
+          "year": 2025,
+          "venue": "ArXiv",
+          "doi_url": "https://doi.org/10.48550/arxiv.2502.16277",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.795); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "4dc26feb",
+          "title": "Navigating Continuous Improvement: \nAn In-Depth Analysis of Lean-Agile \nand DevOps Maturity Models",
+          "authors": "Sethupathy, U. K. A.",
+          "year": 2025,
+          "venue": "Journal of Software Engineering and Applications",
+          "doi_url": "https://doi.org/10.4236/jsea.2025.189019",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.892); nearest labelled exclude: doi:10.64920/drc2025073"
+        },
+        {
+          "stable_id": "530e0f8f",
+          "title": "No silver bullets: Why understanding software cycle time is messy, not magic",
+          "authors": "Flournoy, J., Lee, C. S., Wu, M., & Hicks, C. M.",
+          "year": 2025,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-025-10735-w",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.796); nearest labelled exclude: doi:10.1109/tse.2020.3018726"
+        },
+        {
+          "stable_id": "71d6918c",
+          "title": "RevMine: An LLM-Assisted Tool for Code Review Mining and Analysis Across Git Platforms",
+          "authors": "Kansab, S., Bordeleau, F., & Tizghadam, A.",
+          "year": 2025,
+          "venue": "2025 IEEE International Conference on Collaborative Advances in Software and COmputiNg (CASCON)",
+          "doi_url": "https://doi.org/10.1109/cascon66301.2025.00092",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/j.infsof.2016.01.004"
+        },
+        {
+          "stable_id": "99aab178",
+          "title": "Security and Quality in LLM-Generated Code: A Multi-Language, Multi-Model Analysis",
+          "authors": "Kharma, M., Choi, S., Alkhanafseh, M., & Mohaisen, D. A.",
+          "year": 2025,
+          "venue": "IEEE Transactions on Dependable and Secure Computing",
+          "doi_url": "https://doi.org/10.1109/tdsc.2026.3672745",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.837); nearest labelled exclude: doi:10.48550/arxiv.2508.14727"
+        },
+        {
+          "stable_id": "44fc7bc7",
+          "title": "Security Vulnerabilities in AI-Generated Code: A Large-Scale Analysis of Public GitHub Repositories",
+          "authors": "Schreiber, M., & Tippe, P.",
+          "year": 2025,
+          "venue": "",
+          "doi_url": "https://doi.org/10.1007/978-981-95-3537-8_9",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.878); nearest labelled exclude: doi:10.1109/sist61674.2026.11596372"
+        },
+        {
+          "stable_id": "f63a553b",
+          "title": "The Information Organization: On Changes in Information Technology and Organizational Design",
+          "authors": "Gibbs, M., & Stede, W. A. V. D.",
+          "year": 2025,
+          "venue": "Foundations and Trends® in Accounting",
+          "doi_url": "https://doi.org/10.1561/1400000065",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1111/j.1540-5915.2008.00209.x"
+        },
+        {
+          "stable_id": "3639e2b7",
+          "title": "A systematic literature review on the impact of AI models on the security of code generation",
+          "authors": "Negri-Ribalta, C., Géraud-Stewart, R., Sergeeva, A., & Lenzini, G.",
+          "year": 2024,
+          "venue": "Frontiers in Big Data",
+          "doi_url": "https://doi.org/10.3389/fdata.2024.1386720",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.739); nearest labelled exclude: doi:10.1109/sist61674.2026.11596372"
+        },
+        {
+          "stable_id": "e62d9fbc",
+          "title": "Automation and Augmentation: Artificial Intelligence, Robots, and Work",
+          "authors": "Lei, Y., & Kim, R. Y.",
+          "year": 2024,
+          "venue": "Annual Review of Sociology",
+          "doi_url": "https://doi.org/10.1146/annurev-soc-090523-050708",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "3e194c29",
+          "title": "Beyond information technology and productivity paradox: Analysing the channels of impact at the firm-level",
+          "authors": "Khanna, R., & Sharma, C.",
+          "year": 2024,
+          "venue": "Technological Forecasting and Social Change",
+          "doi_url": "https://doi.org/10.1016/j.techfore.2024.123369",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.2139/ssrn.428560"
+        },
+        {
+          "stable_id": "25ec3df7",
+          "title": "Code Ownership: The Principles, Differences, and Their Associations with Software Quality",
+          "authors": "Thongtanunam, P., & Tantithamthavorn, C.",
+          "year": 2024,
+          "venue": "2024 IEEE 35th International Symposium on Software Reliability Engineering (ISSRE)",
+          "doi_url": "https://doi.org/10.1109/issre62328.2024.00044",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.765); nearest labelled exclude: doi:10.1145/2025113.2025119"
+        },
+        {
+          "stable_id": "e2a8cd37",
+          "title": "Creativity and artificial intelligence: A multilevel perspective",
+          "authors": "Grilli, L., & Pedota, M.",
+          "year": 2024,
+          "venue": "Creativity and Innovation Management",
+          "doi_url": "https://doi.org/10.1111/caim.12580",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.983); nearest labelled exclude: doi:10.24136/eq.4179"
+        },
+        {
+          "stable_id": "eb465bbc",
+          "title": "Effect of automation of routine and non-routine tasks on labour demand and wages",
+          "authors": "Upreti, A., & Sridhar, V.",
+          "year": 2024,
+          "venue": "IIMB Management Review",
+          "doi_url": "https://doi.org/10.1016/j.iimb.2024.09.001",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "06f56199",
+          "title": "Governing the commons: code ownership and code-clones in large-scale software development",
+          "authors": "Sundelin, A., Gonzalez-Huerta, J., Torkar, R., & Wnuk, K.",
+          "year": 2024,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-024-10598-7",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.709); nearest labelled exclude: doi:10.1145/2025113.2025119"
+        },
+        {
+          "stable_id": "1b96cd30",
+          "title": "Knowledge Management Perspective of Generative Artificial Intelligence",
+          "authors": "Alavi, M., Leidner, D., & Mousavi, R.",
+          "year": 2024,
+          "venue": "J. Assoc. Inf. Syst.",
+          "doi_url": "https://doi.org/10.17705/1jais.00859",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.973); nearest labelled exclude: doi:10.24136/eq.4179"
+        },
+        {
+          "stable_id": "2d332cad",
+          "title": "Machine Learning-Based Prediction of Technical Debt in Continuous Software Development Using Repository Mining and Developer Activity Analytics",
+          "authors": "Tiwari, D., Sharma, S., Tomar, K., & Arora, S.",
+          "year": 2024,
+          "venue": "International Journal of Emerging Trends in Computer Science and Information Technology",
+          "doi_url": "https://doi.org/10.63282/3050-9246.ijetcsit-v5i4p122",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.834); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "ecc16105",
+          "title": "Study of Failures in Continuous Integration Environment",
+          "authors": "Sinha, P. K., Nand, P., Chauhan, S., & Tiwari, S.",
+          "year": 2024,
+          "venue": "2024 International Conference on Electrical Electronics and Computing Technologies (ICEECT)",
+          "doi_url": "https://doi.org/10.1109/iceect61758.2024.10739077",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.761); nearest labelled exclude: doi:10.1016/j.jss.2022.111259"
+        },
+        {
+          "stable_id": "8d21a8d9",
+          "title": "The impact of AI assimilation on firm performance in small and medium-sized enterprises: A moderated multi-mediation model",
+          "authors": "Wahab, M. D. A., & Radmehr, M.",
+          "year": 2024,
+          "venue": "Heliyon",
+          "doi_url": "https://doi.org/10.1016/j.heliyon.2024.e29580",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.940); nearest labelled exclude: doi:10.1016/j.jbusres.2022.113609"
+        },
+        {
+          "stable_id": "59ec7116",
+          "title": "Using AI-Based Coding Assistants in Practice: State of Affairs, Perceptions, and Ways Forward",
+          "authors": "Sergeyuk, A., Golubev, Y., Bryksin, T., & Ahmed, I.",
+          "year": 2024,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2024.107610",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.701); nearest labelled exclude: doi:10.1145/3643916.3644402"
+        },
+        {
+          "stable_id": "2fb887ea",
+          "title": "An Empirical Study of Self-Admitted Technical Debt in Machine Learning Software",
+          "authors": "Bhatia, A., Khomh, F., Adams, B., & Hassan, A.",
+          "year": 2023,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3785001",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.898); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "aa1e1f37",
+          "title": "An Empirical Study on GitHub Pull Requests’ Reactions",
+          "authors": "Batoun, M. A., Yung, K., Tian, Y., & Sayagh, M.",
+          "year": 2023,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3597208",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/j.infsof.2016.01.004"
+        },
+        {
+          "stable_id": "e255ac8d",
+          "title": "Artificial intelligence in innovation management: A review of innovation capabilities and a taxonomy of AI applications",
+          "authors": "Gama, F., & Magistretti, S.",
+          "year": 2023,
+          "venue": "Journal of Product Innovation Management",
+          "doi_url": "https://doi.org/10.1111/jpim.12698",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.927); nearest labelled exclude: doi:10.1002/jsc.70061"
+        },
+        {
+          "stable_id": "760ff9e6",
+          "title": "Refining ChatGPT-Generated Code: Characterizing and Mitigating Code Quality Issues",
+          "authors": "Liu, Y., Le-Cong, T., Widyasari, R., Tantithamthavorn, C., Li, L., Le, X., & Lo, D.",
+          "year": 2023,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3643674",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.823); nearest labelled exclude: doi:10.1109/issre66568.2025.00035"
+        },
+        {
+          "stable_id": "b046b16d",
+          "title": "Security Weaknesses of Copilot-Generated Code in GitHub Projects: An Empirical Study",
+          "authors": "Fu, Y., Liang, P., Tahir, A., Li, Z., Shahin, M., Yu, J., & Chen, J.",
+          "year": 2023,
+          "venue": "ACM Transactions on Software Engineering and Methodology",
+          "doi_url": "https://doi.org/10.1145/3716848",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.833); nearest labelled exclude: doi:10.48550/arxiv.2508.14727"
+        },
+        {
+          "stable_id": "a3c601f7",
+          "title": "Technical Debt Management: The Road Ahead for Successful Software Delivery",
+          "authors": "Avgeriou, P., Ozkaya, I., Chatzigeorgiou, A., Ciolkowski, M., Ernst, N. A., Koontz, R. J., Poort, E., & Shull, F.",
+          "year": 2023,
+          "venue": "2023 IEEE/ACM International Conference on Software Engineering: Future of Software Engineering (ICSE-FoSE)",
+          "doi_url": "https://doi.org/10.1109/icse-fose59343.2023.00007",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.834); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "e5b9177f",
+          "title": "The impact of a continuous integration service on the delivery time of merged pull requests",
+          "authors": "Bernardo, J. H., Costa, D. A. D., Kulesza, U., & Treude, C.",
+          "year": 2023,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-023-10327-6",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.909); nearest labelled exclude: doi:10.1145/3183519.3183542"
+        },
+        {
+          "stable_id": "f674bcdb",
+          "title": "The Need for Speed: Increasing the Code Review Velocity",
+          "authors": "Kudrjavets, G.",
+          "year": 2023,
+          "venue": "",
+          "doi_url": "https://doi.org/10.33612/diss.781738808",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.964); nearest labelled exclude: doi:10.1145/3524842.3528448"
+        },
+        {
+          "stable_id": "1af6faed",
+          "title": "Towards Adoption of Generative AI in Organizational Settings",
+          "authors": "Agrawal, K.",
+          "year": 2023,
+          "venue": "Journal of Computer Information Systems",
+          "doi_url": "https://doi.org/10.1080/08874417.2023.2240744",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.955); nearest labelled exclude: doi:10.24136/eq.4179"
+        },
+        {
+          "stable_id": "bf60dba6",
+          "title": "A Study of Adoption and Effects of DevOps Practices",
+          "authors": "Offerman, T., Blinde, R., Stettina, C. J., & Visser, J.",
+          "year": 2022,
+          "venue": "2022 IEEE 28th International Conference on Engineering, Technology and Innovation (ICE/ITMC) & 31st International Association For Management of Technology (IAMOT) Joint Conference",
+          "doi_url": "https://doi.org/10.1109/ice/itmc-iamot55089.2022.10033313",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/j.infsof.2019.06.010"
+        },
+        {
+          "stable_id": "b2f3553b",
+          "title": "Artificial Intelligence and Employment: New Cross-Country Evidence",
+          "authors": "Georgieff, A., & Hyee, R.",
+          "year": 2022,
+          "venue": "Frontiers in Artificial Intelligence",
+          "doi_url": "https://doi.org/10.3389/frai.2022.832736",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1086/718327"
+        },
+        {
+          "stable_id": "ee9977d5",
+          "title": "Automatic identification of self-admitted technical debt from four different sources",
+          "authors": "Li, Y., Soliman, M., & Avgeriou, P.",
+          "year": 2022,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-023-10297-9",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.882); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "b450ca33",
+          "title": "Automation, AI & Work",
+          "authors": "Tyson, L., & Zysman, J.",
+          "year": 2022,
+          "venue": "Daedalus",
+          "doi_url": "https://doi.org/10.1162/daed_a_01914",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "b00182f5",
+          "title": "Impact of artificial intelligence assimilation on firm performance: The mediating effects of organizational agility and customer agility",
+          "authors": "Wamba, S. F.",
+          "year": 2022,
+          "venue": "International Journal of Information Management",
+          "doi_url": "https://doi.org/10.1016/j.ijinfomgt.2022.102544",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.975); nearest labelled exclude: doi:10.1002/jsc.70061"
+        },
+        {
+          "stable_id": "aaff7c00",
+          "title": "Is GitHub’s Copilot as bad as humans at introducing vulnerabilities in code?",
+          "authors": "Asare, O., Nagappan, M., & Asokan, N.",
+          "year": 2022,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-023-10380-1",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.864); nearest labelled exclude: doi:10.1007/s10664-024-10590-1"
+        },
+        {
+          "stable_id": "7814e379",
+          "title": "Research on the Productivity Paradox of Information Technology",
+          "authors": "Li, M., & Guo, X.",
+          "year": 2022,
+          "venue": "Proceedings of Business and Economic Studies",
+          "doi_url": "https://doi.org/10.26689/pbes.v5i2.3821",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1080/10438599.2023.2172000"
+        },
+        {
+          "stable_id": "ef25184f",
+          "title": "DevOps Capabilities and Metrics",
+          "authors": "Duarte, R. M.",
+          "year": 2021,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.871); nearest labelled exclude: doi:10.64920/drc2025073"
+        },
+        {
+          "stable_id": "a95885b8",
+          "title": "On the effects of continuous delivery on code quality: A case study in industry",
+          "authors": "Rubert, M., & Farias, K.",
+          "year": 2021,
+          "venue": "Comput. Stand. Interfaces",
+          "doi_url": "https://doi.org/10.1016/j.csi.2021.103588",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.739); nearest labelled exclude: doi:10.1016/j.jss.2022.111259"
+        },
+        {
+          "stable_id": "585e2471",
+          "title": "Pull request latency explained: an empirical overview",
+          "authors": "Zhang, X., Yu, Y., Wang, T., Rastogi, A., & Wang, H.",
+          "year": 2021,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-022-10143-4",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.969); nearest labelled exclude: doi:10.1109/tse.2022.3165056"
+        },
+        {
+          "stable_id": "5c26c8e5",
+          "title": "Quality gatekeepers: investigating the effects of code review bots on pull request activities",
+          "authors": "Wessel, M., Serebrenik, A., Wiese, I., Steinmacher, I., & Gerosa, M.",
+          "year": 2021,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-022-10130-9",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.750); nearest labelled exclude: doi:10.1109/chase66643.2025.00033"
+        },
+        {
+          "stable_id": "03328bae",
+          "title": "The changing nature of work in Canada amid recent advances in automation technology",
+          "authors": "Frank, K., Yang, Z., & Frenette, M.",
+          "year": 2021,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "6e65cf85",
+          "title": "The Effect of Adjustment Costs and Organizational Change on Productivity in Canada: Evidence from Aggregate Data",
+          "authors": "Leung, D.",
+          "year": 2021,
+          "venue": "International Productivity Monitor",
+          "doi_url": "https://doi.org/10.34989/swp-2004-1",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1287/mnsc.1030.0195"
+        },
+        {
+          "stable_id": "ee1ecf32",
+          "title": "An Empirical Study of Post-Production Software Code Quality When Employing the Agile Rapid Delivery Methodology",
+          "authors": "Laura, L., & Elaine, E.",
+          "year": 2020,
+          "venue": "Journal of Information Systems Applied Research and Analytics",
+          "doi_url": "https://doi.org/10.62273/rhhd3965",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.758); nearest labelled exclude: doi:10.1016/j.jss.2022.111259"
+        },
+        {
+          "stable_id": "78596149",
+          "title": "An Empirical Study of Post-Production Software Code Quality When Employing the Agile Rapid Delivery Methodology",
+          "authors": "",
+          "year": 2020,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.758); nearest labelled exclude: doi:10.1016/j.jss.2022.111259"
+        },
+        {
+          "stable_id": "ba2d6064",
+          "title": "Heard it through the Gitvine: an empirical study of tool diffusion across the npm ecosystem",
+          "authors": "Lamba, H., Trockman, A., Armanios, D., Kästner, C., Miller, H., & Vasilescu, B.",
+          "year": 2020,
+          "venue": "Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering",
+          "doi_url": "https://doi.org/10.1145/3368089.3409705",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.750); nearest labelled exclude: doi:10.1109/icsme64153.2025.00078"
+        },
+        {
+          "stable_id": "06ea2784",
+          "title": "Long-Term Evaluation of Technical Debt in Open-Source Software",
+          "authors": "Molnar, A., & Motogna, S.",
+          "year": 2020,
+          "venue": "Proceedings of the 14th ACM / IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM)",
+          "doi_url": "https://doi.org/10.1145/3382494.3410673",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.895); nearest labelled exclude: doi:10.1007/978-3-031-36597-3_14"
+        },
+        {
+          "stable_id": "657cca55",
+          "title": "Rising with the machines: A sociotechnical framework for bringing artificial intelligence into the organization",
+          "authors": "Makarius, E. E., Mukherjee, D., Fox, J. D., & Fox, A. K.",
+          "year": 2020,
+          "venue": "Journal of Business Research",
+          "doi_url": "https://doi.org/10.1016/j.jbusres.2020.07.045",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.965); nearest labelled exclude: doi:10.1016/j.jbusres.2022.113609"
+        },
+        {
+          "stable_id": "11dba704",
+          "title": "Improving the pull requests review process using learning-to-rank algorithms",
+          "authors": "Zhao, G., Costa, D. A. D., & Zou, Y.",
+          "year": 2019,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-019-09696-8",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.933); nearest labelled exclude: doi:10.1109/tse.2022.3165056"
+        },
+        {
+          "stable_id": "68eb847e",
+          "title": "Lessons from three decades of IT productivity research: towards a better understanding of IT-induced productivity effects",
+          "authors": "Schweikl, S., & Obermaier, R.",
+          "year": 2019,
+          "venue": "Management Review Quarterly",
+          "doi_url": "https://doi.org/10.1007/s11301-019-00173-6",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1162/qjec.2007.122.4.1721"
+        },
+        {
+          "stable_id": "087dbfed",
+          "title": "The wrong kind of AI? Artificial intelligence and the future of labour demand",
+          "authors": "Acemoğlu, D., & Restrepo, P.",
+          "year": 2019,
+          "venue": "Cambridge Journal of Regions, Economy and Society",
+          "doi_url": "https://doi.org/10.3386/w25682",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "2f66e3e6",
+          "title": "Toward understanding the impact of artificial intelligence on labor",
+          "authors": "Frank, M., Autor, D., Bessen, J., Brynjolfsson, E., Cebrián, M., Deming, D., Feldman, M., Groh, M., Lobo, J., Moro, E., Wang, D., Youn, H., & Rahwan, I.",
+          "year": 2019,
+          "venue": "Proceedings of the National Academy of Sciences of the United States of America",
+          "doi_url": "https://doi.org/10.1073/pnas.1900949116",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.55214/2576-8484.v10i5.12854"
+        },
+        {
+          "stable_id": "b448f21b",
+          "title": "Artificial Intelligence in Service",
+          "authors": "Huang, M., & Rust, R.",
+          "year": 2018,
+          "venue": "Journal of Service Research",
+          "doi_url": "https://doi.org/10.1177/1094670517752459",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "38314293",
+          "title": "Artificial Intelligence, Automation, and Work",
+          "authors": "Acemoğlu, D., Acemoğlu, D., Acemoğlu, D., & Restrepo, P.",
+          "year": 2018,
+          "venue": "National Bureau of Economic Research",
+          "doi_url": "https://doi.org/10.2139/ssrn.3098384",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.48550/arxiv.2404.06472"
+        },
+        {
+          "stable_id": "a9d6acad",
+          "title": "DevOps Capabilities, Practices, and Challenges: Insights from a Case Study",
+          "authors": "Senapathi, M., Buchan, J., & Osman, H.",
+          "year": 2018,
+          "venue": "Proceedings of the 22nd International Conference on Evaluation and Assessment in Software Engineering 2018",
+          "doi_url": "https://doi.org/10.1145/3210459.3210465",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/j.infsof.2019.06.010"
+        },
+        {
+          "stable_id": "0b49e934",
+          "title": "DevOps delivers",
+          "authors": "Forsgren, N.",
+          "year": 2018,
+          "venue": "Communications of the ACM",
+          "doi_url": "https://doi.org/10.1145/3174799",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1145/3652508"
+        },
+        {
+          "stable_id": "c55ac512",
+          "title": "Processes as Theory in Information Systems Research",
+          "authors": "Crowston, K.",
+          "year": 2018,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1111/j.1540-5915.2008.00209.x"
+        },
+        {
+          "stable_id": "07239154",
+          "title": "Technical Debt tracking: Current state of practice: A survey and multiple case study in 15 large organizations",
+          "authors": "Martini, A., Besker, T., & Bosch, J.",
+          "year": 2018,
+          "venue": "Sci. Comput. Program.",
+          "doi_url": "https://doi.org/10.1016/j.scico.2018.03.007",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.898); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "a0e5a7bf",
+          "title": "A Systematic Mapping Study of Software Development With GitHub",
+          "authors": "Cosentino, V., Izquierdo, J. L. C., & Cabot, J.",
+          "year": 2017,
+          "venue": "IEEE Access",
+          "doi_url": "https://doi.org/10.1109/access.2017.2682323",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1109/qrs-c55045.2021.00163"
+        },
+        {
+          "stable_id": "d5ead697",
+          "title": "Analyzing the concept of technical debt in the context of agile software development: A systematic literature review",
+          "authors": "Behutiye, W., Rodríguez, P., Oivo, M., & Misirli, A. T.",
+          "year": 2017,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2016.10.004",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.894); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "843df0fb",
+          "title": "Technical debt and agile software development practices and processes: An industry practitioner survey",
+          "authors": "Holvitie, J., Licorish, S. A., Spínola, R., Hyrynsalmi, S., MacDonell, S. G., Mendes, T., Buchan, J., & Leppänen, V.",
+          "year": 2017,
+          "venue": "Inf. Softw. Technol.",
+          "doi_url": "https://doi.org/10.1016/j.infsof.2017.11.015",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.877); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "b1c99761",
+          "title": "The impact of continuous integration on other software development practices: A large-scale empirical study",
+          "authors": "Zhao, Y., Serebrenik, A., Zhou, Y., Filkov, V., & Vasilescu, B.",
+          "year": 2017,
+          "venue": "2017 32nd IEEE/ACM International Conference on Automated Software Engineering (ASE)",
+          "doi_url": "https://doi.org/10.1109/ase.2017.8115619",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.806); nearest labelled exclude: doi:10.1145/2970276.2970358"
+        },
+        {
+          "stable_id": "198e07be",
+          "title": "Technical Debt and the Reliability of Enterprise Software Systems: A Competing Risks Analysis",
+          "authors": "Ramasubbu, N., & Kemerer, C.",
+          "year": 2016,
+          "venue": "Manag. Sci.",
+          "doi_url": "https://doi.org/10.2139/ssrn.2523483",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.884); nearest labelled exclude: doi:10.1016/j.jss.2021.111114"
+        },
+        {
+          "stable_id": "b2fbaa0e",
+          "title": "An in-depth study of the promises and perils of mining GitHub",
+          "authors": "Kalliamvakou, E., Gousios, G., Blincoe, K., Singer, L., Germán, D., & Damian, D. E.",
+          "year": 2015,
+          "venue": "Empirical Software Engineering",
+          "doi_url": "https://doi.org/10.1007/s10664-015-9393-5",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1109/qrs-c55045.2021.00163"
+        },
+        {
+          "stable_id": "e780e027",
+          "title": "Information technology (IT) productivity paradox in the 21st century",
+          "authors": "Hajli, M., Sims, J. M., & Ibragimov, V.",
+          "year": 2015,
+          "venue": "International Journal of Productivity and Performance Management",
+          "doi_url": "https://doi.org/10.1108/ijppm-12-2012-0129",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.2139/ssrn.428560"
+        },
+        {
+          "stable_id": "38032396",
+          "title": "Quality and productivity outcomes relating to continuous integration in GitHub",
+          "authors": "Vasilescu, B., Yu, Y., Wang, H., Devanbu, P. T., & Filkov, V.",
+          "year": 2015,
+          "venue": "Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering",
+          "doi_url": "https://doi.org/10.1145/2786805.2786850",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.850); nearest labelled exclude: doi:10.1145/2970276.2970358"
+        },
+        {
+          "stable_id": "8aaa4349",
+          "title": "The Role of Continuous Delivery in IT and Organizational Performance",
+          "authors": "Forsgren, N., & Humble, J.",
+          "year": 2015,
+          "venue": "",
+          "doi_url": "https://doi.org/10.2139/ssrn.2681909",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.58812/esiscs.v2i02.1076"
+        },
+        {
+          "stable_id": "b4bca259",
+          "title": "Wait for It: Determinants of Pull Request Evaluation Latency on GitHub",
+          "authors": "Yu, Y., Wang, H., Filkov, V., Devanbu, P. T., & Vasilescu, B.",
+          "year": 2015,
+          "venue": "2015 IEEE/ACM 12th Working Conference on Mining Software Repositories",
+          "doi_url": "https://doi.org/10.1109/msr.2015.42",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.965); nearest labelled exclude: doi:10.1109/tse.2022.3165056"
+        },
+        {
+          "stable_id": "c5ed7025",
+          "title": "An exploratory study of the pull-based software development model",
+          "authors": "Gousios, G., Pinzger, M., & Deursen, A.",
+          "year": 2014,
+          "venue": "Proceedings of the 36th International Conference on Software Engineering",
+          "doi_url": "https://doi.org/10.1145/2568225.2568260",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=0.826); nearest labelled exclude: doi:10.1109/chase66643.2025.00033"
+        },
+        {
+          "stable_id": "49aed925",
+          "title": "Information Technology and Productivity in Developed and Developing Countries",
+          "authors": "Dedrick, J. L., Kraemer, K., & Shih, E.",
+          "year": 2013,
+          "venue": "Journal of Management Information Systems",
+          "doi_url": "https://doi.org/10.2753/mis0742-1222300103",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.2139/ssrn.428560"
+        },
+        {
+          "stable_id": "e222f874",
+          "title": "The Extroverted Firm: How External Information Practices Affect Innovation and Productivity",
+          "authors": "Tambe, P. B., Hitt, L., & Brynjolfsson, E.",
+          "year": 2012,
+          "venue": "Manag. Sci.",
+          "doi_url": "https://doi.org/10.1287/mnsc.1110.1446",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/s0378-7206(98)00054-8"
+        },
+        {
+          "stable_id": "9bc39e6b",
+          "title": "The Productivity of Information Technology Investments: New Evidence from IT Labor Data",
+          "authors": "Tambe, P. B., & Hitt, L.",
+          "year": 2012,
+          "venue": "Inf. Syst. Res.",
+          "doi_url": "https://doi.org/10.1287/isre.1110.0398",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.2139/ssrn.428560"
+        },
+        {
+          "stable_id": "98f16b63",
+          "title": "Information technology, organizational change and firm productivity: A panel study of complementarity effects and clustering patterns in Manufacturing and Services",
+          "authors": "Zand, F., Beers, C., & Leeuwen, G.",
+          "year": 2011,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1287/mnsc.1030.0195"
+        },
+        {
+          "stable_id": "71bb82f5",
+          "title": "Product, process and organizational innovation: drivers, complementarity, and productivity effects",
+          "authors": "Polder, M., Leeuwen, G., Mohnen, P., & Raymond, W.",
+          "year": 2010,
+          "venue": "",
+          "doi_url": "https://doi.org/10.2139/ssrn.1626805",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1162/qjec.2007.122.4.1721"
+        },
+        {
+          "stable_id": "f6c08cea",
+          "title": "The Formation and Value of IT-Enabled Resources: Antecedents and Consequences of Synergistic Relationships",
+          "authors": "Nevo, S., & Wade, M.",
+          "year": 2010,
+          "venue": "MIS Q.",
+          "doi_url": "https://doi.org/10.2307/20721419",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1111/j.1540-5915.2008.00209.x"
+        },
+        {
+          "stable_id": "686d7b31",
+          "title": "Research Note - Investments in Information Technology: Indirect Effects and Information Technology Intensity",
+          "authors": "Mittal, N., & Nault, B. R.",
+          "year": 2009,
+          "venue": "Inf. Syst. Res.",
+          "doi_url": "https://doi.org/10.1287/isre.1080.0186",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.2139/ssrn.428560"
+        },
+        {
+          "stable_id": "0f855756",
+          "title": "The promises and perils of mining GitHub",
+          "authors": "Kalliamvakou, E., Gousios, G., Blincoe, K., Singer, L., Germán, D., & Damian, D. E.",
+          "year": 2009,
+          "venue": "",
+          "doi_url": "https://doi.org/10.1145/2597073.2597074",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1109/qrs-c55045.2021.00163"
+        },
+        {
+          "stable_id": "eb518ea9",
+          "title": "Effect of Information Systems Resources and Capabilities on Firm Performance: A Resource-Based Perspective",
+          "authors": "Ravichandran, T., Lertwongsatien, C., & Lertwongsatien, C.",
+          "year": 2005,
+          "venue": "Journal of Management Information Systems",
+          "doi_url": "https://doi.org/10.1080/07421222.2005.11045820",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1287/orsc.1070.0306"
+        },
+        {
+          "stable_id": "547484f6",
+          "title": "Information Technology , Organisational Change and Productivity Growth : Evidence from UK firms *",
+          "authors": "Crespi, G.",
+          "year": 2005,
+          "venue": "",
+          "doi_url": "",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1787/615168153531"
+        },
+        {
+          "stable_id": "674a7f6b",
+          "title": "Information Technology Investments and Organizational Productivity and Performance: An Empirical Investigation",
+          "authors": "Mahmood, M., & Mann, G. J.",
+          "year": 2005,
+          "venue": "Journal of Organizational Computing and Electronic Commerce",
+          "doi_url": "https://doi.org/10.1207/s15327744joce1503_1",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/s0378-7206(98)00054-8"
+        },
+        {
+          "stable_id": "b7dbddd6",
+          "title": "Review: Information Technology and Organizational Performance: An Integrative Model of IT Business Value",
+          "authors": "Melville, N. P., Kraemer, K., & Gurbaxani, V.",
+          "year": 2004,
+          "venue": "MIS Q.",
+          "doi_url": "https://doi.org/10.2307/25148636",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1287/orsc.1070.0306"
+        },
+        {
+          "stable_id": "feafd56a",
+          "title": "Information technology and economic performance",
+          "authors": "Dedrick, J. L., Gurbaxani, V., & Kraemer, K.",
+          "year": 2003,
+          "venue": "ACM Computing Surveys (CSUR)",
+          "doi_url": "https://doi.org/10.1145/641865.641866",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/s0378-7206(98)00054-8"
+        },
+        {
+          "stable_id": "5cb0f1de",
+          "title": "Beyond Computation: Information Technology, Organizational Transformation and Business Performance",
+          "authors": "Brynjolfsson, E., Hitt, L., & Hunter, G.",
+          "year": 2000,
+          "venue": "Journal of Economic Perspectives",
+          "doi_url": "https://doi.org/10.1257/jep.14.4.23",
+          "source": "ai_similarity",
+          "comment": "Auto-propagated (posterior=1.000); nearest labelled exclude: doi:10.1016/s0378-7206(98)00054-8"
+        }
+      ]
     }
   ]
 }

@@ -13,6 +13,7 @@ import type {
   ConsensusQuestion,
   PrismaTallyNode,
   ScreeningExclusionCode,
+  ScreeningExclusionPaper,
   ScreeningExclusionsByCode,
   Track1Hit,
   Track1UniqueRef,
@@ -350,10 +351,51 @@ function Q15IgnoredView() {
 
 function ExclusionsByCodeView() {
   const { data } = useJson<ScreeningExclusionsByCode>('screening-excluded-by-code.json');
+  const { data: abstracts } = useJson<AbstractRecord[]>('abstracts.json');
+  const abstractsById = useIndex(abstracts, a => a.stable_id);
+  const [selectedCode, setSelectedCode] = useState<string | null>(null);
+  const [selectedPaper, setSelectedPaper] = useState<AbstractRecord | null>(null);
 
   if (!data) return <p className={styles.dim}>Loading exclusion breakdown…</p>;
 
-  const columns: RowTableColumn<ScreeningExclusionCode>[] = [
+  const activeCode = selectedCode
+    ? data.codes.find(c => c.code === selectedCode) ?? null
+    : null;
+
+  if (activeCode) {
+    return (
+      <>
+        <p className={styles.back}>
+          <button
+            type="button"
+            onClick={() => setSelectedCode(null)}
+            style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', font: 'inherit', textDecoration: 'underline', padding: 0 }}
+          >
+            ← Back to exclusion codes
+          </button>
+        </p>
+        <div className={styles.header}>
+          <div className={styles.headerMeta}>
+            <Chip variant="accent">{activeCode.code}</Chip>
+            <Chip variant="accent">{activeCode.papers.length} records</Chip>
+          </div>
+          <h2 style={{ marginTop: 8 }}>{activeCode.label}</h2>
+          <p className={styles.intro}>{activeCode.description}</p>
+        </div>
+        <PapersUnderCodeTable
+          papers={activeCode.papers}
+          onSelect={paper => {
+            const abstract = abstractsById.get(paper.stable_id);
+            if (abstract) setSelectedPaper(abstract);
+          }}
+        />
+        <p className={styles.hint}>Click a paper for its abstract.</p>
+        <AbstractDrawer record={selectedPaper} onClose={() => setSelectedPaper(null)} />
+      </>
+    );
+  }
+
+  const codeColumns: RowTableColumn<ScreeningExclusionCode>[] = [
     { key: 'code', label: 'Code', width: '70px',
       render: r => <Chip variant="accent">{r.code}</Chip> },
     { key: 'label', label: 'Label',
@@ -376,16 +418,58 @@ function ExclusionsByCodeView() {
       </div>
       <RowTable
         rows={data.codes}
-        columns={columns}
+        columns={codeColumns}
         pageSize={20}
+        onRowClick={r => setSelectedCode(r.code)}
       />
       <p className={styles.hint}>
-        The v1.1.0 to v1.2.0 rubric refinement is documented as a PRISMA 2020 Item 24b protocol
-        amendment. AI-propagated excludes carry a query but no v1.2.0 code because the Bayesian
-        triage does not tick rubric boxes.
+        Click a code to see the papers grouped under it. The v1.1.0 to v1.2.0 rubric refinement is
+        documented as a PRISMA 2020 Item 24b protocol amendment. AI-propagated excludes carry a
+        query but no v1.2.0 code because the Bayesian triage does not tick rubric boxes; they are
+        grouped under an AI bucket at the bottom of the table.
       </p>
     </>
   );
+}
+
+function PapersUnderCodeTable({
+  papers,
+  onSelect,
+}: {
+  papers: ScreeningExclusionPaper[];
+  onSelect: (paper: ScreeningExclusionPaper) => void;
+}) {
+  const columns: RowTableColumn<ScreeningExclusionPaper>[] = [
+    { key: 'title', label: 'Title',
+      render: r => <div className={styles.paperTitle}>{r.title || '(no title)'}</div> },
+    { key: 'authors', label: 'Authors',
+      render: r => <span className={styles.dim}>{shortAuthors(r.authors)}</span> },
+    { key: 'year', label: 'Year', width: '60px' },
+    { key: 'venue', label: 'Venue',
+      render: r => <span className={styles.dim}>{r.venue || '—'}</span> },
+    { key: 'source', label: 'Source', width: '110px',
+      render: r => <Chip variant={r.source.startsWith('ai_') ? 'accent-2' : 'accent'}>{prettySource(r.source)}</Chip> },
+    { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
+      <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
+    ) : <span className={styles.dim}>—</span> },
+  ];
+
+  return (
+    <RowTable
+      rows={papers}
+      columns={columns}
+      searchFields={['title', 'authors', 'venue']}
+      pageSize={25}
+      initialSort={['year', 'desc']}
+      onRowClick={onSelect}
+    />
+  );
+}
+
+function prettySource(source: string): string {
+  if (source.startsWith('human_')) return source.slice(6);
+  if (source === 'ai_similarity') return 'AI triage';
+  return source;
 }
 
 // -----------------------------------------------------------------------------

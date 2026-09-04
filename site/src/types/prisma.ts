@@ -129,6 +129,18 @@ export interface ScreeningExclusionCode {
   label: string;
   count: number;
   description: string;
+  papers: ScreeningExclusionPaper[];
+}
+
+export interface ScreeningExclusionPaper {
+  stable_id: string;
+  title: string;
+  authors: string;
+  year: number | null;
+  venue: string;
+  doi_url: string;
+  source: string;
+  comment: string;
 }
 
 export interface ScreeningExclusionsByCode {
