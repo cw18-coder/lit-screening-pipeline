@@ -87,3 +87,37 @@
   line-height: 1.65;
   white-space: pre-wrap;
 }
+
+.expandBtn {
+  background: none; border: none; color: var(--accent); cursor: pointer;
+  padding: 4px 0; font: inherit; font-size: 13.5px; text-decoration: underline;
+  margin-top: 4px;
+}
+.expandBtn:hover { color: var(--accent-2); }
+
+.exclusionPanel {
+  margin-top: 22px; padding: 14px 16px;
+  background: color-mix(in srgb, var(--accent-2) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-2) 25%, var(--line));
+  border-radius: 10px;
+}
+.exclusionHeader { display: flex; gap: 10px; align-items: center; margin: 8px 0 6px; flex-wrap: wrap; }
+.exclusionHeader strong { color: var(--ink); font-size: 14.5px; }
+.exclusionDescription {
+  color: var(--ink-dim); font-size: 13.5px; line-height: 1.55;
+  margin: 4px 0 10px;
+}
+.exclusionSourceRow { display: flex; gap: 8px; margin: 6px 0 8px; }
+.subheading {
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-dim); margin: 12px 0 4px; font-weight: 700;
+}
+.comment {
+  color: var(--ink); font-size: 13.5px; line-height: 1.55;
+  margin: 0; white-space: pre-wrap;
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+

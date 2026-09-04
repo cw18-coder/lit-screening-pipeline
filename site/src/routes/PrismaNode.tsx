@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { AbstractDrawer } from '../components/AbstractDrawer';
+import { AbstractDrawer, type ExclusionInfo } from '../components/AbstractDrawer';
 import { Callout } from '../components/Callout';
 import { Chip } from '../components/Chip';
 import { MarkdownRenderer } from '../components/MarkdownRenderer';
@@ -355,6 +355,7 @@ function ExclusionsByCodeView() {
   const abstractsById = useIndex(abstracts, a => a.stable_id);
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   const [selectedPaper, setSelectedPaper] = useState<AbstractRecord | null>(null);
+  const [selectedExclusion, setSelectedExclusion] = useState<ExclusionInfo | null>(null);
 
   if (!data) return <p className={styles.dim}>Loading exclusion breakdown…</p>;
 
@@ -386,11 +387,23 @@ function ExclusionsByCodeView() {
           papers={activeCode.papers}
           onSelect={paper => {
             const abstract = abstractsById.get(paper.stable_id);
-            if (abstract) setSelectedPaper(abstract);
+            if (!abstract) return;
+            setSelectedPaper(abstract);
+            setSelectedExclusion({
+              code: activeCode.code,
+              codeLabel: activeCode.label,
+              codeDescription: activeCode.description,
+              source: paper.source,
+              comment: paper.comment,
+            });
           }}
         />
-        <p className={styles.hint}>Click a paper for its abstract.</p>
-        <AbstractDrawer record={selectedPaper} onClose={() => setSelectedPaper(null)} />
+        <p className={styles.hint}>Click a paper for the full abstract and the reviewer's exclusion note.</p>
+        <AbstractDrawer
+          record={selectedPaper}
+          onClose={() => { setSelectedPaper(null); setSelectedExclusion(null); }}
+          exclusionInfo={selectedExclusion ?? undefined}
+        />
       </>
     );
   }
