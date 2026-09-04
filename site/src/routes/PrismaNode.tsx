@@ -448,7 +448,7 @@ function PapersUnderCodeTable({
     { key: 'venue', label: 'Venue',
       render: r => <span className={styles.dim}>{r.venue || '—'}</span> },
     { key: 'source', label: 'Source', width: '110px',
-      render: r => <Chip variant={r.source.startsWith('ai_') ? 'accent-2' : 'accent'}>{prettySource(r.source)}</Chip> },
+      render: r => <Chip variant={r.source.startsWith('ai_') ? 'warn' : 'accent'}>{prettySource(r.source)}</Chip> },
     { key: 'doi_url', label: 'Link', width: '90px', render: r => r.doi_url ? (
       <a href={r.doi_url} target="_blank" rel="noopener noreferrer" className={styles.doiLink}>DOI ↗</a>
     ) : <span className={styles.dim}>—</span> },
