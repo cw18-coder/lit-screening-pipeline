@@ -106,9 +106,9 @@ site/
 
 - **M0** ✅ Scaffold, styling tokens, app shell.
 - **M1** ✅ Data pipeline. `public/data/` snapshot generated.
-- **M2** ⏳ PRISMA diagram + primitive components.
-- **M3** ⏳ Node drill-downs.
-- **M4** ⏳ Wiki tree + page renderer.
+- **M2** ✅ PRISMA diagram + primitive components.
+- **M3** ✅ Node drill-downs (query-aggregation, duplicates, Q15-ignored, overlaps, Track 2 anchors, exclusions-by-code).
+- **M4** ✅ Wiki tree + page renderer. Interactive screening-flow diagram slotted on the AI-assisted-screening page still to come.
 - **M5** ⏳ Search + polish.
 - **M6** ⏳ A11y audit.
 - **M7** ⏳ Release.
