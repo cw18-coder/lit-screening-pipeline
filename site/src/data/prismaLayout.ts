@@ -58,7 +58,7 @@ export const DIAGRAM_NODES: DiagramNodeSpec[] = [
 
   { id: 'screening_records_input_track1',                   column: 'track1',  row: 5, clickable: false },
 
-  { id: 'screening_excluded_title_abstract_track1',         column: 'track1',  row: 6, clickable: true },
+  { id: 'screening_excluded_title_abstract_track1',         column: 'track1',  row: 6, clickable: true, hint: 'Click for the exclusion breakdown' },
 ];
 
 export const DIAGRAM_EDGES: DiagramEdgeSpec[] = [
