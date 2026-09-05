@@ -126,10 +126,10 @@
     "track": "track1",
     "node_id": "eligibility_not_retrieved_track1",
     "label": "Reports not retrieved (Track 1)",
-    "count": 6,
+    "count": 13,
     "source_log": "full_text_retrieval_worksheet.csv rows with retrieved = 0",
-    "last_updated": "2026-09-04",
-    "notes": "Six records sit behind paid publisher entitlements the reviewer does not hold: four Springer, one Wiley, one Elsevier. Recorded as reports not retrieved under PRISMA 2020 Item 16a. Retrieval attempted; unsuccessful; documented rather than silently dropped."
+    "last_updated": "2026-09-05",
+    "notes": "Thirteen records could not be retrieved under the reviewer's institutional entitlement. Composition: 6 Other (small journals with no open PDF), 4 Springer, 1 Wiley, 1 Elsevier, 1 Taylor & Francis. Recorded as reports not retrieved under PRISMA 2020 Item 16a. Retrieval attempted; unsuccessful; documented rather than silently dropped."
   },
   {
     "stable_id": "644cb52a",
@@ -138,10 +138,10 @@
     "track": "track1",
     "node_id": "eligibility_assessed_full_text_track1",
     "label": "Reports assessed for eligibility at full text (Track 1)",
-    "count": 82,
+    "count": 75,
     "source_log": "computed: eligibility_sought_full_text_track1 - eligibility_not_retrieved_track1",
-    "last_updated": "2026-09-04",
-    "notes": "88 sought minus 6 unretrievable = 82 records available for Track 2 full-text eligibility assessment."
+    "last_updated": "2026-09-05",
+    "notes": "88 sought minus 13 unretrievable = 75 records available for Track 2 full-text eligibility assessment."
   },
   {
     "stable_id": "12e68450",
