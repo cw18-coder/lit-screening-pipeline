@@ -14,9 +14,12 @@ const SECTION_LABELS: Record<string, string> = {
   instructions: 'Instructions',
 };
 
+const ALLOWED_PAGE_IDS = new Set(['skill-ai-assisted-screening']);
+
 export function WikiPage() {
   const { section, pageId } = useParams<{ section: string; pageId: string }>();
-  const path = section && pageId ? `wiki-pages/${pageId}.json` : '';
+  const isAllowed = !!pageId && ALLOWED_PAGE_IDS.has(pageId);
+  const path = section && pageId && isAllowed ? `wiki-pages/${pageId}.json` : '';
   const { data, loading, error } = useJson<WikiPageMeta>(path);
 
   if (!section || !pageId) {
@@ -24,6 +27,17 @@ export function WikiPage() {
       <div className="route-view">
         <BackLink />
         <h1>Missing wiki page identifier.</h1>
+      </div>
+    );
+  }
+  if (!isAllowed) {
+    return (
+      <div className="route-view">
+        <BackLink />
+        <Callout variant="accent-2" title="Under review.">
+          {' '}This wiki page is temporarily unavailable while the browsable rendering is being
+          reworked. The AI-assisted screening skill remains reachable from the wiki index.
+        </Callout>
       </div>
     );
   }

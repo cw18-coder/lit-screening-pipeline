@@ -108,7 +108,7 @@ site/
 - **M1** ✅ Data pipeline. `public/data/` snapshot generated.
 - **M2** ✅ PRISMA diagram + primitive components.
 - **M3** ✅ Node drill-downs (query-aggregation, duplicates, Q15-ignored, overlaps, Track 2 anchors, exclusions-by-code).
-- **M4** ✅ Wiki tree + page renderer. Interactive screening-flow diagram slotted on the AI-assisted-screening page still to come.
+- **M4** ⏳ Wiki tree + page renderer. Currently gated: only the AI-assisted-screening skill page renders through the browser; the tree view and other pages are under review.
 - **M5** ⏳ Search + polish.
 - **M6** ⏳ A11y audit.
 - **M7** ⏳ Release.
